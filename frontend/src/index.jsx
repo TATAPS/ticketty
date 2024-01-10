@@ -1,23 +1,28 @@
 import React from 'react';
 import * as ReactDOM from "react-dom/client";
-import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import App from './App';
 import Login from './auth/Login';
+import SingleTicket from './single/SingleTicket';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <App />
-    ),
+    element: <App />,
+    loader: rootLoader,
+    children: [
+      {
+        path: "tickets/:ticketId",
+        element: <SingleTicket />,
+      },
+    ],
   },
   {
-    path: "login",
-    element: Login,
+    path: "/login",
+    element: <Login />,
   },
 ]);
 
