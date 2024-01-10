@@ -12,17 +12,22 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    loader: rootLoader,
     children: [
-      {
-        path: "tickets/:ticketId",
-        element: <SingleTicket />,
-      },
+
+
     ],
   },
   {
-    path: "/login",
-    element: <Login />,
+    path: "login",
+    element: <Login />
+  },
+  {
+    path: "tickets/:ticketId",
+    element: <SingleTicket />,
+  },
+  {
+    path: "tickets/:ticketId/edit",
+    element: <div>Edit Ticket</div>,
   },
 ]);
 
