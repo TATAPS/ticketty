@@ -1,8 +1,13 @@
-import React from 'react'
-import './Dashboard.css'
+import React from 'react';
+import './Dashboard.css';
+import Sidebar from '../sidebar/Sidebar';
+import Navbar from '../navbar/Navbar';
 
 export const Dashboard = () => {
   return (
-    <div className='home'>Dashboard</div>
+    <div className='home'>
+      <Sidebar />
+      <Navbar />
+    </div>
   )
 }
