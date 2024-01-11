@@ -1,8 +1,9 @@
 require("dotenv").config();
-const mysql = require(mysql2 / promise);
-const fs = require(fs).promises;
+console.log(process.env.HOST, process.env.PASSWORD);
+const mysql = require("mysql2/promise");
+const fs = require("fs").promises;
 
-export async function starterSeedDatabase() {
+async function starterSeedDatabase() {
   try {
     const sqlSeedData = await fs.readFile("dev_scripts/seed.sql", {
       encoding: "utf8",
@@ -17,14 +18,19 @@ export async function starterSeedDatabase() {
     });
 
     await connection.connect();
-    await connection.query(seedQueryData);
+    await connection.query(sqlSeedData);
   } catch (err) {
     throw err;
-  } finally {
-    await connection.end(function (err) {
-      if (err) {
-        throw err;
-      }
-    });
   }
+  //finally {
+  //   await connection.end(function (err) {
+  //     if (err) {
+  //       throw err;
+  //     }
+  //   });
+  // }
 }
+
+module.exports = {
+  starterSeedDatabase,
+};
