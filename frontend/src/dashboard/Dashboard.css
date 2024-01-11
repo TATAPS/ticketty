@@ -1,3 +1,9 @@
 .home {
   /* background-color: rebeccapurple; */
+  display: flex;
+}
+
+.homeContainer {
+  background-color: aliceblue;
+  flex: 6;
 }
