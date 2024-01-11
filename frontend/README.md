@@ -67,6 +67,29 @@ To set up and run the application, follow these general steps:
 - Run the application, ensuring the frontend and backend are connected.
 - For detailed instructions and specific requirements, refer to the documentation provided with the application.
 
+## Github workflow
+
+1, Run this script in your local terminal
+
+```bash
+git checkout main
+git pull origin main
+git status
+
+git checkout your-working-branch
+git rebase main
+```
+
+**_git rebase main_**: pull all the changes in main without having extra commits from the merge
+
+2, Push your work to Github and create a PR
+
+```bash
+git add .
+git commit -m "commit message"
+git push origin your-working-branch
+```
+
 ## Github actions
 
 ![Auto Assign](https://github.com/TATAPS/demo-repository/actions/workflows/auto-assign.yml/badge.svg)
