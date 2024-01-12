@@ -1,8 +1,13 @@
-import React from 'react'
+import "./Ticket.css"
+import TicketsTable from "./TicketsTable"
 
 function Tickets() {
   return (
-    <div>Tickets</div>
+    <div className="tickets">
+      <div className="ticketContainer">
+        <TicketsTable />
+      </div>
+    </div>
   )
 }
 

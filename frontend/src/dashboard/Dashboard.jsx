@@ -2,14 +2,18 @@ import React from 'react';
 import './Dashboard.css';
 import Sidebar from '../sidebar/Sidebar';
 import Navbar from '../navbar/Navbar';
+import Tickets from '../tickets/Tickets';
 
 export const Dashboard = () => {
   return (
-    <div className='home'>
+    <div className='dashboard'>
       <Sidebar />
-      <div className="homeContainer">
+      <div className="dashboardContainer">
         <Navbar />
-        Dashboard Container
+        <div className="listContainer">
+          <div className="listTitle"></div>
+          <Tickets />
+        </div>
       </div>
     </div>
   )
