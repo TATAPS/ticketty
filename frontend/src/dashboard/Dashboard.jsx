@@ -7,7 +7,10 @@ export const Dashboard = () => {
   return (
     <div className='home'>
       <Sidebar />
-      <div className="homeContainer">container</div>
+      <div className="homeContainer">
+        <Navbar />
+        Dashboard Container
+      </div>
     </div>
   )
 }
