@@ -3,7 +3,7 @@
   height: 50px;
   border-bottom: 0.5 solid rbg(231, 228, 228);
   align-items: center;
-  color: lightblue;
+  color: black;
   font-size: 14px;
 
   .wrapper {
@@ -60,6 +60,13 @@
           font-weight: bold;
         }
       }
+    }
+
+    .auth {
+      color: brown;
+      font-size: 15px;
+      font-weight: bold;
+      text-decoration: none;
     }
   }
 }

@@ -5,6 +5,8 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ChatIcon from '@mui/icons-material/Chat';
 import EmailIcon from '@mui/icons-material/Email';
+import Login from "../auth/Login";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -32,6 +34,9 @@ function Navbar() {
           <div className="item">
             <EmailIcon className="icon" />
             <div className="counter">1</div>
+          </div>
+          <div >
+            <Link to="/login" className="auth"><Login /></Link>
           </div>
         </div>
       </div>
