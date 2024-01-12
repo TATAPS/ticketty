@@ -1,0 +1,7 @@
+.tickets {
+  display: flex;
+  width: 100%;
+  .ticketsContainer {
+    flex: 6;
+  }
+}
