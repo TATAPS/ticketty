@@ -1,5 +1,4 @@
 require("dotenv").config();
-console.log(process.env.HOST, process.env.PASSWORD);
 const mysql = require("mysql2/promise");
 const fs = require("fs").promises;
 
@@ -22,13 +21,6 @@ async function starterSeedDatabase() {
   } catch (err) {
     throw err;
   }
-  //finally {
-  //   await connection.end(function (err) {
-  //     if (err) {
-  //       throw err;
-  //     }
-  //   });
-  // }
 }
 
 module.exports = {
