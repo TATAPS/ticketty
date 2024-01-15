@@ -1,9 +1,6 @@
 import "./SingleTicket.css"
 import { useState, useReducer } from "react";
 import { useParams, Link } from "react-router-dom"
-import ticketsReducer from "./ticketsReducer";
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en';
 import Sidebar from '../sidebar/Sidebar';
 import Navbar from "../navbar/Navbar";
 
@@ -17,17 +14,7 @@ function SingleTicket() {
   let { ticketId } = useParams();
 
   /////////////// TODO: FETCH SINGLE ticket ////////////////////
-  // useEffect(() => {
-  //   const fetchSingleTicket = async () => {
-  //     try {
-  //       const res = await axios.get(`http://localhost:8800/tickets/${ticketId}`);
-  //       setTicket(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchSingleBook();
-  // }, []);
+
 
   return (
     < div className='single' >

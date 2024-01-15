@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function AddTicket({ onAddTicket }) {
+export default function AddTicket() {
   const [ticket, setTicket] = useState({
     companyName: "",
     description: ""

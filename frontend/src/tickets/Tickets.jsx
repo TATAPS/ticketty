@@ -39,11 +39,10 @@ function Tickets() {
     <div className="tickets">
       <div className="ticketContainer">
         <Link to={`/addticket`}>
-          <AddTicket onAddTicket={handleAddTicket} />
+          <h1>Add Ticket</h1>
         </Link>
         <TicketsTable
           tickets={tickets}
-
         />
       </div>
     </div>
