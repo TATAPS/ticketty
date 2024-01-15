@@ -23,7 +23,7 @@ const initialTickets = [
 
 // MAIN_FUNCTION
 function Tickets() {
-  const [tickets, dispatch] = useState(initialTickets);
+  const [tickets, setTickets] = useState(initialTickets);
 
 
   return (
