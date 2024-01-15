@@ -1,6 +1,6 @@
 import "./SingleTicket.css"
 import { useState, useReducer } from "react";
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import ticketsReducer from "./ticketsReducer";
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
@@ -8,25 +8,26 @@ import Sidebar from '../sidebar/Sidebar';
 import Navbar from "../navbar/Navbar";
 
 function SingleTicket() {
+  const [ticket, setTicket] = useState({})
   const [isEditing, setIsEditing] = useState(false);
-  const [tickets, dispatch] = useReducer(ticketsReducer, initialTickets);
+  const [error, setError] = useState(false)
+
+
+  //////////////// TODO: EXTRACT PARAMS ID////////////////////
   let { ticketId } = useParams();
 
-  let ticket = initialTickets.filter(t => t.id === parseInt(ticketId))[0]
-
-  function handleChangeTicket(ticket) {
-    dispatch({
-      type: 'changed',
-      ticket: ticket,
-    });
-  }
-
-  function handleDeleteTicket(ticketId) {
-    dispatch({
-      type: 'deleted',
-      id: ticketId,
-    });
-  }
+  /////////////// TODO: FETCH SINGLE ticket ////////////////////
+  // useEffect(() => {
+  //   const fetchSingleTicket = async () => {
+  //     try {
+  //       const res = await axios.get(`http://localhost:8800/tickets/${ticketId}`);
+  //       setTicket(res.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchSingleBook();
+  // }, []);
 
   return (
     < div className='single' >
@@ -37,12 +38,16 @@ function SingleTicket() {
           {/* <div className="listTitle"></div> */}
           {/* <Tickets /> */}
           <div className="ticketSummary">
-            <p>TicketId: {ticket.id}</p>
-            <p>TicketCompany: {ticket.companyName}</p>
-            <label>
-              {ticket.mainContact}
-              <button onClick={() => handleDeleteTicket(ticket.id)}>Delete</button>
-            </label>
+            <p>TicketId: {ticketId}</p>
+            <div>
+              <label>
+                <Link to={`/tickets/${ticketId}/edit`}>
+                  <button>Update</button>
+                </Link>
+                <button>Delete</button>
+              </label>
+
+            </div>
           </div>
         </div>
       </div>

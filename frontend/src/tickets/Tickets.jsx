@@ -1,7 +1,7 @@
 import "./Tickets.css"
 import { useReducer } from "react";
 import { Link } from "react-router-dom";
-import AddTicket from "../single/AddTicket"
+import AddTicket from "../crud/AddTicket.jsx"
 import TicketsTable from "./TicketsTable"
 import ticketsReducer from "../single/ticketsReducer.js";
 import TimeAgo from 'javascript-time-ago';

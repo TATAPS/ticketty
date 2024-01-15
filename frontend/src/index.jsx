@@ -7,8 +7,8 @@ import {
 import App from './App';
 import Login from './auth/Login';
 import SingleTicket from './single/SingleTicket';
-import AddTicket from './single/AddTicket.jsx';
-
+import AddTicket from './crud/AddTicket.jsx';
+import UpdateTicket from './crud/UpdateTicket.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "tickets/:ticketId/edit",
-    element: <div>Edit Ticket</div>,
+    element: <UpdateTicket />,
   },
   {
     path: "addticket",
