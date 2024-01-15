@@ -1,22 +1,33 @@
 import { useState } from 'react';
 
 export default function AddTicket({ onAddTicket }) {
-  const [text, setText] = useState('');
+  const [ticket, setTicket] = useState({
+    companyName: "",
+    description: ""
+  })
+
+  const handleChange = (e) => {
+    setTicket(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  const handleClick = async e => {
+    e.preventDefault()
+    // TODO: FETCH_DATA_HERE
+    // try {
+
+    // } catch (error) {
+
+    // }
+  }
+
+  console.log(ticket);
   return (
-    <>
-      <input
-        placeholder="Add ticket"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button
-        onClick={() => {
-          setText('');
-          onAddTicket(text);
-        }}>
-        Add
-      </button>
-    </>
+    <div className='addTicket'>
+      <h1>Add New Ticket</h1>
+      <input type="text" placeholder='companyName' onChange={handleChange} name="companyName" />
+      <input type="text" placeholder='description' onChange={handleChange} name="description" />
+      <button onClick={handleClick}></button>
+    </div>
   );
 }
 
