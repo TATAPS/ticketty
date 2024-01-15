@@ -1,9 +1,8 @@
 import "./Tickets.css"
-import { useReducer } from "react";
+import { useState } from "react";
+import { useQuery } from '@tanstack/react-query'
 import { Link } from "react-router-dom";
-import AddTicket from "../crud/AddTicket.jsx"
 import TicketsTable from "./TicketsTable"
-import ticketsReducer from "../single/ticketsReducer.js";
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 
@@ -25,15 +24,34 @@ const initialTickets = [
 
 // MAIN_FUNCTION
 function Tickets() {
-  const [tickets, dispatch] = useReducer(ticketsReducer, initialTickets);
+  const [tickets, setTickets] = useState(
+    //REPLACE WITH THE RESULT FROM fetchTickets FUNCTION//
+    initialTickets
+  );
 
-  function handleAddTicket(text) {
-    dispatch({
-      type: 'added',
-      id: nextId++,
-      text: text,
-    });
-  }
+  ////////////TODO: IMPLEMENT useQuery TO FETCH DATA ///////////////
+  // const fetchTickets = async () => {
+  //   const response = await fetch('/tickets/')
+  //   if (!response.ok) {
+  //     throw new Error('Network response was not ok')
+  //   }
+  //   return response.json()
+  // }
+
+  //  const { isPending, isError, data, error } = useQuery({
+  //  queryKey: ['tickets'],
+  //    queryFn: fetchTickets,
+  //  })
+
+  //  if (isPending) {
+  //    return <span>Loading...</span>
+  //  }
+
+  //  if (isError) {
+  //    return <span>Error: {error.message}</span>
+  //  }
+
+
 
   return (
     <div className="tickets">
