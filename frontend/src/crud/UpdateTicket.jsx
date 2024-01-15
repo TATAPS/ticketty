@@ -19,13 +19,6 @@ function UpdateTicket() {
   const handleClick = async (e) => {
     e.preventDefault();
     console.log("delete ticket");
-    // try {
-    //   // await axios.put(`http://localhost:8800/tickets/${ticketId}`, ticket);
-    //   navigate("/");
-    // } catch (err) {
-    //   console.log(err);
-    //   setError(true);
-    // }
   };
   return (
     <div>
