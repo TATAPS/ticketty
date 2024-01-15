@@ -1,6 +1,6 @@
-import "./SingleTicket.css"
+import "./SingleTicket.css";
 import { useState, useReducer } from "react";
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link } from "react-router-dom";
 import Sidebar from '../sidebar/Sidebar';
 import Navbar from "../navbar/Navbar";
 
@@ -10,11 +10,20 @@ function SingleTicket() {
   const [error, setError] = useState(false)
 
 
-  //////////////// TODO: EXTRACT PARAMS ID////////////////////
+  //////////////// TODO: EXTRACT PARAMS ID: default type: string //////////////////////
   let { ticketId } = useParams();
 
   /////////////// TODO: FETCH SINGLE ticket ////////////////////
 
+  /////////////// TODO: DELETE TICKET HANDLE //////////////////
+  // const handleDelete = async (id) => {
+  //   try {
+  //     await axios.delete("http://localhost:8800/tickets"+id);
+  //     /**navigate to the main page */
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   return (
     < div className='single' >
@@ -31,7 +40,9 @@ function SingleTicket() {
                 <Link to={`/tickets/${ticketId}/edit`}>
                   <button>Update</button>
                 </Link>
-                <button>Delete</button>
+                <button
+                // onClick={() => handleDelete(/*ticketId*/)}
+                >Delete</button>
               </label>
 
             </div>

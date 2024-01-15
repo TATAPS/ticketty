@@ -1,9 +1,7 @@
 import "./Tickets.css"
-import { useReducer } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import AddTicket from "../crud/AddTicket.jsx"
 import TicketsTable from "./TicketsTable"
-import ticketsReducer from "../single/ticketsReducer.js";
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 
@@ -25,15 +23,8 @@ const initialTickets = [
 
 // MAIN_FUNCTION
 function Tickets() {
-  const [tickets, dispatch] = useReducer(ticketsReducer, initialTickets);
+  const [tickets, dispatch] = useState(initialTickets);
 
-  function handleAddTicket(text) {
-    dispatch({
-      type: 'added',
-      id: nextId++,
-      text: text,
-    });
-  }
 
   return (
     <div className="tickets">
