@@ -9,14 +9,19 @@ import Login from './auth/Login';
 import SingleTicket from './single/SingleTicket';
 import AddTicket from './crud/AddTicket.jsx';
 import UpdateTicket from './crud/UpdateTicket.jsx';
+import Register from './auth/Register.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
   },
   {
-    path: "login",
+    path: "/auth/login",
     element: <Login />
+  },
+  {
+    path: "/auth/register",
+    element: <Register />
   },
   {
     path: "tickets/:ticketId",
