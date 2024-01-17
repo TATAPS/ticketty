@@ -2,12 +2,12 @@
   /* background-color: rebeccapurple; */
   display: flex;
 
-  .singleContainer {
+  .single-container {
     background-color: aliceblue;
     flex: 6;
   }
 
-  .singlelistContainer {
+  .singlelist-container {
     padding: 20px;
     margin: 20px;
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);

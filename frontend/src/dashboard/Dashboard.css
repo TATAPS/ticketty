@@ -1,22 +1,21 @@
 .dashboard {
   /* background-color: rebeccapurple; */
   display: flex;
+}
 
-  .dashboardContainer {
-    background-color: aliceblue;
-    flex: 6;
-  }
+.dashboard-container {
+  background-color: aliceblue;
+  flex: 6;
+}
 
-  .listContainer {
-    padding: 20px;
-    margin: 20px;
-    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-
-    .listTitle {
-      font-weight: 500;
-      color: gray;
-      margin-bottom: 15px;
-    }
-  }
+.list-container {
+  padding: 20px;
+  margin: 20px;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+}
+.list-title {
+  font-weight: 500;
+  color: gray;
+  margin-bottom: 15px;
 }
