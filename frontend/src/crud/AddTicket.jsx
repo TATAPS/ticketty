@@ -22,7 +22,7 @@ export default function AddTicket() {
 
   console.log(ticket);
   return (
-    <div className='addTicket'>
+    <div className='add-ticket'>
       <h1>Add New Ticket</h1>
       <input type="text" placeholder='companyName' onChange={handleChange} name="companyName" />
       <input type="text" placeholder='description' onChange={handleChange} name="description" />

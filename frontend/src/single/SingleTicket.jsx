@@ -54,12 +54,12 @@ function SingleTicket() {
   return (
     < div className='single' >
       <Sidebar />
-      <div className="singleContainer">
+      <div className="single-container">
         <Navbar />
-        <div className="singlelistContainer">
+        <div className="singlelist-container">
           {/* <div className="listTitle"></div> */}
           {/* <Tickets /> */}
-          <div className="ticketSummary">
+          <div className="ticket-summary">
             <p>TicketId: {ticketId}</p>
             <div>
               <label>

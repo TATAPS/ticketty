@@ -12,11 +12,10 @@ function Navbar() {
   return (
     <div className="navbar">
       <div className="wrapper">
-        <div className="search">
-          <input type="text" placeholder="Search..." />
-          <SearchIcon />
+        <div className="right-side">
+          <h1>Dashboard</h1>
         </div>
-        <div className="items">
+        <div className="left-side">
           <div className="item">
             <LanguageIcon className="icon" />
           </div>

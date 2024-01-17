@@ -8,10 +8,10 @@ export const Dashboard = () => {
   return (
     <div className='dashboard'>
       <Sidebar />
-      <div className="dashboardContainer">
+      <div className="dashboard-container">
         <Navbar />
-        <div className="listContainer">
-          <div className="listTitle"></div>
+        <div className="list-container">
+          <div className="list-title"></div>
           <Tickets />
         </div>
       </div>
