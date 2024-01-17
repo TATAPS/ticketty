@@ -5,23 +5,18 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from './App';
-import Login from './auth/Login';
+import Auth from './auth/Auth.jsx';
 import SingleTicket from './single/SingleTicket';
 import AddTicket from './crud/AddTicket.jsx';
 import UpdateTicket from './crud/UpdateTicket.jsx';
-import Register from './auth/Register.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
   },
   {
-    path: "/auth/login",
-    element: <Login />
-  },
-  {
-    path: "/auth/register",
-    element: <Register />
+    path: "/auth",
+    element: <Auth />
   },
   {
     path: "tickets/:ticketId",
