@@ -64,7 +64,7 @@ CREATE TABLE tickets (
     engineer_id INT NOT NULL DEFAULT 1,
     title VARCHAR(150), 
     status ENUM("Open", "Closed", "Pending", "Assigned", "Working"),
-    ticket_total_time INT,
+    ticket_total_time INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     closed_at TIMESTAMP,
     PRIMARY KEY (id),

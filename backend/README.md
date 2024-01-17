@@ -1,8 +1,9 @@
 # To Do
 
-Clean up index.js for dev purposes
+- Clean up index.js for dev purposes
+- rename contacts folder to company_contacts to show the relationship in sql
 
-# Current Relationships
+# 1 Current Relationships
 
 ## Contacts <> Companies
 
