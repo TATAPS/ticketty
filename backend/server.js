@@ -2,27 +2,23 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 
-const { router: contactsRouter } = require("./contacts/index.js");
-const { router: companiesRouter } = require("./companies/index.js");
-const { router: engineersRouter } = require("./engineers/index.js");
-const { router: ticketsRouter } = require("./tickets/index.js");
-const { router: personsRouter } = require("./persons/index.js");
-const { router: ticketNotesRouter } = require("./ticket_notes/index.js");
+const { router: apiRouter } = require("./api/index.js");
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/companies", companiesRouter);
-app.use("/contacts", contactsRouter);
-app.use("/engineers", engineersRouter);
-app.use("/tickets", ticketsRouter);
-app.use("/persons", personsRouter);
-app.use("/ticketNotes", ticketNotesRouter);
+app.use("/api", apiRouter);
 
 app.get("/", (req, res, next) => {
   res.send("Hello from backend");
+});
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  console.error(err.stack);
+  res.status(err.status || 500).send(err.message || "Internal server error.");
 });
 
 module.exports = app;

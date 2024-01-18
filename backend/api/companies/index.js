@@ -1,4 +1,4 @@
-const { Router } = require("express");
+const { Router, application } = require("express");
 const { getAllCompaniesAction } = require("./controllers/companies_controller");
 
 const router = Router();
