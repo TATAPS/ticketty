@@ -1,11 +1,11 @@
-const { getAllContacts } = require("../models/contacts_model.js");
+const { getAllCompaniesAndContacts } = require("../models/contacts_model.js");
 
-async function getAllContactsAction(req, res) {
+async function getAllContactsAction(req, res, next) {
   try {
-    const contacts = await getAllContacts();
+    const contacts = await getAllCompaniesAndContacts();
     res.json(contacts);
   } catch (error) {
-    throw error;
+    next(error);
   }
 }
 
