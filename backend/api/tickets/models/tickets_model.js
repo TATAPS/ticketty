@@ -1,12 +1,12 @@
 const connectDatabase = require("../../../db_connnection.js");
 
 async function getAllTickets() {
-  const query = `SELECT t.id, 
+  const query = `SELECT t.id,
   DATEDIFF(t.created_at, NOW()) as age_days,
-  TIMESTAMPDIFF(HOUR, t.created_at, NOW()) as age_hour, 
+  TIMESTAMPDIFF(HOUR, t.created_at, NOW()) as age_hour,
   MOD(TIMESTAMPDIFF(MINUTE, t.created_at, NOW()), 60) as age_mins,
   cm.name as company, concat(p.given_name, " ", p.family_name) as contact, t.title
-  FROM tickets t INNER JOIN companies cm 
+  FROM tickets t INNER JOIN companies cm
   ON t.company_id = cm.ein_tin
   INNER JOIN persons p
   ON t.owner_id = p.uuid;`;
@@ -16,6 +16,8 @@ async function getAllTickets() {
   const [tickets] = await db.query(query);
   return tickets;
 }
+
+
 
 module.exports = {
   getAllTickets,
