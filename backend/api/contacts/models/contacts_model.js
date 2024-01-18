@@ -1,4 +1,4 @@
-const connectDatabase = require("..//../db_connnection.js");
+const connectDatabase = require("../../../db_connnection.js");
 
 async function getAllCompaniesAndContacts() {
   const query = `SELECT cm.ein_tin, cm.name as business_name, cm.active, 

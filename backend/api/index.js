@@ -2,12 +2,12 @@ const { Router } = require("express");
 
 const router = Router();
 
-const { router: contactsRouter } = require("../contacts/index.js");
-const { router: companiesRouter } = require("../companies/index.js");
-const { router: engineersRouter } = require("../engineers/index.js");
-const { router: ticketsRouter } = require("../tickets/index.js");
-const { router: personsRouter } = require("../persons/index.js");
-const { router: ticketNotesRouter } = require("../ticket_notes/index.js");
+const { router: contactsRouter } = require("../api/contacts/index.js");
+const { router: companiesRouter } = require("../api/companies/index.js");
+const { router: engineersRouter } = require("../api/engineers/index.js");
+const { router: ticketsRouter } = require("../api/tickets/index.js");
+const { router: personsRouter } = require("../api/persons/index.js");
+const { router: ticketNotesRouter } = require("../api/ticket_notes/index.js");
 
 router.use("/companies", companiesRouter);
 router.use("/contacts", contactsRouter);
