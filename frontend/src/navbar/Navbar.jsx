@@ -35,7 +35,7 @@ function Navbar() {
             <div className="counter">1</div>
           </div>
           <div >
-            <Link to="/auth/login" className="auth">Login</Link>
+            <Link to="/auth" className="login">Login</Link>
           </div>
         </div>
       </div>
