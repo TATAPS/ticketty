@@ -1,17 +1,23 @@
 import "./SingleTicket.css";
 import { useState } from "react";
-// import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams, Link } from "react-router-dom";
 import Sidebar from '../sidebar/Sidebar';
 import Navbar from "../navbar/Navbar";
+import { fetchTickets } from "../api/tickets";
 
 function SingleTicket() {
   const [ticket, setTicket] = useState({})
   const [isEditing, setIsEditing] = useState(false);
-  const [error, setError] = useState(false)
+  // const [error, setError] = useState(false)
   //////////////// TODO: EXTRACT PARAMS ID: default type: string //////////////////////
   let { ticketId } = useParams();
 
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: ['tickets'],
+    queryFn: fetchTickets,
+  })
+  console.log(data)
   ////////////TODO: IMPLEMENT useQuery TO FETCH DATA ///////////////
   // const queryClient = useQueryClient();
   // const fetchSingleTicket = async () => {
@@ -22,10 +28,6 @@ function SingleTicket() {
   //   return response.json()
   // }
 
-  //  const { isPending, isError, data, error } = useQuery({
-  //    queryKey: ['ticket'],
-  //    queryFn: fetchSingleTicket,
-  //  })
 
 
 
