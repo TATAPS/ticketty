@@ -1,3 +1,23 @@
 ###
 GET http://localhost:8080/tickets
 Content-Type: application/json
+
+###
+POST http://localhost:8080/api/tickets/create
+Content-Type: application/json
+
+{
+  "company_id": "40-2522401",
+  "title": "test title",
+  "status": "Open"
+}
+
+###
+PUT http://localhost:8080/api/tickets/update
+Content-Type: application/json
+
+{
+  "id": "2",
+  "title": "UPDATE IS WORKING",
+  "status": "Closed"
+}

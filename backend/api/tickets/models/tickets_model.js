@@ -17,8 +17,22 @@ async function getAllTickets() {
   return tickets;
 }
 
+async function addTicket(ticket) {
+  const query = `INSERT INTO tickets (company_id, title, status) VALUES (?, ?, ?);`;
+  const db = await connectDatabase();
+  const [tickets] = await db.query(query, ticket);
+  return tickets;
+}
 
+async function updateTicket(ticket) {
+  const query = `UPDATE tickets SET title=?, status=? WHERE id=?`;
+  const db = await connectDatabase();
+  const [tickets] = await db.query(query, ticket);
+  return tickets;
+}
 
 module.exports = {
   getAllTickets,
+  addTicket,
+  updateTicket
 };
