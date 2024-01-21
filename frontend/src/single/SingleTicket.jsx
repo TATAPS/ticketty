@@ -13,11 +13,11 @@ function SingleTicket() {
   //////////////// TODO: EXTRACT PARAMS ID: default type: string //////////////////////
   let { ticketId } = useParams();
 
-  const { isPending, isError, data, error } = useQuery({
+  const { isFetching, isError, data, error } = useQuery({
     queryKey: ['tickets'],
     queryFn: fetchTickets,
   })
-  console.log(data)
+  console.log(isFetching, isError, data, error)
   ////////////TODO: IMPLEMENT useQuery TO FETCH DATA ///////////////
   // const queryClient = useQueryClient();
   // const fetchSingleTicket = async () => {
@@ -45,16 +45,16 @@ function SingleTicket() {
   // }
 
   ///////////// ERROR HANDLER ///////////////
-  //  if (isPending) {
-  //    return <span>Loading...</span>
-  //  }
+  if (isFetching) {
+    return <span>Loading...</span>
+  }
 
-  //  if (isError) {
-  //    return <span>Error: {error.message}</span>
-  //  }
+  if (isError) {
+    return <span>Error: {error.message}</span>
+  }
 
   return (
-    < div className='single' >
+    <div className='single' >
       <Sidebar />
       <div className="single-container">
         <Navbar />
@@ -77,7 +77,7 @@ function SingleTicket() {
           </div>
         </div>
       </div>
-    </div >
+    </div>
 
   )
 }
