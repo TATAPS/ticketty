@@ -1,5 +1,5 @@
 USE sys;
-DROP SCHEMA IF EXISTS support_ticket_platform; 
+DROP SCHEMA IF EXISTS support_ticket_platform;
 
 CREATE SCHEMA support_ticket_platform;
 USE support_ticket_platform;
@@ -8,7 +8,7 @@ USE support_ticket_platform;
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS companies;
 DROP TABLE IF EXISTS contacts_companies;
-DROP TABLE IF EXISTS engineer; 
+DROP TABLE IF EXISTS engineer;
 DROP TABLE IF EXISTS tickets;
 DROP TABLE IF EXISTS persons;
 
@@ -30,8 +30,8 @@ CREATE TABLE engineers (
     role ENUM("Dispatch", "Engineer", "Manager"),
     active BOOLEAN DEFAULT FALSE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id), 
-    FOREIGN KEY (person_uuid) 
+    PRIMARY KEY (id),
+    FOREIGN KEY (person_uuid)
 		REFERENCES persons (uuid) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -60,9 +60,9 @@ CREATE TABLE company_contacts (
 CREATE TABLE tickets (
     id INT NOT NULL AUTO_INCREMENT,
     company_id VARCHAR(15) NOT NULL,
-    owner_id BINARY(16) NOT NULL,
+    owner_id BINARY(16),
     engineer_id INT NOT NULL DEFAULT 1,
-    title VARCHAR(150), 
+    title VARCHAR(150),
     status ENUM("Open", "Closed", "Pending", "Assigned", "Working"),
     ticket_total_time INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -85,7 +85,7 @@ CREATE TABLE ticket_notes (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     CONSTRAINT fk_ticket_id FOREIGN KEY (ticket_id)
-        REFERENCES tickets (id) ON DELETE RESTRICT ON UPDATE CASCADE 
+        REFERENCES tickets (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("11eeb505-16a3-6017-8584-001fbc130d5b", 1),"Arlen", "Haruard", "aharuard0@reverbnation.com", 8309539728);
@@ -96,7 +96,7 @@ INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_T
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("7b671389-b554-11ee-ad8f-001fbc130d5b", 1),"Iseabal", "Elloy", "ielloy5@pen.io", 7469073433);
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("813827e4-b554-11ee-ad8f-001fbc130d5b", 1), "Dispatch", "None", "dispatch@ticketty.com", 9175555555);
 
-INSERT INTO engineers (id, person_uuid, role, active) VALUES (0, UUID_TO_BIN("813827e4-b554-11ee-ad8f-001fbc130d5b", 1), 'Dispatch', TRUE);
+INSERT INTO engineers (id, person_uuid, role, active) VALUES (1, UUID_TO_BIN("813827e4-b554-11ee-ad8f-001fbc130d5b", 1), 'Dispatch', TRUE);
 INSERT INTO engineers (person_uuid, role, active) VALUES (UUID_TO_BIN('08c4b362-b554-11ee-ad8f-001fbc130d5b', 1), 'Dispatch', TRUE);
 INSERT INTO engineers (person_uuid, role, active) VALUES (UUID_TO_BIN('7b671389-b554-11ee-ad8f-001fbc130d5b', 1), 'Engineer', TRUE);
 INSERT INTO engineers (person_uuid, role, active) VALUES (UUID_TO_BIN('2443fc01-b554-11ee-ad8f-001fbc130d5b', 1), 'Manager', TRUE);

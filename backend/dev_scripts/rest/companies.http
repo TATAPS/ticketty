@@ -1,3 +1,23 @@
 ###
-GET http://localhost:8080/companies
+GET http://localhost:8080/api/companies
 Content-Type: application/json
+
+###
+POST http://localhost:8080/api/companies/create
+Content-Type: application/json
+
+  {
+    "ein_tin": "38-1234567",
+    "name": "new test",
+    "active": "1"
+  }
+
+###
+PUT http://localhost:8080/api/companies/update
+Content-Type: application/json
+
+  {
+    "ein_tin": "38-1234567",
+    "name": "update",
+    "active": "0"
+  }

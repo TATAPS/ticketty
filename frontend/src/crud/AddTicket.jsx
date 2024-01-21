@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export default function AddTicket() {
   const [ticket, setTicket] = useState({
     companyName: "",
     description: ""
   })
+
+  const queryClient = useQueryClient();
 
   const handleChange = (e) => {
     setTicket(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -16,7 +19,6 @@ export default function AddTicket() {
     // try {
 
     // } catch (error) {
-
     // }
   }
 
