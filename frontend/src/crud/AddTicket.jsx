@@ -7,6 +7,8 @@ export default function AddTicket() {
     description: ""
   })
 
+  const queryClient = useQueryClient();
+
   const handleChange = (e) => {
     setTicket(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
@@ -17,7 +19,6 @@ export default function AddTicket() {
     // try {
 
     // } catch (error) {
-    gd
     // }
   }
 
