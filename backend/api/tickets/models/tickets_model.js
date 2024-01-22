@@ -17,6 +17,18 @@ async function getAllTickets() {
   return tickets;
 }
 
+async function getSingleTicket(ticketId) {
+  const query = `SELECT 
+  t.id, t.company_id, BIN_TO_UUID(t.owner_id, 1), t.engineer_id, t.title, 
+  t.status, t.ticket_total_time, t.created_at, t.closed_at, tn.ticket_id, 
+  tn.id, tn.note FROM tickets t INNER JOIN ticket_notes tn
+  ON t.id = tn.ticket_id
+  WHERE t.id=${ticketId};`;
+  const db = await connectDatabase();
+  const [ticket] = await db.query(query);
+  return ticket;
+}
+
 async function addTicket(ticket) {
   const query = `INSERT INTO tickets (company_id, title, status, owner_id) VALUES (?, ?, ?, UUID_TO_BIN(?, 1));`;
   const db = await connectDatabase();
@@ -33,6 +45,7 @@ async function updateTicket(ticket) {
 
 module.exports = {
   getAllTickets,
+  getSingleTicket,
   addTicket,
-  updateTicket
+  updateTicket,
 };

@@ -3,6 +3,10 @@ GET http://localhost:8080/api/tickets
 Content-Type: application/json
 
 ###
+GET http://localhost:8080/api/tickets/3
+Content-Type: application/json
+
+###
 POST http://localhost:8080/api/tickets/create
 Content-Type: application/json
 
