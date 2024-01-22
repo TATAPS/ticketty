@@ -1,8 +1,6 @@
 import './TicketsTable.css'
 import { useState } from 'react';
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
@@ -12,24 +10,25 @@ export default function TicketsTable({ tickets }) {
   const [filterModel, setFilterModel] = useState({
     items: [],
     quickFilterExcludeHiddenColumns: true,
-    // quickFilterValues: ['1'],
   });
   const [columnVisibilityModel, setColumnVisibilityModel] = useState({});
+  const navigate = useNavigate()
 
   const columns = [
     {
-      field: 'id',
-      renderCell: (ticketId) => <Link to={`/tickets/${ticketId.id}`}>{ticketId.id}</Link>,
-      headerName: 'Ticket ID', width: 70
+      field: 'id', headerName: 'Ticket ID', width: 70
     },
-    { field: 'age', headerName: 'Age', type: 'number', width: 130 },
-    { field: 'companyName', headerName: 'Company', width: 130 },
-    { field: 'mainContact', headerName: 'Main Contact', width: 130 },
-    { field: 'notes', headerName: 'Notes', sortable: false, width: 130 },
+    { field: 'age_days', headerName: 'Age', type: 'number', width: 130 },
+    { field: 'company', headerName: 'Company', width: 150 },
+    { field: 'contact', headerName: 'Main Contact', width: 150 },
+    { field: 'title', headerName: 'Titles', sortable: false, width: 500 },
   ];
 
-  const rows = tickets
-
+  const handleRowClick = (params, event) => {
+    if (event.type === "click") {
+      navigate(`/tickets/${params.id}`)
+    }
+  }
 
   return (
     <>
@@ -53,9 +52,10 @@ export default function TicketsTable({ tickets }) {
         label="Exclude hidden columns"
       />
       <div style={{ height: "100%", width: '100%' }}>
+
         <DataGrid
           columns={columns}
-          rows={rows}
+          rows={tickets}
           disableColumnFilter
           disableDensitySelector
           slots={{ toolbar: GridToolbar }}
@@ -66,7 +66,10 @@ export default function TicketsTable({ tickets }) {
           onColumnVisibilityModelChange={(newModel) =>
             setColumnVisibilityModel(newModel)
           }
+          onRowClick={handleRowClick}
         />
+
+
       </div>
     </>
   )

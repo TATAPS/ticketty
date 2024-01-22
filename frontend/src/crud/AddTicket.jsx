@@ -1,34 +1,32 @@
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { addTicket } from '../api/tickets';
+import TicketForm from './TicketForm.jsx';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function AddTicket() {
-  const [ticket, setTicket] = useState({
-    companyName: "",
-    description: ""
+  const navigate = useNavigate()
+  const queryClient = useQueryClient();
+  const addTicketMutation = useMutation({
+    mutationFn: addTicket,
+    onSuccess: (newTicket) => {
+      queryClient.invalidateQueries({ queryKey: ['tickets'], newTicket });
+      console.log("CREATED TICKET SUCCESSFULLY")
+    },
   })
 
-  const queryClient = useQueryClient();
-
-  const handleChange = (e) => {
-    setTicket(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  const handleAddTicket = (ticket) => {
+    addTicketMutation.mutate({
+      ...ticket
+    })
+    navigate("/");
   }
 
-  const handleClick = async e => {
-    e.preventDefault()
-    // TODO: FETCH_DATA_HERE
-    // try {
-
-    // } catch (error) {
-    // }
-  }
-
-  console.log(ticket);
   return (
     <div className='add-ticket'>
       <h1>Add New Ticket</h1>
-      <input type="text" placeholder='companyName' onChange={handleChange} name="companyName" />
-      <input type="text" placeholder='description' onChange={handleChange} name="description" />
-      <button onClick={handleClick}>Add Ticket</button>
+      <TicketForm onSubmit={handleAddTicket} initialValue={{}} />
     </div>
   );
 }
