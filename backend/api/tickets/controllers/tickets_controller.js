@@ -26,7 +26,12 @@ async function getSingleTicketAction(req, res) {
 
 async function addTicketAction(req, res) {
   try {
-    const values = [req.body.company_id, req.body.title, req.body.status];
+    const values = [
+      req.body.company_id,
+      req.body.title,
+      req.body.status,
+      req.body.owner_id,
+    ];
     const newTicket = await addTicket(values);
     res.status(200).json(newTicket);
   } catch (error) {
