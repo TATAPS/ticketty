@@ -14,6 +14,20 @@ async function getAllEngineers() {
   }
 }
 
+async function find(user) {
+  const query = `SELECT salt, password FROM engineers WHERE username = ?`;
+  try {
+    if (user.username && user.password) {
+      const db = await connectDatabase();
+      const [result] = await db.query(query, user.username);
+      return result;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 module.exports = {
   getAllEngineers,
+  find,
 };
