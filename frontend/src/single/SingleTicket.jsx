@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams, Link } from "react-router-dom";
 import Sidebar from '../sidebar/Sidebar';
 import Navbar from "../navbar/Navbar";
-import { fetchTickets } from "../api/tickets";
+import { fetchTicket } from "../api/tickets.jsx";
 
 function SingleTicket() {
   const [ticket, setTicket] = useState({})
@@ -14,10 +14,10 @@ function SingleTicket() {
   let { ticketId } = useParams();
 
   const { isFetching, isError, data, error } = useQuery({
-    queryKey: ['tickets'],
-    queryFn: fetchTickets,
+    queryKey: ['tickets', ticketId],
+    queryFn: () => fetchTicket(ticketId),
   })
-  console.log(isFetching, isError, data, error)
+  // console.log(isFetching, isError, data, error)
   ////////////TODO: IMPLEMENT useQuery TO FETCH DATA ///////////////
   // const queryClient = useQueryClient();
   // const fetchSingleTicket = async () => {
@@ -28,21 +28,6 @@ function SingleTicket() {
   //   return response.json()
   // }
 
-
-
-
-  /////////////// TODO: DELETE TICKET HANDLE //////////////////
-
-  // const deletePostMutation = useMutation({
-  //   mutationFn: deletePost,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ['ticket']});
-  //   }
-  // });
-
-  // const handleDelete = (id) => {
-  //   deletePostMutation.mutate(id)
-  // }
 
   ///////////// ERROR HANDLER ///////////////
   if (isFetching) {

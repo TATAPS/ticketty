@@ -5,20 +5,13 @@ import { Link } from "react-router-dom";
 import TicketsTable from "./TicketsTable"
 import { fetchTickets } from "../api/tickets";
 
-// MAIN_FUNCTION
 function Tickets() {
-  ////////////TODO: IMPLEMENT useQuery TO FETCH DATA ///////////////
   const { isFetching, isError, data, error } = useQuery({
     queryKey: ['tickets'],
-    queryFn: fetchTickets,
+    queryFn: fetchTickets
   })
-  console.log(isFetching, isError, data, error)
-  const [tickets, setTickets] = useState(
-    //REPLACE WITH THE RESULT FROM fetchTickets FUNCTION//
-    data
-  );
-
-
+  // const [tickets, setTickets] = useState(data);
+  console.log("data", data);
   if (isFetching) {
     return <span>Loading...</span>
   }
@@ -26,8 +19,6 @@ function Tickets() {
   if (isError) {
     return <span>Error: {error.message}</span>
   }
-
-
 
   return (
     <div className="tickets">
