@@ -30,7 +30,7 @@ async function loginAction(req, res) {
   );
 
   const foundUser = { name: user };
-
+  console.log("found user", foundUser);
   if (verifiedPassword) {
     res.send({ accessToken: generateAccessToken(foundUser) });
   }

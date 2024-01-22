@@ -8,12 +8,14 @@
 # }
 # }
 
+###
+# Should fail
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
     "user": {
         "username": "dispatch",
-        "password": "CracK3dPas$WordPl3ase"
+        "password": "CracK3dPas$WordPl3as"
     }
 }
