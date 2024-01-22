@@ -26,6 +26,9 @@ CREATE TABLE persons (
 CREATE TABLE engineers (
 	id INT NOT NULL AUTO_INCREMENT,
 	person_uuid BINARY(16) NOT NULL,
+    username VARCHAR(254),
+    password VARCHAR(60),
+    salt VARCHAR(32),
     -- DEFAULT (UUID_TO_BIN(UUID(),1)),
     role ENUM("Dispatch", "Engineer", "Manager"),
     active BOOLEAN DEFAULT FALSE NOT NULL,
@@ -96,10 +99,10 @@ INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_T
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("7b671389-b554-11ee-ad8f-001fbc130d5b", 1),"Iseabal", "Elloy", "ielloy5@pen.io", 7469073433);
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("813827e4-b554-11ee-ad8f-001fbc130d5b", 1), "Dispatch", "None", "dispatch@ticketty.com", 9175555555);
 
-INSERT INTO engineers (id, person_uuid, role, active) VALUES (1, UUID_TO_BIN("813827e4-b554-11ee-ad8f-001fbc130d5b", 1), 'Dispatch', TRUE);
-INSERT INTO engineers (person_uuid, role, active) VALUES (UUID_TO_BIN('08c4b362-b554-11ee-ad8f-001fbc130d5b', 1), 'Dispatch', TRUE);
-INSERT INTO engineers (person_uuid, role, active) VALUES (UUID_TO_BIN('7b671389-b554-11ee-ad8f-001fbc130d5b', 1), 'Engineer', TRUE);
-INSERT INTO engineers (person_uuid, role, active) VALUES (UUID_TO_BIN('2443fc01-b554-11ee-ad8f-001fbc130d5b', 1), 'Manager', TRUE);
+INSERT INTO engineers (id, person_uuid, username, password, salt, role, active) VALUES (1, UUID_TO_BIN("813827e4-b554-11ee-ad8f-001fbc130d5b", 1),'dispatch', '$2b$10$CPx4byxXqCGzJv6VErAX6uxu2Gbt562qc2GVgUePEm2Ca22HOfFxG', "$2b$10$CPx4byxXqCGzJv6VErAX6u", 'Dispatch', TRUE);
+INSERT INTO engineers (person_uuid, username, password, salt, role, active) VALUES (UUID_TO_BIN('08c4b362-b554-11ee-ad8f-001fbc130d5b', 1), 'dispatch2', '$2b$10$x8Y5NyJFlAiNKUbKxk2hpeGC.A5tjXrixlxi.DkzDZ9aIubzE7Rz6','$2b$10$x8Y5NyJFlAiNKUbKxk2hpe','Dispatch', TRUE);
+INSERT INTO engineers (person_uuid, username, password, salt, role, active) VALUES (UUID_TO_BIN('7b671389-b554-11ee-ad8f-001fbc130d5b', 1),'engineer', '$2b$10$7HZBFonB/R5xdWFxfEHuM.jLhaVRChUaejoGhFvheImURe6L/yBrO','$2b$10$7HZBFonB/R5xdWFxfEHuM.','Engineer', TRUE);
+INSERT INTO engineers (person_uuid, username, password, salt, role, active) VALUES (UUID_TO_BIN('2443fc01-b554-11ee-ad8f-001fbc130d5b', 1),'manager', '$2b$10$XgJ6ydkSCIC.H7AS5fILg.Y3uX6pqvFE6DizJXUMfih7nSw3LumIu','$2b$10$XgJ6ydkSCIC.H7AS5fILg.','Manager', TRUE);
 
 INSERT INTO companies (ein_tin, name, active) VALUES ("40-2522401", "Rose's Apothecary", TRUE);
 INSERT INTO companies (ein_tin, name, active) VALUES ("30-2846270", "Jimmy's Auto Shop", TRUE);

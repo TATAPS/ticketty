@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const path = require("path");
 const cors = require("cors");
 const { router: apiRouter } = require("./api/index.js");
+const { router: authRouter } = require("./auth/index.js");
 
 const app = express();
 const corsOptions = {
@@ -14,6 +15,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use("/auth", authRouter);
 app.use("/api", apiRouter);
 
 app.get("/", (req, res, next) => {
