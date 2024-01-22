@@ -1,3 +1,7 @@
 ###
-GET http://localhost:8080/contacts
+GET http://localhost:8080/api/contacts
+Content-Type: application/json
+
+###
+GET http://localhost:8080/api/contacts/company_contacts
 Content-Type: application/json

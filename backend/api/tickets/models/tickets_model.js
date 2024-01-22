@@ -9,7 +9,8 @@ async function getAllTickets() {
   FROM tickets t INNER JOIN companies cm
   ON t.company_id = cm.ein_tin
   INNER JOIN persons p
-  ON t.owner_id = p.uuid;`;
+  ON t.owner_id = p.uuid
+  ORDER BY t.id ASC;`;
 
   // "SELECT id, company_id, BIN_TO_UUID(owner_id, 1) as owner_id, engineer_id, title, status, ticket_total_time, created_at, closed_at FROM tickets;";
   const db = await connectDatabase();
@@ -19,11 +20,12 @@ async function getAllTickets() {
 
 async function getSingleTicket(ticketId) {
   const query = `SELECT 
-  t.id, t.company_id, BIN_TO_UUID(t.owner_id, 1), t.engineer_id, t.title, 
+  t.id, t.company_id, BIN_TO_UUID(t.owner_id, 1) as owner_id, t.engineer_id, t.title, 
   t.status, t.ticket_total_time, t.created_at, t.closed_at, tn.ticket_id, 
-  tn.id, tn.note FROM tickets t INNER JOIN ticket_notes tn
+  tn.id as ticket_id, tn.note FROM tickets t INNER JOIN ticket_notes tn
   ON t.id = tn.ticket_id
-  WHERE t.id=${ticketId};`;
+  WHERE t.id=${ticketId}
+  ORDER BY tn.id DESC;`;
   const db = await connectDatabase();
   const [ticket] = await db.query(query);
   return ticket;
