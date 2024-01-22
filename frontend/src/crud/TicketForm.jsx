@@ -4,7 +4,8 @@ function TicketForm({ onSubmit, initialValue }) {
   const [ticket, setTicket] = useState({
     title: initialValue.title || "test FE",
     company_id: initialValue.company_id || "40-2522401",
-    status: initialValue.status || "Open"
+    status: initialValue.status || "Open",
+    owner_id: initialValue.status || "11eeb505-16a3-6017-8584-001fbc130d5b"
   })
   // const navigate = useNavigate()
   const handleChangeInput = (e) => {
@@ -27,7 +28,8 @@ function TicketForm({ onSubmit, initialValue }) {
     setTicket({
       title: "",
       company_id: "",
-      status: ""
+      status: "",
+      owner_id: ""
     });
     // navigate("/");
   }
@@ -37,6 +39,7 @@ function TicketForm({ onSubmit, initialValue }) {
       {renderField('Title')}
       {renderField('Company_ID')}
       {renderField('Status')}
+      {renderField('Owner_id')}
       <button type="submit">Submit</button>
     </form>
   )

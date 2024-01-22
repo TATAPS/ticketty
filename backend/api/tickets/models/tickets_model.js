@@ -18,7 +18,7 @@ async function getAllTickets() {
 }
 
 async function addTicket(ticket) {
-  const query = `INSERT INTO tickets (company_id, title, status) VALUES (?, ?, ?);`;
+  const query = `INSERT INTO tickets (company_id, title, status, owner_id) VALUES (?, ?, ?, UUID_TO_BIN(?, 1));`;
   const db = await connectDatabase();
   const [tickets] = await db.query(query, ticket);
   return tickets;
