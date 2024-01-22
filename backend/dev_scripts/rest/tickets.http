@@ -1,5 +1,5 @@
 ###
-GET http://localhost:8080/tickets
+GET http://localhost:8080/api/tickets
 Content-Type: application/json
 
 ###

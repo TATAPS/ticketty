@@ -14,7 +14,8 @@ async function addTicketAction(req, res) {
     const values = [
       req.body.company_id,
       req.body.title,
-      req.body.status
+      req.body.status,
+      req.body.owner_id
     ];
     const newTicket = await addTicket(values);
     res.status(200).json(newTicket);
