@@ -1,5 +1,6 @@
 const { executeQuery, pool } = require("../../db_connnection.js");
 // const { login, register, logout } = require("../models/auth_model.js");
+// const { find } = require("../../api/models/engineers_model.js");
 const { find } = require("../../api/models/engineers_model.js");
 const { verifyPassword, generateAccessToken } = require("../models/auth_model.js");
 // const { hashPassword, verifyPassword } = require();
@@ -13,13 +14,13 @@ async function loginAction(req, res) {
     return res.status(400).send("No user submitted");
   }
 
+  // console.log(req.body.user);
   const user = await find(req.body.user);
-  console.log(user);
   if (user === null) {
     return res.status(400).send("Cannot find user");
   }
 
-  console.log(user);
+  // console.log(user);
   const verifiedPassword = await verifyPassword(
     req.body.user.password,
     user[0].salt,
@@ -27,13 +28,15 @@ async function loginAction(req, res) {
   );
 
   const foundUser = { name: user };
-  console.log("found user", foundUser);
+  // console.log("found user", foundUser);
   if (verifiedPassword) {
-    res.send({ accessToken: generateAccessToken(foundUser) });
+    res.json({ accessToken: generateAccessToken(foundUser) });
+  } else {
+    res.json("Username or Password incorrect");
   }
-  //   console.log(user);
-  //   const { username, password } = req.body;
-  //   res.json(verifiedPassword);
+  // console.log(user);
+  // const { username, password } = req.body;
+  // res.json(verifiedPassword);
 }
 
 // export const logout = (req, res) => {};

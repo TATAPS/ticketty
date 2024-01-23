@@ -9,7 +9,8 @@ const {
 const router = Router();
 
 router.get("/", getAllContactsAction);
-router.get("/:UUID", getSingleContactAction);
+// don't drop /company_contacts below /:uuid or it won't work
 router.get("/company_contacts", getAllCompaniesAndContactsAction);
+router.get("/:UUID", getSingleContactAction);
 router.get("/company/:ein_tin", getCompanyContactsAction);
 module.exports = { router };

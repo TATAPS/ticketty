@@ -19,7 +19,7 @@ async function find(user) {
   try {
     if (user.username && user.password) {
       // const db = await connectDatabase();
-      const [result] = await executeQuery(query, user.username);
+      const [result] = await executeQuery(query, [user.username]);
       return result;
     }
   } catch (error) {
