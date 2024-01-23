@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 .auth-container {
-  background-color: #c9d6ff;
+  background-color: var(--color-background);
   background: linear-gradient(to right, #e2e2e2, #c9d6ff);
   display: flex;
   align-items: center;
@@ -25,6 +25,7 @@
 }
 
 .container p {
+  color: var(--color-white);
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.3px;
@@ -58,7 +59,7 @@
   cursor: pointer;
 }
 
-.container button.hidden {
+.toggle-panel button {
   background-color: transparent;
   border-color: #fff;
 }

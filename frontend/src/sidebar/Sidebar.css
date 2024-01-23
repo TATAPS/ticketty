@@ -1,4 +1,4 @@
-.sidebar {
+/* .sidebar {
   background-color: antiquewhite;
   flex: 1;
   border-right: 0.5px solid rgb(230, 227, 227);
@@ -89,4 +89,106 @@ hr {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+} */
+
+aside {
+  height: 100vh;
+}
+
+aside a {
+  text-decoration: none;
+}
+aside .sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.4rem;
+}
+
+aside .sidebar-toggle .logo {
+  display: flex;
+  gap: 0.5rem;
+}
+
+aside .sidebar-toggle .logo h1 {
+  width: 2rem;
+  height: 2rem;
+}
+
+aside .sidebar-toggle .close {
+  padding-right: 1rem;
+  /* display: none; */
+}
+
+aside .sidebar-main {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow);
+  border-radius: 15px;
+  height: 88vh;
+  position: relative;
+  top: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+aside .sidebar-main:hover {
+  box-shadow: none;
+}
+
+aside .sidebar-main a {
+  display: flex;
+  align-items: center;
+  color: var(--color-info-dark);
+  height: 3.7rem;
+  gap: 1rem;
+  position: relative;
+  margin-left: 2rem;
+  transition: all 0.3s ease;
+}
+
+aside .sidebar-main a span {
+  font-size: 1.6rem;
+  transition: all 0.3s ease;
+}
+
+aside .sidebar-main a:last-child {
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+}
+
+aside .sidebar-main a.active {
+  width: 100%;
+  color: var(--color-primary);
+  background-color: var(--color-light);
+  margin-left: 0;
+}
+
+aside .sidebar-main a.active::before {
+  content: "";
+  width: 6px;
+  height: 18px;
+  background-color: var(--color-primary);
+}
+
+aside .sidebar-main a.active span {
+  color: var(--color-primary);
+  margin-left: calc(1rem - 3px);
+}
+
+aside .sidebar-main a:hover {
+  color: var(--color-primary);
+}
+
+aside .sidebar-main a:hover span {
+  margin-left: 0.6rem;
+}
+
+aside .sidebar-main .message-count {
+  background-color: var(--color-danger);
+  padding: 2px 6px;
+  color: var(--color-white);
+  font-size: 11px;
+  border-radius: var(--border-radius-1);
 }
