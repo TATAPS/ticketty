@@ -2,6 +2,9 @@
 
 - Clean up index.js for dev purposes
 - rename contacts folder to company_contacts to show the relationship in sql
+- lots of weird issues going on with the api requests
+- get api/contacts/company_contacts failing,
+- post requests for creating and updating companies cause the server to fail if they already exist and we send the same request
 
 # 1 Current Relationships
 

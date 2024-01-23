@@ -1,7 +1,5 @@
 const { Router } = require("express");
-const {
-  getAllEngineersAction,
-} = require("./controllers/engineers_controller.js");
+const { getAllEngineersAction } = require("../controllers/engineers_controller.js");
 
 const router = Router();
 

@@ -1,6 +1,6 @@
 const {
   getAllEngineers,
-  getEngineer,
+  // getEngineer
 } = require("../models/engineers_model.js");
 
 async function getAllEngineersAction(req, res) {
@@ -12,16 +12,16 @@ async function getAllEngineersAction(req, res) {
   }
 }
 
-async function getEngineerAction(req, res, next) {
-  try {
-    const engineer = await getEngineer();
-    res.json(engineer);
-  } catch (error) {
-    next(error);
-  }
-}
+// async function getEngineerAction(req, res, next) {
+//   try {
+//     const engineer = await getEngineer();
+//     res.json(engineer);
+//   } catch (error) {
+//     next(error);
+//   }
+// }
 
 module.exports = {
   getAllEngineersAction,
-  getEngineerAction,
+  // getEngineerAction,
 };

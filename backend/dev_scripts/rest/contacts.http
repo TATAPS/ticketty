@@ -1,3 +1,15 @@
 ###
-GET http://localhost:8080/contacts
+GET http://localhost:8080/api/contacts
+Content-Type: application/json
+
+###
+GET http://localhost:8080/api/contacts/company_contacts
+Content-Type: application/json
+
+###
+GET http://localhost:8080/api/contacts/187b0262-b554-11ee-ad8f-001fbc130d5b
+Content-Type: application/json
+
+###
+GET http://localhost:8080/api/contacts/company/40-2522401
 Content-Type: application/json
