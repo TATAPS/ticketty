@@ -1,5 +1,9 @@
 const { Router } = require("express");
-const { getAllCompaniesAction, addCompanyAction, updateCompanyAction } = require("./controllers/companies_controller");
+const {
+  getAllCompaniesAction,
+  addCompanyAction,
+  updateCompanyAction,
+} = require("../controllers/companies_controller.js");
 
 const router = Router();
 

@@ -5,7 +5,7 @@ const {
   getSingleTicketAction,
   addTicketAction,
   updateTicketAction,
-} = require("./controllers/tickets_controller.js");
+} = require("../controllers/tickets_controller.js");
 
 const router = Router();
 

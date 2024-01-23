@@ -1,4 +1,4 @@
-const { executeQuery } = require("../../../db_connnection.js");
+const { executeQuery, pool } = require("../../db_connnection.js");
 
 async function getAllCompaniesAndContacts() {
   try {

@@ -4,7 +4,7 @@ const {
   getAllContactsAction,
   getSingleContactAction,
   getCompanyContactsAction,
-} = require("./controllers/contacts_controller.js");
+} = require("../controllers/contacts_controller.js");
 
 const router = Router();
 

@@ -1,10 +1,7 @@
-const connectDatabase = require("../../db_connnection.js");
+const { executeQuery, pool } = require("../../db_connnection.js");
 // const { login, register, logout } = require("../models/auth_model.js");
-const { find } = require("../../api/engineers/models/engineers_model.js");
-const {
-  verifyPassword,
-  generateAccessToken,
-} = require("../models/auth_model.js");
+const { find } = require("../../api/models/engineers_model.js");
+const { verifyPassword, generateAccessToken } = require("../models/auth_model.js");
 // const { hashPassword, verifyPassword } = require();
 // import bcrypt from "bcryptjs";
 // import jwt from "jsonwebtoken";

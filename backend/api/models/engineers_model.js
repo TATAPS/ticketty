@@ -1,4 +1,4 @@
-const connectDatabase = require("../../../db_connnection.js");
+const { executeQuery, pool } = require("../../db_connnection.js");
 
 async function getAllEngineers() {
   try {
@@ -6,8 +6,8 @@ async function getAllEngineers() {
       e.active, p.given_name, p.family_name, p.email, p.phone 
       FROM persons p INNER JOIN engineers e 
       ON p.uuid = e.person_uuid;`;
-    const db = await connectDatabase();
-    const [engineers] = await db.query(query);
+    // const db = await connectDatabase();
+    const [engineers] = await executeQuery(query);
     return engineers;
   } catch (error) {
     next(error);
@@ -18,8 +18,8 @@ async function find(user) {
   const query = `SELECT salt, password FROM engineers WHERE username = ?`;
   try {
     if (user.username && user.password) {
-      const db = await connectDatabase();
-      const [result] = await db.query(query, user.username);
+      // const db = await connectDatabase();
+      const [result] = await executeQuery(query, user.username);
       return result;
     }
   } catch (error) {

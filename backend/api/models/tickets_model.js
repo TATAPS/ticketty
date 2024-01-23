@@ -1,4 +1,4 @@
-const connectDatabase = require("../../../db_connnection.js");
+const { executeQuery, pool } = require("../../db_connnection.js");
 
 async function getAllTickets() {
   const query = `SELECT t.id,
@@ -13,8 +13,8 @@ async function getAllTickets() {
   ORDER BY t.id ASC;`;
 
   // "SELECT id, company_id, BIN_TO_UUID(owner_id, 1) as owner_id, engineer_id, title, status, ticket_total_time, created_at, closed_at FROM tickets;";
-  const db = await connectDatabase();
-  const [tickets] = await db.query(query);
+  // const db = await connectDatabase();
+  const [tickets] = await executeQuery(query);
   return tickets;
 }
 
@@ -26,22 +26,22 @@ async function getSingleTicket(ticketId) {
   ON t.id = tn.ticket_id
   WHERE t.id=${ticketId}
   ORDER BY tn.id DESC;`;
-  const db = await connectDatabase();
-  const [ticket] = await db.query(query);
+  // const db = await connectDatabase();
+  const [ticket] = await executeQuery(query);
   return ticket;
 }
 
 async function addTicket(ticket) {
   const query = `INSERT INTO tickets (company_id, title, status, owner_id) VALUES (?, ?, ?, UUID_TO_BIN(?, 1));`;
-  const db = await connectDatabase();
-  const [tickets] = await db.query(query, ticket);
+  // const db = await connectDatabase();
+  const [tickets] = await executeQuery(query, ticket);
   return tickets;
 }
 
 async function updateTicket(ticket) {
   const query = `UPDATE tickets SET title=?, status=? WHERE id=?`;
-  const db = await connectDatabase();
-  const [tickets] = await db.query(query, ticket);
+  // const db = await connectDatabase();
+  const [tickets] = await executeQuery(query, ticket);
   return tickets;
 }
 
