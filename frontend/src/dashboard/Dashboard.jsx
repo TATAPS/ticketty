@@ -5,7 +5,7 @@ import Navbar from '../navbar/Navbar';
 import Tickets from '../tickets/Tickets';
 
 export const Dashboard = () => {
-  const [isMenuOpen, setMenuOpen] = useState(0);
+  const [isMenuOpen, setMenuOpen] = useState(true);
 
   const handleMenuClick = () => {
     setMenuOpen((prevState) => !prevState);
