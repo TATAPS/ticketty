@@ -11,6 +11,7 @@ GET http://localhost:8080/api/tickets/2
 Content-Type: application/json
 
 ###
+# Doesn't crash like companies/create
 POST http://localhost:8080/api/tickets/
 Content-Type: application/json
 

@@ -26,7 +26,6 @@ async function getAllContactsAction(req, res, next) {
 async function getSingleContactAction(req, res, next) {
   try {
     const { UUID } = req.params;
-    console.log(typeof UUID);
     const contact = await getSingleContact(UUID);
     res.json(contact);
   } catch (error) {
