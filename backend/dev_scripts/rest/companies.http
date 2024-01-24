@@ -3,6 +3,9 @@ GET http://localhost:8080/api/companies
 Content-Type: application/json
 
 ###
+# Causes application to crash if ran twice
+# Could be the active being passed when not included
+# in the addCompany function in the model
 POST http://localhost:8080/api/companies/create
 Content-Type: application/json
 

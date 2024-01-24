@@ -7,17 +7,19 @@ GET http://localhost:8080/api/tickets/3
 Content-Type: application/json
 
 ###
-GET http://localhost:8080/api/tickets/3
+GET http://localhost:8080/api/tickets/2
 Content-Type: application/json
 
 ###
-POST http://localhost:8080/api/tickets/create
+# Doesn't crash like companies/create
+POST http://localhost:8080/api/tickets/
 Content-Type: application/json
 
 {
   "company_id": "40-2522401",
   "title": "test title",
-  "status": "Open"
+  "status": "Open",
+  "owner_id": "11eeb505-16a3-6017-8584-001fbc130d5b"
 }
 
 ###

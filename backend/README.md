@@ -1,10 +1,15 @@
 # To Do
 
-- Clean up index.js for dev purposes
-- rename contacts folder to company_contacts to show the relationship in sql
-- lots of weird issues going on with the api requests
-- get api/contacts/company_contacts failing,
-- post requests for creating and updating companies cause the server to fail if they already exist and we send the same request
+- [] Clean up index.js for dev purposes
+- [] Rename contacts folder to company_contacts to show the relationship in sql
+- [] Issues with api requests:
+  - [] POST to api/companies/create kills server if done more than once
+  - [] POST to api/companies/create does not have the correct "active" status when you GET all companies after creating.
+  - [x] GET api/contacts/company_contacts failing,
+- [] Clean up models:
+  - [] Confirm all models have been parameterized
+  - [] Confirm all models that have values being passed to the model are passed as an array per best practice.
+- [] Setup Auth and Tokens:
 
 # 1 Current Relationships
 
