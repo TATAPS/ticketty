@@ -51,14 +51,13 @@ function Sidebar({ onShow, isOpen }) {
           </span>
           <h3>Analytics</h3>
         </a>
-        <a href="#">
+        <Link to="/addticket" className="link">
           <span className="material-icons-sharp">
             <ControlPointIcon />
           </span>
-          <h3>Tickets</h3>
+          <h3>New Tickets</h3>
           <span className="message-count">27</span>
-        </a>
-
+        </Link>
         <a href="#">
           <span className="material-icons-sharp">
             <ControlPointIcon />
