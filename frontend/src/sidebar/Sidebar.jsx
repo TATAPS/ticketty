@@ -58,12 +58,7 @@ function Sidebar({ onShow, isOpen }) {
           <h3>Tickets</h3>
           <span className="message-count">27</span>
         </a>
-        <a href="#">
-          <span className="material-icons-sharp">
-            <ControlPointIcon />
-          </span>
-          <h3>Sale List</h3>
-        </a>
+
         <a href="#">
           <span className="material-icons-sharp">
             <ControlPointIcon />

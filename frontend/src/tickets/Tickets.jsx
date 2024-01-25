@@ -11,7 +11,6 @@ function Tickets() {
     queryFn: fetchTickets
   })
   // const [tickets, setTickets] = useState(data);
-  console.log("data", data);
   if (isFetching) {
     return <span>Loading...</span>
   }

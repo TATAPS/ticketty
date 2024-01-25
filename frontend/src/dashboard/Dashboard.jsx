@@ -17,8 +17,9 @@ export const Dashboard = () => {
       <div className="dashboard-container">
         <Navbar isOpen={isMenuOpen} onShow={handleMenuClick} />
         <div className="list-container">
-          <div className="list-title"></div>
-          <Tickets />
+          <div className="list-title">
+            <Tickets />
+          </div>
         </div>
       </div>
     </div>
