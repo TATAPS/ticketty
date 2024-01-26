@@ -27,12 +27,12 @@ function Sidebar({ onShow, isOpen }) {
             </span>
           </div>
         </div>
-        <a href="#">
+        <Link to="/" className="link">
           <span className="material-icons-sharp">
             <DashboardIcon />
           </span>
           <h3>Dashboard</h3>
-        </a>
+        </Link>
         <a href="#">
           <span className="material-icons-sharp">
             <AccountCircleIcon />
@@ -58,12 +58,6 @@ function Sidebar({ onShow, isOpen }) {
           <h3>New Tickets</h3>
           <span className="message-count">27</span>
         </Link>
-        <a href="#">
-          <span className="material-icons-sharp">
-            <ControlPointIcon />
-          </span>
-          <h3>Reports</h3>
-        </a>
         <a href="#">
           <span className="material-icons-sharp">
             <SettingsIcon />

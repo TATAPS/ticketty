@@ -1,0 +1,8 @@
+.ticket-details {
+  background-color: yellow;
+}
+
+.ticket-details button {
+  background-color: var(--color-success);
+  color: #fff;
+}

@@ -17,6 +17,11 @@ function SingleTicket() {
     queryKey: ['tickets', ticketId],
     queryFn: () => fetchTicket(ticketId),
   })
+  const [isMenuOpen, setMenuOpen] = useState(true);
+
+  const handleMenuClick = () => {
+    setMenuOpen((prevState) => !prevState);
+  };
   // console.log(isFetching, isError, data, error)
   ////////////TODO: IMPLEMENT useQuery TO FETCH DATA ///////////////
   // const queryClient = useQueryClient();
@@ -39,31 +44,32 @@ function SingleTicket() {
   }
 
   return (
-    <div className='single' >
-      <Sidebar />
-      <div className="single-container">
-        <Navbar />
-        <div className="singlelist-container">
-          {/* <div className="listTitle"></div> */}
-          {/* <Tickets /> */}
-          <div className="ticket-summary">
-            <p>TicketId: {ticketId}</p>
-            <div>
-              <label>
-                <Link to={`/tickets/${ticketId}/edit`}>
-                  <button>Update</button>
-                </Link>
-                <button
-                // onClick={() => handleDelete(/*ticketId*/)}
-                >Delete</button>
-              </label>
+    <div className='dashboard'>
+      <Sidebar isOpen={isMenuOpen} onShow={handleMenuClick} />
+      <div className="dashboard-container">
+        <Navbar isOpen={isMenuOpen} onShow={handleMenuClick} />
+        <div className="list-container">
+          <div className="list-title">
+            <h1>Single Ticket</h1>
+            {/* <Tickets /> */}
+            <div className="ticket-summary">
+              <p>TicketId: {ticketId}</p>
+              <div>
+                <label>
+                  <Link to={`/tickets/${ticketId}/edit`}>
+                    <button>Update</button>
+                  </Link>
+                  <button
+                  // onClick={() => handleDelete(/*ticketId*/)}
+                  >Delete</button>
+                </label>
 
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   )
 }
 
