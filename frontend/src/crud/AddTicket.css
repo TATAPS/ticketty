@@ -1,0 +1,10 @@
+.ticket-details form {
+  display: grid; /* to use css-grid */
+  grid-template-columns: 1fr 1fr; /* creates 2 columns */
+  gap: 20px; /* creates a gap between the columns and rows */
+}
+
+.ticket-details button {
+  background-color: var(--color-success);
+  color: #fff;
+}

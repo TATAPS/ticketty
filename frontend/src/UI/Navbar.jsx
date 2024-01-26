@@ -11,26 +11,24 @@ import Login from "../auth/Login";
 
 
 function Navbar({ onShow, isOpen }) {
-  console.log(isOpen);
   return (
     <div className="right-section">
       <div className="nav">
-
-        <button id="menu-btn" onClick={onShow}>
-          <span className="material-icons-sharp">
-            <MenuOutlinedIcon />
-          </span>
+        <button id="" onClick={onShow}>
+          {/* <span className="material-icons-sharp"> */}
+          <MenuOutlinedIcon />
+          {/* </span> */}
         </button>
-        <div className="dark-mode">
-          <span className="material-icons-sharp active">
-            <DarkModeIcon />
-          </span>
-          <span className="material-icons-sharp">
-            <LightModeOutlinedIcon />
-          </span>
-        </div>
 
         <div className="profile">
+          <div className="dark-mode">
+            <span className="material-icons-sharp active">
+              <DarkModeIcon />
+            </span>
+            <span className="material-icons-sharp">
+              <LightModeOutlinedIcon />
+            </span>
+          </div>
           <div className="info">
             <p>Hey, <b>Name</b></p>
             <small className="text-muted">Admin</small>

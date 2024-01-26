@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import './TicketForm.css'
+import React, { useState, useEffect, useRef } from 'react'
 // import { useNavigate } from 'react-router-dom';
+
 function TicketForm({ onSubmit, initialValue }) {
   const [ticket, setTicket] = useState({
     title: initialValue.title || "test FE",
@@ -7,7 +9,7 @@ function TicketForm({ onSubmit, initialValue }) {
     status: initialValue.status || "Open",
     owner_id: initialValue.status || "11eeb505-16a3-6017-8584-001fbc130d5b"
   })
-  // const navigate = useNavigate()
+
   const handleChangeInput = (e) => {
     setTicket({
       ...ticket,
@@ -15,12 +17,13 @@ function TicketForm({ onSubmit, initialValue }) {
     })
   }
 
-  const renderField = (label) => (
+  const renderInput = (label) => (
     <div>
       <label>{label}</label>
       <input onChange={handleChangeInput} type="text" name={label.toLowerCase()} value={ticket[label.toLowerCase()]} />
     </div>
   );
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,10 +39,10 @@ function TicketForm({ onSubmit, initialValue }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      {renderField('Title')}
-      {renderField('Company_ID')}
-      {renderField('Status')}
-      {renderField('Owner_id')}
+      {renderInput('Title')}
+      {renderInput('Company_ID')}
+      {renderInput('Status')}
+      {renderInput('Owner_id')}
       <button type="submit">Submit</button>
     </form>
   )

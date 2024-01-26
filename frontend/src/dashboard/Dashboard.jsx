@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
-import Sidebar from '../sidebar/Sidebar';
-import Navbar from '../navbar/Navbar';
-import Tickets from '../tickets/Tickets';
+import Sidebar from '../UI/Sidebar.jsx';
+import Navbar from '../UI/Navbar.jsx';
+import Tickets from '../tickets/Tickets.jsx';
 
 export const Dashboard = () => {
   const [isMenuOpen, setMenuOpen] = useState(true);
@@ -17,8 +17,9 @@ export const Dashboard = () => {
       <div className="dashboard-container">
         <Navbar isOpen={isMenuOpen} onShow={handleMenuClick} />
         <div className="list-container">
-          <div className="list-title"></div>
-          <Tickets />
+          <div className="list-title">
+            <Tickets />
+          </div>
         </div>
       </div>
     </div>

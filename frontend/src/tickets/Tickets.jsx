@@ -11,7 +11,6 @@ function Tickets() {
     queryFn: fetchTickets
   })
   // const [tickets, setTickets] = useState(data);
-  console.log("data", data);
   if (isFetching) {
     return <span>Loading...</span>
   }
@@ -23,9 +22,7 @@ function Tickets() {
   return (
     <div className="tickets">
       <div className="ticket-container">
-        <Link to={`/addticket`}>
-          <h1>Add Ticket</h1>
-        </Link>
+        <h1>Working Space</h1>
         <TicketsTable
           tickets={data}
         />

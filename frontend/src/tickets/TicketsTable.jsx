@@ -21,7 +21,7 @@ export default function TicketsTable({ tickets }) {
     { field: 'age_days', headerName: 'Age', type: 'number', width: 130 },
     { field: 'company', headerName: 'Company', width: 150 },
     { field: 'contact', headerName: 'Main Contact', width: 150 },
-    { field: 'title', headerName: 'Titles', sortable: false, width: 500 },
+    { field: 'title', headerName: 'Titles', sortable: false, width: 400 },
   ];
 
   const handleRowClick = (params, event) => {
@@ -51,13 +51,13 @@ export default function TicketsTable({ tickets }) {
         control={<Switch color="primary" size="small" />}
         label="Exclude hidden columns"
       />
-      <div style={{ height: "100%", width: '100%' }}>
-
+      <div style={{ height: "100%", width: '96%' }}>
         <DataGrid
           columns={columns}
           rows={tickets}
           disableColumnFilter
           disableDensitySelector
+          pageSizeOptions={[5, 10, 25, 100]}
           slots={{ toolbar: GridToolbar }}
           filterModel={filterModel}
           onFilterModelChange={(newModel) => setFilterModel(newModel)}
@@ -67,6 +67,7 @@ export default function TicketsTable({ tickets }) {
             setColumnVisibilityModel(newModel)
           }
           onRowClick={handleRowClick}
+
         />
 
 
