@@ -1,5 +1,5 @@
 ###
-POST http://localhost:8080/auth/login
+POST https://localhost:8080/auth/login
 Content-Type: application/json
 
 {   "user": {
@@ -10,7 +10,7 @@ Content-Type: application/json
 
 ###
 # Should fail
-POST http://localhost:8080/auth/login
+POST https://localhost:8080/auth/login
 Content-Type: application/json
 
 {

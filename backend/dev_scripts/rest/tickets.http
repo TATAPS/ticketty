@@ -1,18 +1,18 @@
 ###
-GET http://localhost:8080/api/tickets
+GET https://localhost:8080/api/tickets
 Content-Type: application/json
 
 ###
-GET http://localhost:8080/api/tickets/3
+GET https://localhost:8080/api/tickets/3
 Content-Type: application/json
 
 ###
-GET http://localhost:8080/api/tickets/2
+GET https://localhost:8080/api/tickets/2
 Content-Type: application/json
 
 ###
 # Doesn't crash like companies/create
-POST http://localhost:8080/api/tickets/
+POST https://localhost:8080/api/tickets/
 Content-Type: application/json
 
 {
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8080/api/tickets/update
+PUT https://localhost:8080/api/tickets/update
 Content-Type: application/json
 
 {
