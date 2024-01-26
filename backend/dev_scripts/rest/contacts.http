@@ -1,19 +1,19 @@
 ###
 # All Contacts, no Businesses
-GET http://localhost:8080/api/contacts
+GET https://localhost:8080/api/contacts
 Content-Type: application/json
 
 ###
 # All Businesses and Their Contacts
-GET http://localhost:8080/api/contacts/company_contacts
+GET https://localhost:8080/api/contacts/company_contacts
 Content-Type: application/json
 
 ###
 # Singular Contact
-GET http://localhost:8080/api/contacts/187b0262-b554-11ee-ad8f-001fbc130d5b
+GET https://localhost:8080/api/contacts/187b0262-b554-11ee-ad8f-001fbc130d5b
 Content-Type: application/json
 
 ###
 # Singular Company_Contact
-GET http://localhost:8080/api/contacts/company/40-2522401
+GET https://localhost:8080/api/contacts/company/40-2522401
 Content-Type: application/json

@@ -1,22 +1,21 @@
 ###
-GET http://localhost:8080/api/companies
+GET https://localhost:8080/api/companies
 Content-Type: application/json
 
 ###
 # Causes application to crash if ran twice
 # Could be the active being passed when not included
 # in the addCompany function in the model
-POST http://localhost:8080/api/companies/create
+POST https://localhost:8080/api/companies/create
 Content-Type: application/json
 
   {
     "ein_tin": "38-1234567",
     "name": "new test",
-    "active": "1"
   }
 
 ###
-PUT http://localhost:8080/api/companies/update
+PUT https://localhost:8080/api/companies/update
 Content-Type: application/json
 
   {
