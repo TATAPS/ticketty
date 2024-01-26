@@ -2,8 +2,8 @@ import "./SingleTicket.css";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams, Link } from "react-router-dom";
-import Sidebar from '../sidebar/Sidebar';
-import Navbar from "../navbar/Navbar";
+import Sidebar from '../UI/Sidebar.jsx';
+import Navbar from "../UI/Navbar.jsx"
 import { fetchTicket } from "../api/tickets.jsx";
 
 function SingleTicket() {

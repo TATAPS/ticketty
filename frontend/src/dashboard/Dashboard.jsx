@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
-import Sidebar from '../sidebar/Sidebar';
-import Navbar from '../navbar/Navbar';
-import Tickets from '../tickets/Tickets';
+import Sidebar from '../UI/Sidebar.jsx';
+import Navbar from '../UI/Navbar.jsx';
+import Tickets from '../tickets/Tickets.jsx';
 
 export const Dashboard = () => {
   const [isMenuOpen, setMenuOpen] = useState(true);

@@ -3,6 +3,9 @@ aside {
   width: 15rem;
 }
 
+aside h4 {
+  font-size: 16px;
+}
 aside .sidebar-toggle {
   display: flex;
   align-items: center;
@@ -100,11 +103,21 @@ aside .sidebar-main .message-count {
 }
 
 @media screen and (max-width: 1200px) {
+  aside {
+    width: 8rem;
+    justify-content: center;
+    align-items: center;
+  }
   aside .logo h2 {
     display: none;
   }
 
-  aside .sidebar-main h3 {
+  aside .sidebar-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  aside .sidebar-main h4 {
     display: none;
   }
 
@@ -130,6 +143,11 @@ aside .sidebar-main .message-count {
     display: none;
     animation: showMenu 0.4s ease forwards;
   }
+  aside .sidebar-main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
 
   @keyframes showMenu {
     to {
@@ -142,12 +160,13 @@ aside .sidebar-main .message-count {
   }
 
   /* aside logo img */
-  aside .logo h3 {
+  aside .logo h2 {
     display: inline;
   }
   /* aside logo img */
-  aside .sidebar-main h3 {
+  aside .sidebar-main h4 {
     display: inline;
+    font-size: 16px;
   }
 
   aside .sidebar-main a {
@@ -157,7 +176,7 @@ aside .sidebar-main .message-count {
 
   aside .sidebar-main a:last-child {
     position: absolute;
-    bottom: 5rem;
+    bottom: 2rem;
   }
 
   aside .sidebar-toggle .close {

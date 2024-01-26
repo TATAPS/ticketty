@@ -4,8 +4,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addTicket } from '../api/tickets';
 import TicketForm from './TicketForm.jsx';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../sidebar/Sidebar.jsx';
-import Navbar from '../navbar/Navbar.jsx';
+import Sidebar from '../UI/Sidebar.jsx';
+import Navbar from '../UI/Navbar.jsx';
 
 
 export default function AddTicket() {
