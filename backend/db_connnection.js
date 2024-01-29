@@ -21,6 +21,7 @@ async function executeQuery(sql, values) {
   } finally {
     if (connection) {
       connection.release();
+      console.log("connection released back to the pool");
     }
   }
 }

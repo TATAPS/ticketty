@@ -6,8 +6,10 @@ const {
 const moment = require("moment/moment.js");
 
 async function getAllCompaniesAction(req, res) {
+  console.log(req.session);
   try {
     const companies = await getAllCompanies();
+    console.log(req.session.viewCount);
     res.status(200).json(companies);
   } catch (error) {
     throw error;
