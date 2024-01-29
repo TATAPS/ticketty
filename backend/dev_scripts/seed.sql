@@ -11,6 +11,14 @@ DROP TABLE IF EXISTS contacts_companies;
 DROP TABLE IF EXISTS engineer;
 DROP TABLE IF EXISTS tickets;
 DROP TABLE IF EXISTS persons;
+DROP TABLE IF EXISTS sessions;
+
+CREATE TABLE sessions (
+    session_id VARCHAR(128) COLLATE utf8mb4_bin NOT NULL,
+    expires INT(11) UNSIGNED NOT NULL,
+    data MEDIUMTEXT COLLATE utf8mb4_bin,
+    PRIMARY KEY (session_id)
+);
 
 CREATE TABLE persons (
 	uuid BINARY(16) DEFAULT (UUID_TO_BIN(UUID(),1)),

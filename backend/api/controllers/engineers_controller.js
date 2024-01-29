@@ -4,6 +4,8 @@ const {
 } = require("../models/engineers_model.js");
 
 async function getAllEngineersAction(req, res) {
+  const { id } = req.session;
+  console.log(id, req.session);
   try {
     const engineers = await getAllEngineers();
     res.json(engineers);
