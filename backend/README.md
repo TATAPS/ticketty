@@ -1,3 +1,8 @@
+# Major To Do
+
+- [] redo self signed certs with all information
+- [] confirm cookies have 'secure' setting for them
+
 # To Do
 
 - [] Clean up index.js for dev purposes

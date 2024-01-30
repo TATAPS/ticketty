@@ -1,33 +1,32 @@
 export async function fetchTickets() {
   try {
-    const response = await fetch('http://localhost:8080/api/tickets')
-    return response.json()
+    const response = await fetch("https://localhost:8080/api/tickets");
+    return response.json();
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
 export async function fetchTicket(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/tickets/${id}`)
-    return response.json()
+    const response = await fetch(`https://localhost:8080/api/tickets/${id}`);
+    return response.json();
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
 export async function addTicket(newTicket) {
   try {
-    const response = await fetch('http://localhost:8080/api/tickets', {
+    const response = await fetch("https://localhost:8080/api/tickets", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newTicket)
-    })
+      body: JSON.stringify(newTicket),
+    });
 
-    return response.json()
-
+    return response.json();
   } catch (error) {
     console.log(error);
   }
@@ -35,14 +34,14 @@ export async function addTicket(newTicket) {
 
 export async function updateTicket(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/tickets/${id}`, {
+    const response = await fetch(`https://localhost:8080/api/tickets/${id}`, {
       method: "put",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newTicket)
-    })
-    return response.json()
+      body: JSON.stringify(newTicket),
+    });
+    return response.json();
   } catch (error) {
     console.log(error);
   }
