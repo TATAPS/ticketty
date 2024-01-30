@@ -6,7 +6,7 @@ const {
 const moment = require("moment/moment.js");
 
 async function getAllCompaniesAction(req, res) {
-  console.log(req.session);
+  console.log(req.session.cookie);
   try {
     const companies = await getAllCompanies();
     console.log(req.session.viewCount);

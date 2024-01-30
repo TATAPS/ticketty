@@ -23,13 +23,14 @@ app.use(
     store: sessionStore,
     resave: false,
     saveUninitialized: true, // turn false for cookie consent
-    coookie: {
+    cookie: {
       maxAge: MAXAGE,
       secure: true,
       sameSite: true,
     },
   })
 );
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
