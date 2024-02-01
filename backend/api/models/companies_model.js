@@ -6,9 +6,9 @@ async function getAllCompanies() {
   return companies;
 }
 
-async function getSingleCompany() {
-  const query = "SELECT * FROM companies WHERE ein_tin = ?;";
-  const [companies] = await executeQuery(query);
+async function getSingleCompany(ein_tin) {
+  const query = "SELECT * FROM companies WHERE `ein_tin`=?";
+  const [companies] = await executeQuery(query, [ein_tin]);
   return companies;
 }
 

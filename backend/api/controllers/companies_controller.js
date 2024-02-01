@@ -1,3 +1,4 @@
+const { pool } = require("../../db_connnection.js");
 const {
   getAllCompanies,
   addCompany,
