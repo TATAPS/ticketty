@@ -17,3 +17,12 @@ Content-Type: application/json
 # Singular Company_Contact
 GET https://localhost:8080/api/contacts/company/40-2522401
 Content-Type: application/json
+
+###
+POST https://localhost:8080/api/contacts/add
+Content-Type: application/json
+
+{
+  "ein_tin": "57-4730262",
+  "uuid": "187b0262-b554-11ee-ad8f-001fbc130d5b"
+}

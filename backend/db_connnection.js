@@ -16,12 +16,12 @@ async function executeQuery(sql, values) {
   try {
     connection = await pool.getConnection();
     const [rows, fields] = await connection.execute(sql, values);
-    console.log(rows, fields);
+    // console.log("rows", rows, "fields", fields);
     return [rows];
   } finally {
     if (connection) {
       connection.release();
-      console.log("connection released back to the pool");
+      // console.log("connection released back to the pool");
     }
   }
 }

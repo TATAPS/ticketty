@@ -9,13 +9,12 @@ Content-Type: application/json
 }
 
 ###
-# Should fail
-POST https://localhost:8080/auth/login
+POST https://localhost:8080/auth/register
 Content-Type: application/json
 
 {
     "user": {
-        "username": "dispatch",
-        "password": "CracK3dPas$WordPl3as"
+        "username": "test",
+        "password": "123456"
     }
 }
