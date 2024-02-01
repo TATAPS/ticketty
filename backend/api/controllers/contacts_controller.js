@@ -3,6 +3,7 @@ const {
   getAllContacts,
   getSingleContact,
   getCompanyContacts,
+  addCompanyContact
 } = require("../models/contacts_model.js");
 
 async function getAllCompaniesAndContactsAction(req, res, next) {
@@ -43,9 +44,19 @@ async function getCompanyContactsAction(req, res, next) {
   }
 }
 
+async function addCompanyContactAction(req, res, next) {
+  try {
+    const contacts = await addCompanyContact();
+    res.json(contacts);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   getAllCompaniesAndContactsAction,
   getAllContactsAction,
   getSingleContactAction,
   getCompanyContactsAction,
+  addCompanyContactAction
 };

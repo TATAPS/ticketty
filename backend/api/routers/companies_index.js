@@ -8,7 +8,7 @@ const {
 const router = Router();
 
 router.get("/", getAllCompaniesAction);
-router.post("/create", addCompanyAction);
+router.post("/add", addCompanyAction);
 router.put("/update", updateCompanyAction);
 
 module.exports = { router };

@@ -3,7 +3,7 @@ const { executeQuery, pool } = require("../../db_connnection.js");
 async function getAllCompaniesAndContacts() {
   try {
     const query = `
-    SELECT cm.ein_tin, cm.name as business_name, cm.active, 
+    SELECT cm.ein_tin, cm.name as business_name, cm.active,
     CONCAT(p.given_name, " ", p.family_name) as contact, p.email, p.phone
     FROM company_contacts c INNER JOIN companies cm
     ON c.company_id = cm.ein_tin
@@ -20,9 +20,9 @@ async function getAllCompaniesAndContacts() {
 async function getAllContacts() {
   try {
     const query = `
-    SELECT BIN_TO_UUID(p.uuid, 1) as person_uuid, 
-    CONCAT(p.given_name, " ", p.family_name) as contact_name, 
-    p.email, p.phone 
+    SELECT BIN_TO_UUID(p.uuid, 1) as person_uuid,
+    CONCAT(p.given_name, " ", p.family_name) as contact_name,
+    p.email, p.phone
     FROM company_contacts c INNER JOIN persons p
     ON c.person_uuid = p.uuid;
     `;
@@ -36,8 +36,8 @@ async function getAllContacts() {
 async function getSingleContact(UUID) {
   try {
     const query = `
-    SELECT BIN_TO_UUID(p.uuid, 1) as person_uuid, 
-    CONCAT(p.given_name, " ", p.family_name) as contact_name, 
+    SELECT BIN_TO_UUID(p.uuid, 1) as person_uuid,
+    CONCAT(p.given_name, " ", p.family_name) as contact_name,
     p.email, p.phone
     FROM company_contacts c INNER JOIN persons p
     ON c.person_uuid = p.uuid
@@ -53,7 +53,7 @@ async function getSingleContact(UUID) {
 async function getCompanyContacts(ein_tin) {
   try {
     const query = `
-    SELECT cm.ein_tin, cm.name as business_name, cm.active, 
+    SELECT cm.ein_tin, cm.name as business_name, cm.active,
     CONCAT(p.given_name, " ", p.family_name) as contact, p.email, p.phone
     FROM company_contacts c INNER JOIN companies cm
     ON c.company_id = cm.ein_tin
@@ -63,7 +63,22 @@ async function getCompanyContacts(ein_tin) {
     `;
     const [contacts] = await executeQuery(query, [ein_tin]);
     return contacts;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+async function addCompanyContact(ein_tin) {
+  try {
+    const query = `
+    INSERT INTO company_contacts (company_id, person_uuid)
+    VALUES ('your_company_id', UUID_TO_BIN(UUID(), 1));
+      `;
+    const [contacts] = await executeQuery(query, [ein_tin]);
+    return contacts;
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 module.exports = {
@@ -71,4 +86,5 @@ module.exports = {
   getAllContacts,
   getSingleContact,
   getCompanyContacts,
+  addCompanyContact,
 };

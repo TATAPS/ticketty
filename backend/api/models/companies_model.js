@@ -6,8 +6,14 @@ async function getAllCompanies() {
   return companies;
 }
 
+async function getSingleCompany() {
+  const query = "SELECT * FROM companies WHERE ein_tin = ?;";
+  const [companies] = await executeQuery(query);
+  return companies;
+}
+
 async function addCompany(newCompany) {
-  const query = "INSERT INTO companies(`ein_tin`, `name`) VALUES (?, ?)";
+  const query = "INSERT INTO companies (ein_tin, name) VALUES (?, ?) ON DUPLICATE KEY UPDATE name = VALUES(name)";
   const [company] = await executeQuery(query, newCompany);
   return company;
 }
@@ -19,8 +25,17 @@ async function updateCompany(updateCompany) {
   return company;
 }
 
+// // Function to check if the company already exists
+// async function checkCompanyExists(ein_tin) {
+//   const query = "SELECT COUNT(*) AS count FROM companies WHERE ein_tin = ?"
+//   const companyExists = await executeQuery(query, [ein_tin]);
+//   return companyExists[0].count > 0;
+// }
+
 module.exports = {
   getAllCompanies,
+  getSingleCompany,
   addCompany,
   updateCompany,
+  // checkCompanyExists
 };
