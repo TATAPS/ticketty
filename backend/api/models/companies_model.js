@@ -25,17 +25,18 @@ async function updateCompany(updateCompany) {
   return company;
 }
 
-// // Function to check if the company already exists
-// async function checkCompanyExists(ein_tin) {
-//   const query = "SELECT COUNT(*) AS count FROM companies WHERE ein_tin = ?"
-//   const companyExists = await executeQuery(query, [ein_tin]);
-//   return companyExists[0].count > 0;
-// }
+// Function to check if the company already exists
+async function checkCompanyExists(ein_tin) {
+  const query = "SELECT COUNT(*) AS count FROM companies WHERE ein_tin = ?"
+  const [result] = await executeQuery(query, [ein_tin]);
+  const companyExists = result[0].count > 0;
+  return companyExists;
+}
 
 module.exports = {
   getAllCompanies,
   getSingleCompany,
   addCompany,
   updateCompany,
-  // checkCompanyExists
+  checkCompanyExists
 };

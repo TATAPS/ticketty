@@ -5,6 +5,8 @@ const {
   getCompanyContacts,
   addCompanyContact
 } = require("../models/contacts_model.js");
+const { checkCompanyExists } = require("../models/companies_model.js");
+const { checkPersonExists } = require("../models/persons_model.js");
 
 async function getAllCompaniesAndContactsAction(req, res, next) {
   try {
@@ -46,8 +48,22 @@ async function getCompanyContactsAction(req, res, next) {
 
 async function addCompanyContactAction(req, res, next) {
   try {
-    const contacts = await addCompanyContact();
-    res.json(contacts);
+    const { ein_tin, uuid } = req.body
+    const values = [ein_tin, uuid];
+    const companyExists = await checkCompanyExists(ein_tin);
+    console.log("companyExists", companyExists);
+    const personExists = await checkPersonExists(uuid);
+    console.log("personExists", personExists);
+    if (!companyExists) {
+      res.status(400).json('Invalid Company');
+    }
+    if (!personExists) {
+      res.status(400).json('Invalid Account');
+    }
+    if (personExists && companyExists) {
+      const contacts = await addCompanyContact(values);
+      res.json(contacts);
+    }
   } catch (error) {
     next(error);
   }

@@ -68,13 +68,13 @@ async function getCompanyContacts(ein_tin) {
   }
 }
 
-async function addCompanyContact(ein_tin) {
+async function addCompanyContact(newContact) {
   try {
     const query = `
     INSERT INTO company_contacts (company_id, person_uuid)
-    VALUES ('your_company_id', UUID_TO_BIN(UUID(), 1));
-      `;
-    const [contacts] = await executeQuery(query, [ein_tin]);
+    VALUES (?, UUID_TO_BIN(?, 1));
+    `;
+    const [contacts] = await executeQuery(query, newContact);
     return contacts;
   } catch (error) {
     console.log(error)
