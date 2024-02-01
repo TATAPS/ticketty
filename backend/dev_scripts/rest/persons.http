@@ -1,0 +1,10 @@
+###
+POST https://localhost:8080/api/persons/add
+Content-Type: application/json
+
+{
+  "given_name": "test3",
+  "family_name": "family_name",
+  "email": "test3@email.com",
+  "phone": "123456789"
+}

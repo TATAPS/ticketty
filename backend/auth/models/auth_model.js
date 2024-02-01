@@ -17,7 +17,7 @@ async function verifyPassword(password, salt, storedHash) {
 
 async function comparePassword(password, hashedPassword) {
   const isPasswordValid = await bcrypt.compare(password, hashedPassword);
-  console.log(isPasswordValid);
+  console.log("isPasswordValid", isPasswordValid);
 }
 
 function generateAccessToken(user) {
