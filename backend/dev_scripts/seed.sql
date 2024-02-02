@@ -99,6 +99,8 @@ CREATE TABLE ticket_notes (
         REFERENCES tickets (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+
+INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("4e4445eb-c18d-11ee-ac1e-001fbc130d5b", 1),"Default", "Default", "default@defaultemail.com", 0000005555);
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("11eeb505-16a3-6017-8584-001fbc130d5b", 1),"Arlen", "Haruard", "aharuard0@reverbnation.com", 8309539728);
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("08c4b362-b554-11ee-ad8f-001fbc130d5b", 1),"Reese", "Lade", "rlade1@reddit.com", 3503858400);
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("187b0262-b554-11ee-ad8f-001fbc130d5b", 1),"Kinsley", "Dowdney", "kdowdney2@toplist.cz", 6069591537);
@@ -112,11 +114,13 @@ INSERT INTO engineers (person_uuid, username, password, salt, role, active) VALU
 INSERT INTO engineers (person_uuid, username, password, salt, role, active) VALUES (UUID_TO_BIN('7b671389-b554-11ee-ad8f-001fbc130d5b', 1),'engineer', '$2b$10$7HZBFonB/R5xdWFxfEHuM.jLhaVRChUaejoGhFvheImURe6L/yBrO','$2b$10$7HZBFonB/R5xdWFxfEHuM.','Engineer', TRUE);
 INSERT INTO engineers (person_uuid, username, password, salt, role, active) VALUES (UUID_TO_BIN('2443fc01-b554-11ee-ad8f-001fbc130d5b', 1),'manager', '$2b$10$XgJ6ydkSCIC.H7AS5fILg.Y3uX6pqvFE6DizJXUMfih7nSw3LumIu','$2b$10$XgJ6ydkSCIC.H7AS5fILg.','Manager', TRUE);
 
+INSERT INTO companies (ein_tin, name, active) VALUES ("00-0000000", "Default Company", TRUE);
 INSERT INTO companies (ein_tin, name, active) VALUES ("40-2522401", "Rose's Apothecary", TRUE);
 INSERT INTO companies (ein_tin, name, active) VALUES ("30-2846270", "Jimmy's Auto Shop", TRUE);
 INSERT INTO companies (ein_tin, name, active) VALUES ("38-3881633", "Charity to Charity", TRUE);
 INSERT INTO companies (ein_tin, name, active) VALUES ("57-4730262", "Smacked By the Stack", TRUE);
 
+INSERT INTO company_contacts (company_id, person_uuid) VALUES ("00-0000000", UUID_TO_BIN('4e4445eb-c18d-11ee-ac1e-001fbc130d5b', 1));
 INSERT INTO company_contacts (company_id, person_uuid) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1));
 INSERT INTO company_contacts (company_id, person_uuid) VALUES ("30-2846270", UUID_TO_BIN("187b0262-b554-11ee-ad8f-001fbc130d5b", 1));
 INSERT INTO company_contacts (company_id, person_uuid) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1));
