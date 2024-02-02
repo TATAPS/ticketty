@@ -57,7 +57,7 @@ export default function AddTicket() {
   }
 
   if (companies && contacts) {
-    // console.log("yay", companies);
+    console.log("yay", companies);
     console.log("yay contacts", contacts);
     return (
       <div className="dashboard">
