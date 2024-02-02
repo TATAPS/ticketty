@@ -2,21 +2,21 @@ import "./SingleTicket.css";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams, Link } from "react-router-dom";
-import Sidebar from '../UI/Sidebar.jsx';
-import Navbar from "../UI/Navbar.jsx"
+import Sidebar from "../UI/Sidebar.jsx";
+import Navbar from "../UI/Navbar.jsx";
 import { fetchTicket } from "../api/tickets.jsx";
 
 function SingleTicket() {
-  const [ticket, setTicket] = useState({})
+  const [ticket, setTicket] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   // const [error, setError] = useState(false)
   //////////////// TODO: EXTRACT PARAMS ID: default type: string //////////////////////
   let { ticketId } = useParams();
 
   const { isFetching, isError, data, error } = useQuery({
-    queryKey: ['tickets', ticketId],
+    queryKey: ["tickets", ticketId],
     queryFn: () => fetchTicket(ticketId),
-  })
+  });
   const [isMenuOpen, setMenuOpen] = useState(true);
 
   const handleMenuClick = () => {
@@ -33,18 +33,21 @@ function SingleTicket() {
   //   return response.json()
   // }
 
-
   ///////////// ERROR HANDLER ///////////////
   if (isFetching) {
-    return <span>Loading...</span>
+    return <span>Loading...</span>;
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>
+    return <span>Error: {error.message}</span>;
+  }
+
+  if (data) {
+    console.log(data);
   }
 
   return (
-    <div className='dashboard'>
+    <div className="dashboard">
       <Sidebar isOpen={isMenuOpen} onShow={handleMenuClick} />
       <div className="dashboard-container">
         <Navbar isOpen={isMenuOpen} onShow={handleMenuClick} />
@@ -61,17 +64,17 @@ function SingleTicket() {
                   </Link>
                   <button
                   // onClick={() => handleDelete(/*ticketId*/)}
-                  >Delete</button>
+                  >
+                    Delete
+                  </button>
                 </label>
-
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SingleTicket
-
+export default SingleTicket;
