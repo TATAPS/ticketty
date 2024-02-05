@@ -14,22 +14,24 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        path: "/addticket",
+        element: <AddTicket />,
+      },
+      {
+        path: "tickets/:ticketId/edit",
+        element: <UpdateTicket />,
+      },
+      {
+        path: "tickets/:ticketId",
+        element: <SingleTicket />,
+      }
+    ],
   },
   {
     path: "/auth",
     element: <Auth />
-  },
-  {
-    path: "tickets/:ticketId",
-    element: <SingleTicket />,
-  },
-  {
-    path: "tickets/:ticketId/edit",
-    element: <UpdateTicket />,
-  },
-  {
-    path: "addticket",
-    element: <AddTicket />,
   },
 ]);
 // client
