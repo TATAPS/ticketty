@@ -21,12 +21,15 @@ function UpdateTicket() {
     console.log("delete ticket");
   };
   return (
-    <div>
-      <input type="text" placeholder='companyName' onChange={handleChange} name="companyName" />
-      <input type="text" placeholder='description' onChange={handleChange} name="description" />
-      <button onClick={handleClick}>Update</button>
-      {error && "Something went wrong!"}
-      <Link to="/">View All Tickets</Link>
+    <div className="list-container">
+      <div className="list-title">
+        <h1>Update Ticket</h1>
+        <input type="text" placeholder='companyName' onChange={handleChange} name="companyName" />
+        <input type="text" placeholder='description' onChange={handleChange} name="description" />
+        <button onClick={handleClick}>Update</button>
+        {error && "Something went wrong!"}
+        <Link to="/">View All Tickets</Link>
+      </div>
     </div>
   )
 }

@@ -133,3 +133,25 @@ input {
   width: 100%;
   outline: none;
 }
+
+.dashboard {
+  display: flex;
+}
+
+.dashboard-container {
+  height: 100vh;
+  flex: 6;
+}
+
+.list-container {
+  padding: 20px;
+  margin: 10px;
+  overflow: auto;
+  height: 80vh;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+}
+.list-title {
+  max-height: 100%;
+  overflow-y: scroll;
+}
