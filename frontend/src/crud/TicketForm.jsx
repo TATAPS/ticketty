@@ -28,15 +28,17 @@ function TicketForm({
     // navigate("/");
   };
 
-  const renderInputTypeText = (label) => (
+  const renderInputTypeText = (label, displayName) => (
     <div>
-      <label>{label}</label>
-      <input
-        onChange={handleInputChange}
-        type="text"
-        name={label.toLowerCase()}
-        value={ticket[label.toLowerCase()]}
-      />
+      <label>
+        {displayName}
+        <input
+          onChange={handleInputChange}
+          type="text"
+          name={label.toLowerCase()}
+          value={ticket[label.toLowerCase()]}
+        />
+      </label>
     </div>
   );
 
@@ -58,6 +60,7 @@ function TicketForm({
             name={selectName}
             id={selectName}
             defaultValue="default"
+            autoComplete="off"
           >
             <option value="default">Choose a {displayName}</option>
             {dataToMap?.map((data) => {
@@ -73,7 +76,6 @@ function TicketForm({
     </div>
   );
 
-  console.log(contacts);
   return (
     <form onSubmit={handleSubmit}>
       {renderDropDown(
@@ -103,7 +105,7 @@ function TicketForm({
         "person_uuid",
         "contact"
       )}
-      {renderInputTypeText("title")}
+      {renderInputTypeText("title", "Title:")}
       {/* {renderDropDown(
         "Phone:",
         "Phone",
@@ -113,9 +115,7 @@ function TicketForm({
         "person_uuid",
         "phone"
       )} */}
-      <button onClick={() => console.log(ticket)} type="submit">
-        Submit
-      </button>
+      <button type="submit">Submit</button>
     </form>
   );
 }

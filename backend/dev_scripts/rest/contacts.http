@@ -15,7 +15,7 @@ Content-Type: application/json
 
 ###
 # Singular Company_Contact
-GET https://localhost:8080/api/contacts/company/40-2522401
+GET https://localhost:8080/api/contacts/company/57-4730262
 Content-Type: application/json
 
 ###

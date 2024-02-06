@@ -18,7 +18,6 @@ export async function fetchTicket(id) {
 
 export async function addTicket(newTicket) {
   try {
-    console.log("newTicket", newTicket);
     const response = await fetch("https://localhost:8080/api/tickets", {
       method: "POST",
       headers: {
