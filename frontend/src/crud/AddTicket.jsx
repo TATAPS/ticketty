@@ -6,26 +6,35 @@ import TicketForm from "./TicketForm.jsx";
 import { useNavigate } from "react-router-dom";
 import { fetchCompanies, fetchCompanyContacts } from "../api/companies.jsx";
 import { TicketForm2 } from "./TicketForm2.jsx";
+import { fetchStatuses } from "../api/statuses.jsx";
+// import { TicketForm2 } from "./TicketForm2.jsx";
+// import { getAllCompanies } from "../../../backend/api/models/companies_model.js";
 
 export default function AddTicket() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const {
-    isFetching,
-    isError,
-    data: companies,
-    error,
-  } = useQuery({
-    queryKey: ["companies"],
-    queryFn: () => fetchCompanies(),
+
+  const [ticket, setTicket] = useState({
+    company_id: "",
+    owner_id: "",
+    title: "",
+    status: "Open",
   });
 
-  const company_id = companies?.[0]?.["ein_tin"];
+  const { isFetching, data: companies } = useQuery({
+    queryKey: ["companies"],
+    queryFn: async () => await fetchCompanies(),
+  });
+
+  const { data: statuses } = useQuery({
+    queryKey: ["statuses"],
+    queryFn: async () => await fetchStatuses(),
+  });
+
   const { data: contacts } = useQuery({
-    queryKey: ["contacts", company_id],
-    // queryFn: () => fetchCompanyContacts(companies[0]["ein_tin"]),
-    queryFn: () => fetchCompanyContacts(company_id),
-    enabled: !!company_id,
+    queryKey: ["contacts", ticket?.company_id],
+    enabled: ticket?.company_id != null,
+    queryFn: async () => await fetchCompanyContacts(ticket?.company_id),
   });
 
   const addTicketMutation = useMutation({
@@ -34,6 +43,34 @@ export default function AddTicket() {
       queryClient.invalidateQueries({ queryKey: ["tickets"], newTicket });
     },
   });
+
+  const handleCompanyChange = (e) => {
+    const filteredCompany = companies.filter(
+      (company) => company.name === e.target.value
+    );
+    setTicket({
+      ...ticket,
+      company_id: filteredCompany[0]["ein_tin"],
+    });
+  };
+
+  const handleContactChange = (e) => {
+    const filteredContact = contacts.filter(
+      (contact) => contact.contact === e.target.value
+    );
+    setTicket({
+      ...ticket,
+      owner_id: filteredContact[0]["person_uuid"],
+    });
+  };
+
+  const handleInputChange = (e) => {
+    e.preventDefault();
+    setTicket({
+      ...ticket,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleAddTicket = (ticket) => {
     addTicketMutation.mutate({
@@ -46,19 +83,22 @@ export default function AddTicket() {
     <div>Loading...</div>;
   }
 
-  if (companies && contacts) {
-    console.log("yay", companies);
-    console.log("yay contacts", contacts);
+  if (companies) {
     return (
       <div className="list-container">
         <div className="ticket-details">
           <h1>New Ticket</h1>
-          <TicketForm2
+          <TicketForm
+            initValuesCompanies={{ companies }}
+            initValuesContacts={{ contacts }}
+            initValuesStatuses={{ statuses }}
+            ticket={ticket}
+            setTicket={setTicket}
             onSubmit={handleAddTicket}
-            initalValues1={{ companies }}
-            initialValues2={{ contacts }}
-          ></TicketForm2>
-          {/* <TicketForm onSubmit={handleAddTicket} initialValue={{ data }} /> */}
+            handleCompanyChange={handleCompanyChange}
+            handleContactChange={handleContactChange}
+            handleInputChange={handleInputChange}
+          />
         </div>
       </div>
     );

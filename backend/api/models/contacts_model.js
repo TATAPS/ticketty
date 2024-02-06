@@ -33,6 +33,25 @@ async function getAllContacts() {
   }
 }
 
+async function getCompanyContacts(ein_tin) {
+  try {
+    const query = `
+    SELECT cm.ein_tin, cm.name as business_name, cm.active,
+    BIN_TO_UUID(p.uuid, 1) as person_uuid,
+    CONCAT(p.given_name, " ", p.family_name) as contact, p.email, p.phone
+    FROM company_contacts c INNER JOIN companies cm
+    ON c.company_id = cm.ein_tin
+    INNER JOIN persons p
+    ON c.person_uuid = p.uuid
+    WHERE cm.ein_tin = ?;
+    `;
+    const contacts = await executeQuery(query, [ein_tin]);
+    return contacts;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function getSingleContact(UUID) {
   try {
     const query = `
@@ -47,25 +66,6 @@ async function getSingleContact(UUID) {
     return contact;
   } catch (err) {
     console.error(err);
-  }
-}
-
-async function getCompanyContacts(ein_tin) {
-  try {
-    const query = `
-    SELECT cm.ein_tin, cm.name as business_name, cm.active,
-    BIN_TO_UUID(p.uuid, 1) as person_uuid,
-    CONCAT(p.given_name, " ", p.family_name) as contact, p.email, p.phone
-    FROM company_contacts c INNER JOIN companies cm
-    ON c.company_id = cm.ein_tin
-    INNER JOIN persons p
-    ON c.person_uuid = p.uuid
-    WHERE cm.ein_tin = ?;
-    `;
-    const [contacts] = await executeQuery(query, [ein_tin]);
-    return contacts;
-  } catch (error) {
-    console.log(error);
   }
 }
 
