@@ -6,9 +6,14 @@ import TicketForm from "./TicketForm.jsx";
 import { useNavigate } from "react-router-dom";
 import { fetchCompanies, fetchCompanyContacts } from "../api/companies.jsx";
 import { TicketForm2 } from "./TicketForm2.jsx";
+import { fetchStatuses } from "../api/statuses.jsx";
+// import { TicketForm2 } from "./TicketForm2.jsx";
 // import { getAllCompanies } from "../../../backend/api/models/companies_model.js";
 
 export default function AddTicket() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const [ticket, setTicket] = useState({
     company_id: "",
     owner_id: "",
@@ -16,15 +21,17 @@ export default function AddTicket() {
     status: "Open",
   });
 
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
   const { isFetching, data: companies } = useQuery({
     queryKey: ["companies"],
     queryFn: async () => await fetchCompanies(),
   });
 
-  const { isFetching: contactFetching, data: contacts } = useQuery({
+  const { data: statuses } = useQuery({
+    queryKey: ["statuses"],
+    queryFn: async () => await fetchStatuses(),
+  });
+
+  const { data: contacts } = useQuery({
     queryKey: ["contacts", ticket?.company_id],
     enabled: ticket?.company_id != null,
     queryFn: async () => await fetchCompanyContacts(ticket?.company_id),
@@ -37,7 +44,7 @@ export default function AddTicket() {
     },
   });
 
-  const onHandleChangeCompany = (e) => {
+  const handleCompanyChange = (e) => {
     const filteredCompany = companies.filter(
       (company) => company.name === e.target.value
     );
@@ -47,18 +54,17 @@ export default function AddTicket() {
     });
   };
 
-  const onHandleChangeContact = (e) => {
+  const handleContactChange = (e) => {
     const filteredContact = contacts.filter(
       (contact) => contact.contact === e.target.value
     );
-    console.log(filteredContact);
     setTicket({
       ...ticket,
       owner_id: filteredContact[0]["person_uuid"],
     });
   };
 
-  const onHandleInputChange = (e) => {
+  const handleInputChange = (e) => {
     e.preventDefault();
     setTicket({
       ...ticket,
@@ -77,43 +83,24 @@ export default function AddTicket() {
     <div>Loading...</div>;
   }
 
-  // if (companies && contacts) {
   if (companies) {
-    console.log("yay", companies);
-    // console.log("yay contacts", contacts);
     return (
       <div className="list-container">
         <div className="ticket-details">
           <h1>New Ticket</h1>
-          <TicketForm2
+          <TicketForm
+            initValuesCompanies={{ companies }}
+            initValuesContacts={{ contacts }}
+            initValuesStatuses={{ statuses }}
+            ticket={ticket}
             setTicket={setTicket}
             onSubmit={handleAddTicket}
-            onHandleChange={onHandleChangeCompany}
-            onHandleChangeContact={onHandleChangeContact}
-            onHandleInputChange={onHandleInputChange}
-            initalValues1={{ companies }}
-            initialValues2={{ contacts }}
-            ticket={ticket}
-          ></TicketForm2>
-          {/* <TicketForm onSubmit={handleAddTicket} initialValue={{ data }} /> */}
+            handleCompanyChange={handleCompanyChange}
+            handleContactChange={handleContactChange}
+            handleInputChange={handleInputChange}
+          />
         </div>
       </div>
     );
   }
 }
-// }
-
-// const userQuery = useQuery({
-
-// queryKey: ["users", postQuery?.data?.userId],
-// enabled: postQuery?.data?.userId != null,
-// queryFn: () => getUser(postQuery.data.userId)
-// })
-
-// { postQuery.data.userId}
-// {userQuery.isLoading
-// ? "Loading User..."
-// userQuery.isError
-// ? "Error loading user"
-// : userQuery.data.name //returns userQuery.data.name if not loading and no errors
-//}

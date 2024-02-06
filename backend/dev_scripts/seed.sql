@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS contacts_companies;
 DROP TABLE IF EXISTS engineer;
 DROP TABLE IF EXISTS tickets;
 DROP TABLE IF EXISTS persons;
+DROP TABLE IF EXISTS statuses;
 DROP TABLE IF EXISTS sessions;
 
 CREATE TABLE sessions (
@@ -68,6 +69,12 @@ CREATE TABLE company_contacts (
      FOREIGN KEY (person_uuid) REFERENCES persons (uuid) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+CREATE TABLE statuses (
+    id INT NOT NULL AUTO_INCREMENT,
+    status ENUM("Open", "Closed", "Pending", "Assigned", "Working"),
+    PRIMARY KEY(id)
+);
+
 CREATE TABLE tickets (
     id INT NOT NULL AUTO_INCREMENT,
     company_id VARCHAR(15) NOT NULL,
@@ -108,6 +115,7 @@ INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_T
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("6fa3ab02-b554-11ee-ad8f-001fbc130d5b", 1),"Xena", "Crosetto", "xcrosetto4@gnu.org", 4878801366);
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("7b671389-b554-11ee-ad8f-001fbc130d5b", 1),"Iseabal", "Elloy", "ielloy5@pen.io", 7469073433);
 INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("813827e4-b554-11ee-ad8f-001fbc130d5b", 1), "Dispatch", "None", "dispatch@ticketty.com", 9175555555);
+INSERT INTO persons (uuid, given_name, family_name, email, phone) VALUES (UUID_TO_BIN("516827e4-b554-11ee-ad8f-001fbc130d5b", 1), "Dispatch", "the Second", "dispatch2@ticketty.com", 9175555555);
 
 INSERT INTO engineers (id, person_uuid, username, password, salt, role, active) VALUES (1, UUID_TO_BIN("813827e4-b554-11ee-ad8f-001fbc130d5b", 1),'dispatch', '$2b$10$CPx4byxXqCGzJv6VErAX6uxu2Gbt562qc2GVgUePEm2Ca22HOfFxG', "$2b$10$CPx4byxXqCGzJv6VErAX6u", 'Dispatch', TRUE);
 INSERT INTO engineers (person_uuid, username, password, salt, role, active) VALUES (UUID_TO_BIN('08c4b362-b554-11ee-ad8f-001fbc130d5b', 1), 'dispatch2', '$2b$10$x8Y5NyJFlAiNKUbKxk2hpeGC.A5tjXrixlxi.DkzDZ9aIubzE7Rz6','$2b$10$x8Y5NyJFlAiNKUbKxk2hpe','Dispatch', TRUE);
@@ -125,6 +133,13 @@ INSERT INTO company_contacts (company_id, person_uuid) VALUES ("40-2522401", UUI
 INSERT INTO company_contacts (company_id, person_uuid) VALUES ("30-2846270", UUID_TO_BIN("187b0262-b554-11ee-ad8f-001fbc130d5b", 1));
 INSERT INTO company_contacts (company_id, person_uuid) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1));
 INSERT INTO company_contacts (company_id, person_uuid) VALUES ("57-4730262", UUID_TO_BIN('813827e4-b554-11ee-ad8f-001fbc130d5b', 1));
+INSERT INTO company_contacts (company_id, person_uuid) VALUES ("57-4730262", UUID_TO_BIN('516827e4-b554-11ee-ad8f-001fbc130d5b', 1));
+
+INSERT INTO statuses (status) VALUES ("Open");
+INSERT INTO statuses (status) VALUES ("Assigned");
+INSERT INTO statuses (status) VALUES ("Pending");
+INSERT INTO statuses (status) VALUES ("Working");
+INSERT INTO statuses (status) VALUES ("Closed");
 
 INSERT INTO tickets (company_id, owner_id, title, status) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "Printer is down again", "Open");
 INSERT INTO tickets (company_id, owner_id, title, status) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), "Our CCTV Cameras are down! Help!", "Assigned");
