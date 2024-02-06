@@ -1,14 +1,11 @@
 import "./AddTicket.css";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addTicket, fetchTickets } from "../api/tickets";
+import { addTicket } from "../api/tickets";
 import TicketForm from "./TicketForm.jsx";
 import { useNavigate } from "react-router-dom";
 import { fetchCompanies, fetchCompanyContacts } from "../api/companies.jsx";
-import { TicketForm2 } from "./TicketForm2.jsx";
 import { fetchStatuses } from "../api/statuses.jsx";
-// import { TicketForm2 } from "./TicketForm2.jsx";
-// import { getAllCompanies } from "../../../backend/api/models/companies_model.js";
 
 export default function AddTicket() {
   const navigate = useNavigate();
