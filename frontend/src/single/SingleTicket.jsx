@@ -9,9 +9,6 @@ function SingleTicket() {
   const [isEditing, setIsEditing] = useState(false);
 
 
-  const handleMouseUp = () => {
-    setResizing(false);
-  };
   // const [error, setError] = useState(false)
   //////////////// TODO: EXTRACT PARAMS ID: default type: string //////////////////////
   let { ticketId } = useParams();
@@ -58,12 +55,10 @@ function SingleTicket() {
       </div>
     ));
   }
-
   return (
     <div className="list-container">
       <div className="list-title">
         <h1>#{ticketId}</h1>
-        {/* <Tickets /> */}
         {ticketData ? (
           <div className="ticket-summary">
             <div className="ticket-info" style={{ backgroundColor: 'white' }}>
@@ -86,14 +81,18 @@ function SingleTicket() {
         ) : (
           <p>No Ticket Found</p>
         )}
-        <label>
-          <Link to={`/tickets/${ticketId}/edit`}>
-            <button>Update</button>
-          </Link>
-          <button
-          // onClick={() => handleDelete(/*ticketId*/)}
-          >Archive</button>
-        </label>
+        {/* <Tickets /> */}
+        <div>
+          <label>
+            <Link to={`/tickets/${ticketId}/edit`}>
+              <button>Update</button>
+            </Link>
+            <button
+            // onClick={() => handleDelete(/*ticketId*/)}
+            >Delete</button>
+          </label>
+
+        </div>
       </div>
     </div>
   );
