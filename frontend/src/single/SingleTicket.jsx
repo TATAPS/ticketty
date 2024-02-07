@@ -80,7 +80,7 @@ function SingleTicket() {
               <h3>Notes</h3>
               {renderTicketNote()}
               {/* <input type="file" placeholder="Upload File" aria-label="Upload File" /> */}
-              <input type="text" placeholder="New Notes" />
+              <input type="text" placeholder="New Notes" className="newnote-input" />
             </div>
           </div>
         ) : (
