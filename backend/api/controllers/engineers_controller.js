@@ -5,7 +5,7 @@ const {
 
 async function getAllEngineersAction(req, res) {
   const { id } = req.session;
-  console.log("id", id, "req.session", req.session);
+  // console.log("id", id, "req.session", req.session);
   try {
     const engineers = await getAllEngineers();
     res.json(engineers);
