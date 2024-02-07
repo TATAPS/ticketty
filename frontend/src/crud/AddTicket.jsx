@@ -30,7 +30,7 @@ export default function AddTicket() {
 
   const { data: contacts } = useQuery({
     queryKey: ["contacts", ticket?.company_id],
-    enabled: ticket?.company_id != null,
+    enabled: ticket?.company_id !== "",
     queryFn: async () => await fetchCompanyContacts(ticket?.company_id),
   });
 
@@ -100,4 +100,5 @@ export default function AddTicket() {
       </div>
     );
   }
+  // return <div> Hello There Neighbor</div>;
 }
