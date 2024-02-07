@@ -17,6 +17,7 @@ Content-Type: application/json
 
 {
   "company_id": "40-2522401",
+  "engineer_id": 3, 
   "title": "test title",
   "status": "Open",
   "owner_id": "11eeb505-16a3-6017-8584-001fbc130d5b"

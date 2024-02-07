@@ -1,6 +1,6 @@
 const { executeQuery, pool } = require("../../db_connnection.js");
 
-async function getAllEngineers() {
+async function getAllEngineersAdminNotSafe() {
   try {
     const query = `
     SELECT BIN_TO_UUID(p.uuid, 1) as person_uuid,
@@ -13,6 +13,19 @@ async function getAllEngineers() {
     return engineers;
   } catch (error) {
     next(error);
+  }
+}
+
+async function getAllEngineersFrontendSafe() {
+  try {
+    const query = `SELECT e.id, BIN_TO_UUID(p.uuid, 1) as person_uuid,
+    CONCAT(p.given_name, " ", p.family_name) as contact, p.email, p.phone
+    FROM engineers e INNER JOIN persons p
+    ON e.person_uuid = p.uuid;`;
+    const [engineers] = await executeQuery(query);
+    return engineers;
+  } catch (error) {
+    console.error(error);
   }
 }
 
@@ -29,6 +42,7 @@ async function find(user) {
 }
 
 module.exports = {
-  getAllEngineers,
+  getAllEngineersAdminNotSafe,
+  getAllEngineersFrontendSafe,
   find,
 };
