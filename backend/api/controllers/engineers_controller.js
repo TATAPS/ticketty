@@ -1,19 +1,27 @@
 const {
-  getAllEngineers,
-  // getEngineer
+  getAllEngineersAdminNotSafe,
+  getAllEngineersFrontendSafe,
 } = require("../models/engineers_model.js");
 
-async function getAllEngineersAction(req, res) {
+async function getAllEngineersAdminNotSafeAction(req, res) {
   const { id } = req.session;
   // console.log("id", id, "req.session", req.session);
   try {
-    const engineers = await getAllEngineers();
+    const engineers = await getAllEngineersAdminNotSafe();
     res.json(engineers);
   } catch (error) {
     throw error;
   }
 }
 
+async function getAllEngineersFrontendSafeAction(req, res) {
+  try {
+    const engineers = await getAllEngineersFrontendSafe();
+    res.json(engineers);
+  } catch (error) {
+    console.error(error);
+  }
+}
 // async function getEngineerAction(req, res, next) {
 //   try {
 //     const engineer = await getEngineer();
@@ -23,8 +31,8 @@ async function getAllEngineersAction(req, res) {
 //   }
 // }
 
-
 module.exports = {
-  getAllEngineersAction,
+  getAllEngineersAdminNotSafeAction,
+  getAllEngineersFrontendSafeAction,
   // getEngineerAction,
 };

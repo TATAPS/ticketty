@@ -28,6 +28,7 @@ async function addTicketAction(req, res) {
   try {
     const values = [
       req.body.company_id,
+      req.body.engineer_id,
       req.body.title,
       req.body.status,
       req.body.owner_id,

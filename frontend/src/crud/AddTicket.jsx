@@ -6,6 +6,8 @@ import TicketForm from "./TicketForm.jsx";
 import { useNavigate } from "react-router-dom";
 import { fetchCompanies, fetchCompanyContacts } from "../api/companies.jsx";
 import { fetchStatuses } from "../api/statuses.jsx";
+import { fetchEngineers } from "../api/engineers.jsx";
+import RenderDropDown from "../../reusable components/RenderDropDown.jsx";
 
 export default function AddTicket() {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ export default function AddTicket() {
   const [ticket, setTicket] = useState({
     company_id: "",
     owner_id: "",
+    engineer_id: "",
     title: "",
     status: "Open",
   });
@@ -26,6 +29,11 @@ export default function AddTicket() {
   const { data: statuses } = useQuery({
     queryKey: ["statuses"],
     queryFn: async () => await fetchStatuses(),
+  });
+
+  const { data: engineers } = useQuery({
+    queryKey: ["engineers"],
+    queryFn: async () => await fetchEngineers(),
   });
 
   const { data: contacts } = useQuery({
@@ -61,6 +69,17 @@ export default function AddTicket() {
     });
   };
 
+  const handleEngineerChange = (e) => {
+    e.preventDefault();
+    const filteredEngineer = engineers.filter(
+      (engineer) => engineer.contact === e.target.value
+    );
+    setTicket({
+      ...ticket,
+      engineer_id: filteredEngineer[0]["id"],
+    });
+  };
+
   const handleInputChange = (e) => {
     e.preventDefault();
     setTicket({
@@ -89,11 +108,13 @@ export default function AddTicket() {
             initValuesCompanies={{ companies }}
             initValuesContacts={{ contacts }}
             initValuesStatuses={{ statuses }}
+            initValuesEngineers={{ engineers }}
             ticket={ticket}
             setTicket={setTicket}
             onSubmit={handleAddTicket}
             handleCompanyChange={handleCompanyChange}
             handleContactChange={handleContactChange}
+            handleEngineerChange={handleEngineerChange}
             handleInputChange={handleInputChange}
           />
         </div>
