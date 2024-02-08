@@ -30,14 +30,7 @@ function TicketSummary({ ticketData, ticketId }) {
         {renderInfo("status")}
         {renderInfo("ticket_id")}
         {renderInfo("ticket_total_time")}
-        <div className="edit-section">
-          <Link to={`/tickets/${ticketId}/edit`}>
-            <button>Update</button>
-          </Link>
-          <button
-          // onClick={() => handleDelete(/*ticketId*/)}
-          >Archives</button>
-        </div>
+
       </div>
       <div className="ticket-notes">
         <h3>Notes</h3>
