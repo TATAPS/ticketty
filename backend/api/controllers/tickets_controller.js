@@ -41,7 +41,9 @@ async function addTicketAction(req, res) {
 }
 async function updateTicketAction(req, res) {
   try {
-    const values = [req.body.title, req.body.status, req.body.id];
+    console.log(req.body)
+    const id = req.params.ticket_id;
+    const values = [req.body.title, id];
     const updatedTicket = await updateTicket(values);
     res.status(200).json(updatedTicket);
   } catch (error) {

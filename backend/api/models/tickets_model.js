@@ -20,11 +20,11 @@ async function getAllTickets() {
 //Left Join to return tickets that don't have any notes
 async function getSingleTicket(ticketId) {
   const query = `
-  SELECT t.id, t.company_id, 
-  BIN_TO_UUID(t.owner_id, 1) as owner_id, 
+  SELECT t.id, t.company_id,
+  BIN_TO_UUID(t.owner_id, 1) as owner_id,
   t.engineer_id, t.title, t.status, t.ticket_total_time,
-  t.created_at, t.closed_at, tn.ticket_id, 
-  tn.id as ticket_id, tn.note 
+  t.created_at, t.closed_at, tn.ticket_id,
+  tn.id as note_id, tn.note
   FROM tickets t LEFT JOIN ticket_notes tn
   ON t.id = tn.ticket_id
   WHERE t.id = ?
@@ -42,7 +42,7 @@ async function addTicket(ticket) {
 }
 
 async function updateTicket(ticket) {
-  const query = `UPDATE tickets SET title=?, status=? WHERE id=?`;
+  const query = `UPDATE tickets SET title=? WHERE id=?`;
   const [tickets] = await executeQuery(query, ticket);
   return tickets;
 }

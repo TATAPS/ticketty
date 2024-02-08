@@ -32,16 +32,17 @@ export async function addTicket(newTicket) {
   }
 }
 
-export async function updateTicket(id) {
+export async function updateTicket(updateTicket) {
   try {
-    const response = await fetch(`https://localhost:8080/api/tickets/${id}`, {
-      method: "put",
+    console.log(updateTicket)
+    const response = await fetch(`https://localhost:8080/api/tickets/${updateTicket.id}/edit`, {
+      method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(newTicket),
+      body: JSON.stringify(updateTicket)
     });
-    return response.json();
+    return response.json()
   } catch (error) {
     console.log(error);
   }

@@ -43,8 +43,8 @@ function SingleTicket() {
   }
   return (
     <div className="list-container">
+      <h1>#{ticketId}</h1>
       <div className="list-title">
-        <h1>#{ticketId}</h1>
         {ticketData ? (
           <TicketSummary ticketData={ticketData} />
         ) : (
