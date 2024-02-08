@@ -1,4 +1,5 @@
-function TicketSummary({ ticketData }) {
+import { useParams, Link } from "react-router-dom";
+function TicketSummary({ ticketData, ticketId }) {
   const formatText = (text) => {
     // Remove underscores and capitalize the first letter of each word
     return text.replace(/_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
@@ -29,6 +30,14 @@ function TicketSummary({ ticketData }) {
         {renderInfo("status")}
         {renderInfo("ticket_id")}
         {renderInfo("ticket_total_time")}
+        <div className="edit-section">
+          <Link to={`/tickets/${ticketId}/edit`}>
+            <button>Update</button>
+          </Link>
+          <button
+          // onClick={() => handleDelete(/*ticketId*/)}
+          >Archives</button>
+        </div>
       </div>
       <div className="ticket-notes">
         <h3>Notes</h3>

@@ -105,25 +105,46 @@ function UpdateTicket() {
   if (isFetching) {
     <div>Loading...</div>;
   }
-
+  const renderTicketNote = () => {
+    const reversedTicketData = ticketData?.slice().reverse();
+    return reversedTicketData?.map(ticket => (
+      ticket.note ? (
+        <div className="ticket-note" key={ticket.id} style={{ backgroundColor: 'white' }}>
+          <p>{ticket.note}</p>
+        </div>
+      ) : (
+        <p>No notes available</p>
+      )
+    ));
+  }
   return (
     <div className="list-container">
       <div className="list-title">
         <h1>Update #{ticketId}</h1>
         {ticketData ? (
-          <TicketForm
-            initValuesCompanies={{ companies }}
-            initValuesContacts={{ contacts }}
-            initValuesStatuses={{ statuses }}
-            initValuesEngineers={{ engineers }}
-            ticket={ticket}
-            setTicket={setTicket}
-            onSubmit={handleUpdateTicket}
-            handleCompanyChange={handleCompanyChange}
-            handleContactChange={handleContactChange}
-            handleEngineerChange={handleEngineerChange}
-            handleInputChange={handleInputChange}
-          />
+          <div className="ticket-summary">
+            <div className="ticket-info" style={{ backgroundColor: 'white' }}>
+              <TicketForm
+                initValuesCompanies={{ companies }}
+                initValuesContacts={{ contacts }}
+                initValuesStatuses={{ statuses }}
+                initValuesEngineers={{ engineers }}
+                ticket={ticket}
+                setTicket={setTicket}
+                onSubmit={handleUpdateTicket}
+                handleCompanyChange={handleCompanyChange}
+                handleContactChange={handleContactChange}
+                handleEngineerChange={handleEngineerChange}
+                handleInputChange={handleInputChange}
+              />
+            </div>
+            <div className="ticket-notes">
+              <h3>Notes</h3>
+              {renderTicketNote()}
+              {/* <input type="file" placeholder="Upload File" aria-label="Upload File" /> */}
+              <input type="text" placeholder="New Notes" className="newnote-input" />
+            </div>
+          </div>
         ) : (
           <p>No Ticket Found</p>
         )}

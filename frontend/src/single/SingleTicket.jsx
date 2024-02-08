@@ -51,14 +51,6 @@ function SingleTicket() {
           <p>No Ticket Found</p>
         )}
         {/* <Tickets /> */}
-        <div className="edit-section">
-          <Link to={`/tickets/${ticketId}/edit`}>
-            <button>Update</button>
-          </Link>
-          <button
-          // onClick={() => handleDelete(/*ticketId*/)}
-          >Archives</button>
-        </div>
       </div>
     </div>
   );
