@@ -1,7 +1,7 @@
 import "./TicketForm.css";
 import React, { useState, useEffect, useRef } from "react";
-import RenderDropDown from "../../reusable components/RenderDropDown";
-import RenderInputTypeText from "../../reusable components/RenderInputTypeText";
+import RenderDropDown from "../../reusable-components/RenderDropDown";
+import RenderInputTypeText from "../../reusable-components/RenderInputTypeText";
 
 function TicketForm({
   initValuesCompanies,

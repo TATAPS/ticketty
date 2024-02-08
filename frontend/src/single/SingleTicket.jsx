@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams, Link } from "react-router-dom";
 import { fetchTicket } from "../api/tickets.jsx";
+import TicketSummary from "./TicketSummary.jsx";
 
 function SingleTicket() {
   const [ticket, setTicket] = useState({});
@@ -40,58 +41,23 @@ function SingleTicket() {
   if (ticketData) {
     console.log(ticketData);
   }
-  const formatText = (text) => {
-    // Remove underscores and capitalize the first letter of each word
-    return text.replace(/_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
-  };
-  const renderInfo = (propertyName) => (
-    <p>{`${formatText(propertyName)}: ${ticketData[0][propertyName.toLowerCase()]}`}</p>
-  );
-  const renderTicketNote = () => {
-    const reversedTicketData = ticketData?.slice().reverse();
-    return reversedTicketData?.map(ticket => (
-      <div className="ticket-note" key={ticket.id} style={{ backgroundColor: 'white' }}>
-        <p>{ticket.note}</p>
-      </div>
-    ));
-  }
   return (
     <div className="list-container">
       <div className="list-title">
         <h1>#{ticketId}</h1>
         {ticketData ? (
-          <div className="ticket-summary">
-            <div className="ticket-info" style={{ backgroundColor: 'white' }}>
-              <h2>{ticketData[0].title}</h2>
-              {renderInfo("company_Id")}
-              {renderInfo("created_at")}
-              {renderInfo("engineer_id")}
-              {renderInfo("owner_id")}
-              {renderInfo("status")}
-              {renderInfo("ticket_id")}
-              {renderInfo("ticket_total_time")}
-            </div>
-            <div className="ticket-notes">
-              <h3>Notes</h3>
-              {renderTicketNote()}
-              {/* <input type="file" placeholder="Upload File" aria-label="Upload File" /> */}
-              <input type="text" placeholder="New Notes" className="newnote-input" />
-            </div>
-          </div>
+          <TicketSummary ticketData={ticketData} />
         ) : (
           <p>No Ticket Found</p>
         )}
         {/* <Tickets /> */}
-        <div>
-          <label>
-            <Link to={`/tickets/${ticketId}/edit`}>
-              <button>Update</button>
-            </Link>
-            <button
-            // onClick={() => handleDelete(/*ticketId*/)}
-            >Delete</button>
-          </label>
-
+        <div className="edit-section">
+          <Link to={`/tickets/${ticketId}/edit`}>
+            <button>Update</button>
+          </Link>
+          <button
+          // onClick={() => handleDelete(/*ticketId*/)}
+          >Archives</button>
         </div>
       </div>
     </div>

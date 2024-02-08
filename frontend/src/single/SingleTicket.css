@@ -49,8 +49,6 @@
   border-radius: 30px;
   resize: both;
 }
-.dynamic-resize {
-  background-color: aqua;
-  /* width: 10px; */
-  cursor: col-resize;
+.edit-section button {
+  margin-right: 10px;
 }
