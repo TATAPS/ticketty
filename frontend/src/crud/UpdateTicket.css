@@ -12,10 +12,10 @@
 .ticket-summary {
   display: grid;
   flex-direction: row;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 1px;
   justify-items: stretch;
-  height: 75%;
+  height: 100%;
   /* resize: none; */
 }
 

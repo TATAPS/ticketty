@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchCompanies, fetchCompanyContacts } from "../api/companies.jsx";
 import { fetchStatuses } from "../api/statuses.jsx";
 import { fetchEngineers } from "../api/engineers.jsx";
-import RenderDropDown from "../../reusable components/RenderDropDown.jsx";
+import RenderDropDown from "../../reusable-components/RenderDropDown.jsx";
 
 export default function AddTicket() {
   const navigate = useNavigate();
