@@ -13,7 +13,7 @@ export default function RenderInputTypeText({
         <input
           onChange={onChangeHandler}
           type="text"
-          name={label.toLowerCase()}
+          name={displayName}
           value={ticket[label.toLowerCase()]}
         />
       </label>
