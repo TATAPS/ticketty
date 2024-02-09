@@ -13,6 +13,7 @@ function TicketForm({
   onSubmit,
   handleCompanyChange,
   handleContactChange,
+  handleStatusChange,
   handleEngineerChange,
   handleInputChange,
 }) {
@@ -51,7 +52,7 @@ function TicketForm({
         <RenderDropDown
           label={"Status:"}
           displayName={"Status"}
-          onChangeHandler={handleInputChange}
+          onChangeHandler={handleStatusChange}
           selectName={"status"}
           dataToMap={statuses}
           mapKey={"id"}
@@ -67,12 +68,14 @@ function TicketForm({
         mapKey="person_uuid"
         value="contact"
       />
+
       <RenderInputTypeText
         label="Title"
         displayName="title"
         onChangeHandler={handleInputChange}
         ticket={ticket}
       />
+
       <RenderDropDown
         label="Engineer:"
         displayName="Resource"

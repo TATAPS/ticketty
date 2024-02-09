@@ -1,20 +1,24 @@
+.list-container {
+  /* background-color: red; */
+}
 .list-title {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  /* background-color: blue; */
+  justify-content: flex-start;
+  /* background-color: aqua; */
+  /* height: 100%; */
 }
 .list-title button {
   background-color: var(--color-success);
   color: #fff;
+  margin-right: 10px;
 }
 .ticket-summary {
   display: grid;
   flex-direction: row;
   grid-template-columns: 2fr 1fr;
   gap: 1px;
-  justify-items: stretch;
+  justify-items: center;
   height: 100%;
   /* resize: none; */
 }
@@ -48,7 +52,4 @@
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
   border-radius: 30px;
   resize: both;
-}
-.edit-section button {
-  margin-right: 10px;
 }
