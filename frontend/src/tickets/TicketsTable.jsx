@@ -1,10 +1,9 @@
-import './TicketsTable.css'
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-
+import "./TicketsTable.css";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 
 export default function TicketsTable({ tickets }) {
   const [filterModel, setFilterModel] = useState({
@@ -12,23 +11,30 @@ export default function TicketsTable({ tickets }) {
     quickFilterExcludeHiddenColumns: true,
   });
   const [columnVisibilityModel, setColumnVisibilityModel] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const columns = [
     {
-      field: 'id', headerName: 'Ticket ID', width: 70
+      field: "id",
+      headerName: "Ticket ID",
+      width: 70,
     },
-    { field: 'age_days', headerName: 'Age', type: 'number', width: 130 },
-    { field: 'company', headerName: 'Company', width: 150 },
-    { field: 'contact', headerName: 'Main Contact', width: 150 },
-    { field: 'title', headerName: 'Titles', sortable: false, width: 400 },
+    { field: "status", headerName: "Status", width: 100 },
+    { field: "priority", headerName: "Priority", width: 100 },
+    { field: "age_days", headerName: "Age", type: "number", width: 50 },
+    { field: "company", headerName: "Company", width: 150 },
+    { field: "contact", headerName: "Main Contact", width: 150 },
+    { field: "phone", headerName: "Phone", width: 125 },
+    { field: "email", headerName: "Email", width: 200 },
+    { field: "title", headerName: "Summary Description", sortable: false, width: 400 },
+    { field: "engineer", headerName: "Assigned Engineer", width: 150 },
   ];
 
   const handleRowClick = (params, event) => {
     if (event.type === "click") {
-      navigate(`/tickets/${params.id}`)
+      navigate(`/tickets/${params.id}`);
     }
-  }
+  };
 
   return (
     <>
@@ -51,7 +57,7 @@ export default function TicketsTable({ tickets }) {
         control={<Switch color="primary" size="small" />}
         label="Exclude hidden columns"
       />
-      <div style={{ height: "100%", width: '96%' }}>
+      <div style={{ height: "100%", width: "96%" }}>
         <DataGrid
           columns={columns}
           rows={tickets}
@@ -63,19 +69,10 @@ export default function TicketsTable({ tickets }) {
           onFilterModelChange={(newModel) => setFilterModel(newModel)}
           slotProps={{ toolbar: { showQuickFilter: true } }}
           columnVisibilityModel={columnVisibilityModel}
-          onColumnVisibilityModelChange={(newModel) =>
-            setColumnVisibilityModel(newModel)
-          }
+          onColumnVisibilityModelChange={(newModel) => setColumnVisibilityModel(newModel)}
           onRowClick={handleRowClick}
-
         />
-
-
       </div>
     </>
-  )
+  );
 }
-
-
-
-
