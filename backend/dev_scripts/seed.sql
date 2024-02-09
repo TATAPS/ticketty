@@ -4,11 +4,10 @@ DROP SCHEMA IF EXISTS support_ticket_platform;
 CREATE SCHEMA support_ticket_platform;
 USE support_ticket_platform;
 
-
-DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS companies;
-DROP TABLE IF EXISTS contacts_companies;
-DROP TABLE IF EXISTS engineer;
+DROP TABLE IF EXISTS company_contacts;
+DROP TABLE IF EXISTS engineers;
+DROP TABLE IF EXISTS priorities;
 DROP TABLE IF EXISTS tickets;
 DROP TABLE IF EXISTS persons;
 DROP TABLE IF EXISTS statuses;
@@ -69,6 +68,12 @@ CREATE TABLE company_contacts (
      FOREIGN KEY (person_uuid) REFERENCES persons (uuid) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+CREATE TABLE priorities (
+	id INT NOT NULL AUTO_INCREMENT,
+    priority ENUM("P1 High", "P2 Medium", "P3 Low", "P4 Other"),
+    PRIMARY KEY(id)
+);
+
 CREATE TABLE statuses (
     id INT NOT NULL AUTO_INCREMENT,
     status ENUM("Open", "Closed", "Pending", "Assigned", "Working"),
@@ -77,6 +82,7 @@ CREATE TABLE statuses (
 
 CREATE TABLE tickets (
     id INT NOT NULL AUTO_INCREMENT,
+    priority ENUM("P1 High", "P2 Medium", "P3 Low", "P4 Other"),
     company_id VARCHAR(15) NOT NULL,
     owner_id BINARY(16),
     engineer_id INT NOT NULL DEFAULT 1,
@@ -135,23 +141,28 @@ INSERT INTO company_contacts (company_id, person_uuid) VALUES ("38-3881633", UUI
 INSERT INTO company_contacts (company_id, person_uuid) VALUES ("57-4730262", UUID_TO_BIN('813827e4-b554-11ee-ad8f-001fbc130d5b', 1));
 INSERT INTO company_contacts (company_id, person_uuid) VALUES ("57-4730262", UUID_TO_BIN('516827e4-b554-11ee-ad8f-001fbc130d5b', 1));
 
+INSERT INTO priorities (priority) VALUES ("P1 High");
+INSERT INTO priorities (priority) VALUES ("P2 Medium");
+INSERT INTO priorities (priority) VALUES ("P3 Low");
+INSERT INTO priorities (priority) VALUES ("P4 Other");
+
 INSERT INTO statuses (status) VALUES ("Open");
 INSERT INTO statuses (status) VALUES ("Assigned");
 INSERT INTO statuses (status) VALUES ("Pending");
 INSERT INTO statuses (status) VALUES ("Working");
 INSERT INTO statuses (status) VALUES ("Closed");
 
-INSERT INTO tickets (company_id, owner_id, title, status) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "Printer is down again", "Open");
-INSERT INTO tickets (company_id, owner_id, title, status) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), "Our CCTV Cameras are down! Help!", "Assigned");
-INSERT INTO tickets (company_id, owner_id, engineer_id, title, status) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), 2 , "My internet is down", "Working");
-INSERT INTO tickets (company_id, owner_id, engineer_id, title, status) VALUES ("30-2846270", UUID_TO_BIN("187b0262-b554-11ee-ad8f-001fbc130d5b", 1), 3, "The Starbucks machine isn't dispensing coffee", "Closed");
+INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "Printer is down again", "Open", "P3 Low");
+INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), "Our CCTV Cameras are down! Help!", "Assigned", "P1 High");
+INSERT INTO tickets (company_id, owner_id, engineer_id, title, status, priority) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), 2 , "My internet is down", "Working", "P1 High");
+INSERT INTO tickets (company_id, owner_id, engineer_id, title, status, priority) VALUES ("30-2846270", UUID_TO_BIN('187b0262-b554-11ee-ad8f-001fbc130d5b', 1), 3, "The Starbucks machine isn't dispensing coffee", "Closed", "P3 Low");
 INSERT INTO tickets (company_id, owner_id, title, status) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "Our computers are really slow", "Pending");
-INSERT INTO tickets (company_id, owner_id, title, status) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "Is this a virus?", "Pending");
-INSERT INTO tickets (company_id, owner_id, title, status) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "What should we do with this electrical outlet?", "Working");
-INSERT INTO tickets (company_id, owner_id, title, status) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), "VPN access needed", "Assigned");
-INSERT INTO tickets (company_id, owner_id, title, status) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), "Need to install this shady software", "Assigned");
-INSERT INTO tickets (company_id, owner_id, engineer_id, title, status) VALUES ("30-2846270", UUID_TO_BIN("187b0262-b554-11ee-ad8f-001fbc130d5b", 1), 2, "Office 365 down?", "Working");
-INSERT INTO tickets (company_id, owner_id, engineer_id, title, status) VALUES ("30-2846270", UUID_TO_BIN("187b0262-b554-11ee-ad8f-001fbc130d5b", 1), 2, "Jan got a virus again", "Working");
+INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "Is this a virus?", "Pending", "P1 High");
+INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "What should we do with this electrical outlet?", "Working", "P3 Low");
+INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), "VPN access needed", "Assigned", "P3 Low");
+INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), "Need to install this shady software", "Assigned", "P2 Medium");
+INSERT INTO tickets (company_id, owner_id, engineer_id, title, status, priority) VALUES ("30-2846270", UUID_TO_BIN('187b0262-b554-11ee-ad8f-001fbc130d5b', 1), 2, "Office 365 down?", "Working", "P1 High");
+INSERT INTO tickets (company_id, owner_id, engineer_id, title, status, priority) VALUES ("30-2846270", UUID_TO_BIN('187b0262-b554-11ee-ad8f-001fbc130d5b', 1), 2, "Jan got a virus again", "Working", "P1 High");
 
 INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(3, "Hi Arlen, I see that there is an outage in your area", 15);
 INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(3, "That sucks, did you receive an estimate on when it would be back up?", 0);
