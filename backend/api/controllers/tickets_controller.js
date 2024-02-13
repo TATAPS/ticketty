@@ -39,11 +39,28 @@ async function addTicketAction(req, res) {
     throw error;
   }
 }
+
+function splitFullName(fullName) {
+  // Split the full name into an array of words
+  const nameParts = fullName.split(' ');
+
+  // Extract the last name and first name
+  const lastName = nameParts.pop(); // Removes and returns the last element of the array
+  const firstName = nameParts.join(' '); // Join the remaining elements with a space
+
+  return {
+    firstName: firstName,
+    lastName: lastName
+  };
+}
+
+
 async function updateTicketAction(req, res) {
   try {
-    console.log(req.body)
+    const { title, company_id, status, engineer_id, contact } = req.body
+    const { firstName, lastName } = splitFullName(contact)
     const id = req.params.ticket_id;
-    const values = [req.body.title, id];
+    const values = [title, company_id, status, engineer_id, firstName, lastName, id];
     const updatedTicket = await updateTicket(values);
     res.status(200).json(updatedTicket);
   } catch (error) {

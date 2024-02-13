@@ -16,17 +16,19 @@ function UpdateTicket() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const [ticket, setTicket] = useState({
-    title: '',
-    company_id: "",
-    status: "",
-    engineer_id: ""
-  });
   const { data: ticketData } = useQuery({
     queryKey: ['tickets', ticketId],
     queryFn: () => fetchTicket(ticketId)
   });
-
+  const [ticket, setTicket] = useState({
+    title: "",
+    company_id: "",
+    status: "",
+    engineer_id: "",
+    contact: "",
+    ...ticketData
+  });
+  console.log(ticket)
   const { isFetching, data: companies } = useQuery({
     queryKey: ["companies"],
     queryFn: async () => await fetchCompanies(),
@@ -47,7 +49,7 @@ function UpdateTicket() {
     queryKey: ["engineers"],
     queryFn: async () => await fetchEngineers(),
   });
-  console.log(engineers);
+  // console.log(engineers);
   const updateTicketMutation = useMutation({
     mutationFn: updateTicket,
     onSuccess: (updatedTicket) => {
@@ -70,7 +72,8 @@ function UpdateTicket() {
       title: ticket.title,
       company_id: ticket.company_id,
       status: ticket.status,
-      engineer_id: ticket.engineer_id
+      engineer_id: ticket.engineer_id,
+      contact: ticket.contact
     })
   };
   const handleCompanyChange = (e) => {
@@ -87,17 +90,16 @@ function UpdateTicket() {
     const filteredContact = contacts.filter(
       (contact) => contact.contact === e.target.value
     );
-
     setTicket({
       ...ticket,
-      owner_id: filteredContact[0]["person_uuid"],
+      contact: filteredContact[0]["contact"],
     });
   };
   const handleStatusChange = (e) => {
     const filteredStatus = statuses.filter(
       (status) => status.status === e.target.value
     );
-    console.log(filteredStatus)
+    // console.log(filteredStatus)
     setTicket({
       ...ticket,
       status: filteredStatus[0]["status"],

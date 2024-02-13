@@ -18,7 +18,7 @@ function SingleTicket() {
     queryKey: ["tickets", ticketId],
     queryFn: () => fetchTicket(ticketId),
   })
-  // console.log(isFetching, isError, data, error)
+  console.log(isFetching, isError, ticketData, error)
   ////////////TODO: IMPLEMENT useQuery TO FETCH DATA ///////////////
   // const queryClient = useQueryClient();
   // const fetchSingleTicket = async () => {
