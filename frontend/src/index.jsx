@@ -8,6 +8,7 @@ import Auth from "./auth/Auth.jsx";
 import SingleTicket from "./single/SingleTicket";
 import AddTicket from "./crud/AddTicket.jsx";
 import UpdateTicket from "./crud/UpdateTicket.jsx";
+import Login from "./auth/Login.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +31,12 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: <Auth />,
+    children: [
+      {
+        path: "/auth/login",
+        element: <Login />,
+      },
+    ],
   },
 ]);
 // client

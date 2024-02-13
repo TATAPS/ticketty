@@ -2,11 +2,30 @@
 POST https://localhost:8080/auth/login
 Content-Type: application/json
 
-{   "user": {
+{   
     "username": "dispatch",
     "password": "CracK3dPas$WordPl3ase"
+}
+
+###
+GET https://localhost:8080/auth/profile
+Content-Type: application/json
+
+###
+GET https://localhost:8080/auth/logout
+Content-Type: application/json
+
+### 
+POST https://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "user": {
+        "username": "notdispatch",
+        "password": "NotAPassword"
     }
 }
+
 
 ###
 POST https://localhost:8080/auth/register

@@ -41,30 +41,28 @@ async function addTicketAction(req, res) {
 }
 
 function splitFullName(fullName) {
-  let firstName = '';
-  let lastName = '';
+  let firstName = "";
+  let lastName = "";
 
   // Split the full name into an array of words
-  if (fullName && fullName.includes(' ')) {
-    const nameParts = fullName.split(' ');
+  if (fullName && fullName.includes(" ")) {
+    const nameParts = fullName.split(" ");
     // Extract the last name and first name
     lastName = nameParts.pop(); // Removes and returns the last element of the array
-    firstName = nameParts.join(' '); // Join the remaining elements with a space
+    firstName = nameParts.join(" "); // Join the remaining elements with a space
   }
-
 
   return {
     firstName: firstName,
-    lastName: lastName
+    lastName: lastName,
   };
 }
 
-
 async function updateTicketAction(req, res) {
   try {
-    const { title, company_id, status, engineer_id, contact } = req.body
-    console.log(req.body)
-    const { firstName, lastName } = splitFullName(contact)
+    const { title, company_id, status, engineer_id, contact } = req.body;
+    console.log(req.body);
+    const { firstName, lastName } = splitFullName(contact);
     const id = req.params.ticket_id;
     const values = [title, company_id, status, engineer_id, firstName, lastName, id];
     const updatedTicket = await updateTicket(values);
