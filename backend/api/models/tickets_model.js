@@ -14,13 +14,13 @@ async function getAllTickets() {
   // ORDER BY t.id ASC;
   // `;
   const query = `
-  SELECT t.created_at as ticket_creation_time, t.id, t.priority, 
-  t.company_id, c.name AS company, 
-  DATEDIFF(t.created_at, NOW()) as age_days, 
-  BIN_TO_UUID(t.owner_id, 1) AS owner_id, 
-  CONCAT(p.given_name, " ", p.family_name) AS contact, 
-  p.phone, p.email, t.engineer_id, 
-  BIN_TO_UUID(e.person_uuid, 1) as engineer_uuid, 
+  SELECT t.created_at as ticket_creation_time, t.id, t.priority,
+  t.company_id, c.name AS company,
+  DATEDIFF(t.created_at, NOW()) as age_days,
+  BIN_TO_UUID(t.owner_id, 1) AS owner_id,
+  CONCAT(p.given_name, " ", p.family_name) AS contact,
+  p.phone, p.email, t.engineer_id,
+  BIN_TO_UUID(e.person_uuid, 1) as engineer_uuid,
   CONCAT(eng.given_name, " ", eng.family_name) AS engineer,
   t.title, t.status, t.ticket_total_time, t.created_at
   FROM tickets t JOIN companies c ON t.company_id = c.ein_tin
@@ -36,15 +36,32 @@ async function getAllTickets() {
 //Left Join to return tickets that don't have any notes
 async function getSingleTicket(ticketId) {
   const query = `
-  SELECT t.id, t.company_id,
-  BIN_TO_UUID(t.owner_id, 1) as owner_id,
-  t.engineer_id, t.title, t.status, t.ticket_total_time,
-  t.created_at, t.closed_at, tn.ticket_id,
-  tn.id as note_id, tn.note
-  FROM tickets t LEFT JOIN ticket_notes tn
-  ON t.id = tn.ticket_id
-  WHERE t.id = ?
-  ORDER BY tn.id DESC;
+  SELECT
+    t.id,
+    t.company_id,
+    BIN_TO_UUID(t.owner_id, 1) AS owner_id,
+    t.engineer_id,
+    t.title,
+    t.status,
+    t.ticket_total_time,
+    t.created_at,
+    t.closed_at,
+    tn.ticket_id,
+    tn.id AS note_id,
+    tn.note,
+    CONCAT(p.given_name, " ", p.family_name) AS contact
+  FROM
+    tickets t
+  LEFT JOIN
+    ticket_notes tn ON t.id = tn.ticket_id
+  JOIN
+    companies c ON t.company_id = c.ein_tin
+  JOIN
+    persons p ON t.owner_id = p.uuid
+  WHERE
+    t.id = ?
+  ORDER BY
+    tn.id DESC;
   `;
 
   const [ticket] = await executeQuery(query, [ticketId]);
@@ -58,7 +75,7 @@ async function addTicket(ticket) {
 }
 
 async function updateTicket(ticket) {
-  const query = `UPDATE tickets SET title=? WHERE id=?`;
+  const query = `UPDATE tickets t JOIN persons p ON t.owner_id = p.uuid SET t.title=?, t.company_id=?, t.status=?, t.engineer_id=?, p.given_name=?, p.family_name=? WHERE t.id=?`;
   const [tickets] = await executeQuery(query, ticket);
   return tickets;
 }

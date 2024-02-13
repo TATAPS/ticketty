@@ -15,19 +15,19 @@ function UpdateTicket() {
   const { ticketId } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [ticket, setTicket] = useState({});
 
-  const [ticket, setTicket] = useState({
-    title: '',
-    company_id: "",
-    status: "",
-    engineer_id: ""
+  const { isFetching, data: ticketData } = useQuery({
+    queryKey: ['tickets', (ticketId)],
+    queryFn: () => fetchTicket(ticketId),
+    onCompleted: () => {
+      const initialTicket = ticketData[0] || {};
+      setTicket(initialTicket)
+    },
   });
-  const { data: ticketData } = useQuery({
-    queryKey: ['tickets', ticketId],
-    queryFn: () => fetchTicket(ticketId)
-  });
-
-  const { isFetching, data: companies } = useQuery({
+  console.log("ticketData", ticketData);
+  console.log("ticket", ticket)
+  const { data: companies } = useQuery({
     queryKey: ["companies"],
     queryFn: async () => await fetchCompanies(),
   });
@@ -47,7 +47,7 @@ function UpdateTicket() {
     queryKey: ["engineers"],
     queryFn: async () => await fetchEngineers(),
   });
-  console.log(engineers);
+  // console.log(engineers);
   const updateTicketMutation = useMutation({
     mutationFn: updateTicket,
     onSuccess: (updatedTicket) => {
@@ -64,15 +64,6 @@ function UpdateTicket() {
     });
   };
 
-  const handleSubmit = () => {
-    updateTicketMutation.mutate({
-      id: ticketId,
-      title: ticket.title,
-      company_id: ticket.company_id,
-      status: ticket.status,
-      engineer_id: ticket.engineer_id
-    })
-  };
   const handleCompanyChange = (e) => {
     const filteredCompany = companies.filter(
       (company) => company.name === e.target.value
@@ -87,17 +78,16 @@ function UpdateTicket() {
     const filteredContact = contacts.filter(
       (contact) => contact.contact === e.target.value
     );
-
     setTicket({
       ...ticket,
-      owner_id: filteredContact[0]["person_uuid"],
+      contact: filteredContact[0]["contact"],
     });
   };
   const handleStatusChange = (e) => {
     const filteredStatus = statuses.filter(
       (status) => status.status === e.target.value
     );
-    console.log(filteredStatus)
+    // console.log(filteredStatus)
     setTicket({
       ...ticket,
       status: filteredStatus[0]["status"],
@@ -108,11 +98,20 @@ function UpdateTicket() {
     const filteredEngineer = engineers.filter(
       (engineer) => engineer.contact === e.target.value
     );
-    console.log(filteredEngineer)
     setTicket({
       ...ticket,
       engineer_id: filteredEngineer[0]["id"],
     });
+  };
+  const handleSubmit = () => {
+    updateTicketMutation.mutate({
+      id: ticketId,
+      title: ticket.title,
+      company_id: ticket.company_id,
+      status: ticket.status,
+      engineer_id: ticket.engineer_id,
+      contact: ticket.contact
+    })
   };
 
   if (isFetching) {

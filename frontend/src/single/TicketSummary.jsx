@@ -30,6 +30,7 @@ function TicketSummary({ ticketData, ticketId }) {
         {renderInfo("status")}
         {renderInfo("ticket_id")}
         {renderInfo("ticket_total_time")}
+        {renderInfo("contact")}
 
       </div>
       <div className="ticket-notes">
