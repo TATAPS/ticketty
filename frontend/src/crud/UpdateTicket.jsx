@@ -15,21 +15,19 @@ function UpdateTicket() {
   const { ticketId } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [ticket, setTicket] = useState({});
 
-  const { data: ticketData } = useQuery({
-    queryKey: ['tickets', ticketId],
-    queryFn: () => fetchTicket(ticketId)
+  const { isFetching, data: ticketData } = useQuery({
+    queryKey: ['tickets', (ticketId)],
+    queryFn: () => fetchTicket(ticketId),
+    onCompleted: () => {
+      const initialTicket = ticketData[0] || {};
+      setTicket(initialTicket)
+    },
   });
-  const [ticket, setTicket] = useState({
-    title: "",
-    company_id: "",
-    status: "",
-    engineer_id: "",
-    contact: "",
-    ...ticketData
-  });
-  console.log(ticket)
-  const { isFetching, data: companies } = useQuery({
+  console.log("ticketData", ticketData);
+  console.log("ticket", ticket)
+  const { data: companies } = useQuery({
     queryKey: ["companies"],
     queryFn: async () => await fetchCompanies(),
   });
@@ -66,16 +64,6 @@ function UpdateTicket() {
     });
   };
 
-  const handleSubmit = () => {
-    updateTicketMutation.mutate({
-      id: ticketId,
-      title: ticket.title,
-      company_id: ticket.company_id,
-      status: ticket.status,
-      engineer_id: ticket.engineer_id,
-      contact: ticket.contact
-    })
-  };
   const handleCompanyChange = (e) => {
     const filteredCompany = companies.filter(
       (company) => company.name === e.target.value
@@ -110,11 +98,20 @@ function UpdateTicket() {
     const filteredEngineer = engineers.filter(
       (engineer) => engineer.contact === e.target.value
     );
-    console.log(filteredEngineer)
     setTicket({
       ...ticket,
       engineer_id: filteredEngineer[0]["id"],
     });
+  };
+  const handleSubmit = () => {
+    updateTicketMutation.mutate({
+      id: ticketId,
+      title: ticket.title,
+      company_id: ticket.company_id,
+      status: ticket.status,
+      engineer_id: ticket.engineer_id,
+      contact: ticket.contact
+    })
   };
 
   if (isFetching) {
