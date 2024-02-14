@@ -9,7 +9,7 @@
   --color-light: rgba(132, 139, 200, 0.18);
   --color-dark-variant: #677483;
   --color-background: #f6f6f9;
-
+  --color-input: #eee;
   --card-border-radius: 2rem;
   --border-radius-1: 0.4rem;
   --border-radius-2: 1.2rem;
@@ -27,6 +27,8 @@
   --color-dark-variant: #a3bdcc;
   --color-light: rgba(0, 0, 0, 0.4);
   --box-shadow: 0 2rem 3rem var(--color-light);
+  --color-input: #2c333b;
+  --color-primary: #45678f;
 }
 
 * {
@@ -124,7 +126,7 @@ button {
 }
 
 input {
-  background-color: #eee;
+  background-color: var(--color-input);
   border: none;
   margin: 8px 0;
   padding: 10px 15px;
@@ -132,6 +134,8 @@ input {
   border-radius: 8px;
   width: 100%;
   outline: none;
+  /* box-shadow: var(--box-shadow); */
+  color: var(--color-dark);
 }
 
 .dashboard {
