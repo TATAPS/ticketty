@@ -3,6 +3,7 @@ const { executeQuery, pool } = require("../../db_connnection.js");
 // const { find } = require("../../api/models/engineers_model.js");
 const { find } = require("../../api/models/engineers_model.js");
 const { logout, verifyPassword } = require("../models/auth_model.js");
+const { Cookie } = require("express-session");
 
 async function loginAction(req, res, next) {
   const user = req.body;
@@ -27,6 +28,11 @@ async function loginAction(req, res, next) {
         if (err) next(err);
 
         req.session.user = { username: foundUser[0]["given_name"] };
+        // res.cookie("user");
+        res.cookie("username", foundUser[0]["given_name"], {
+          expires: new Date(Date.now() + 900000),
+          secure: true,
+        });
         req.session.save(function (err) {
           if (err) return next(err);
           res.status(200).json("all good");
