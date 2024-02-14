@@ -6,7 +6,7 @@ const session = require("express-session");
 const sessionStore = require("./session.js");
 const { router: apiRouter } = require("./api/index.js");
 const { router: authRouter } = require("./auth/index.js");
-
+const { isAuthenticated } = require("./auth/middleware/auth_middleware.js");
 const app = express();
 const corsOptions = {
   origin: "https://localhost:3000",
@@ -22,7 +22,7 @@ app.use(
     secret: "session_cookie_secret",
     store: sessionStore,
     resave: false,
-    saveUninitialized: true, // turn false for cookie consent
+    saveUninitialized: false, // turn false for cookie consent
     cookie: {
       maxAge: MAXAGE,
       secure: true,
@@ -35,16 +35,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// app.use(
-//   session({
-//     secret: process.env.CONFIGURE_SESSION_TOKEN,
-//     resave: false,
-//     saveUninitialized: false,
-//   })
-// );
-
 app.use("/auth", authRouter);
-app.use("/api", apiRouter);
+app.use("/api", isAuthenticated, apiRouter);
 
 app.get("/", (req, res, next) => {
   res.send("Hello from backend");

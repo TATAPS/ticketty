@@ -2,45 +2,55 @@ const { executeQuery, pool } = require("../../db_connnection.js");
 // const { login, register, logout } = require("../models/auth_model.js");
 // const { find } = require("../../api/models/engineers_model.js");
 const { find } = require("../../api/models/engineers_model.js");
-const { verifyPassword, generateAccessToken } = require("../models/auth_model.js");
-// const { hashPassword, verifyPassword } = require();
-// import bcrypt from "bcryptjs";
-// import jwt from "jsonwebtoken";
+const { logout, verifyPassword } = require("../models/auth_model.js");
 
-// async function register(req, res) {}
+async function loginAction(req, res, next) {
+  const user = req.body;
+  try {
+    if (user === null) {
+      return res.status(400).send("No user submitted");
+    }
 
-async function loginAction(req, res) {
-  if (req.body.user === null) {
-    return res.status(400).send("No user submitted");
+    const foundUser = await find(user); // get back an array
+    if (foundUser.length === 0) {
+      return res.status(404).send("Cannot find user");
+    }
+
+    const verifiedPassword = await verifyPassword(
+      user.password,
+      foundUser[0].salt,
+      foundUser[0].password
+    );
+
+    if (verifiedPassword) {
+      req.session.regenerate(function (err) {
+        if (err) next(err);
+
+        req.session.user = { username: foundUser[0]["given_name"] };
+        req.session.save(function (err) {
+          if (err) return next(err);
+          res.status(200).json("all good");
+        });
+      });
+    } else {
+      res.status(400).json("Username or Password incorrect");
+    }
+  } catch (error) {
+    console.error(error);
   }
-
-  // console.log(req.body.user);
-  const user = await find(req.body.user);
-  if (user === null) {
-    return res.status(400).send("Cannot find user");
-  }
-
-  // console.log(user);
-  const verifiedPassword = await verifyPassword(
-    req.body.user.password,
-    user[0].salt,
-    user[0].password
-  );
-
-  const foundUser = { name: user };
-  // console.log("found user", foundUser);
-  if (verifiedPassword) {
-    res.json({ accessToken: generateAccessToken(foundUser) });
-  } else {
-    res.json("Username or Password incorrect");
-  }
-  // console.log(user);
-  // const { username, password } = req.body;
-  // res.json(verifiedPassword);
 }
 
 // export const logout = (req, res) => {};
 
+async function logoutAction(req, res) {
+  try {
+    const result = await logout();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
 module.exports = {
+  logoutAction,
   loginAction,
 };

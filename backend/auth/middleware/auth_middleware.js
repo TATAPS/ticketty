@@ -17,6 +17,21 @@ function verifyToken(req, res, next) {
   }
 }
 
+async function isAuthenticated(req, res, next) {
+  try {
+    // if (req.session.authenticated) {
+    if (req.session.user) {
+      next();
+    } else {
+      res.redirect("/auth/login");
+    }
+  } catch (error) {
+    console.error("Error in isAuthenticated middleware", error);
+    res.status(500).send("Internal server error");
+  }
+}
+
 module.exports = {
+  isAuthenticated,
   verifyToken,
 };

@@ -30,7 +30,7 @@ async function getAllEngineersFrontendSafe() {
 }
 
 async function find(user) {
-  const query = `SELECT salt, password FROM engineers WHERE username = ?`;
+  const query = `SELECT salt, password, p.given_name, p.family_name FROM engineers e JOIN persons p ON e.person_uuid = p.uuid WHERE username = ?`;
   try {
     if (user.username && user.password) {
       const [result] = await executeQuery(query, [user.username]);
