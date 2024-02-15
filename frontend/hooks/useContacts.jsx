@@ -1,7 +1,7 @@
 import { fetchCompanyContacts } from '../src/api/companies';
 import { useQuery } from '@tanstack/react-query';
 
-function useContacts(ticket) {
+function useAddContact(ticket) {
   return useQuery({
     queryKey: ["contacts", ticket?.company_id],
     enabled: ticket?.company_id !== "",
@@ -9,4 +9,4 @@ function useContacts(ticket) {
   });
 }
 
-export default useContacts
+export default useAddContact

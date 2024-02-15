@@ -1,17 +1,15 @@
 import "./AddTicket.css";
 import { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addTicket } from "../api/tickets";
 import TicketForm from "./TicketForm.jsx";
 import { useNavigate } from "react-router-dom";
 import useCompanies from "../../hooks/useCompanies.jsx";
 import useStatuses from "../../hooks/useStatuses.jsx";
 import useEngineers from "../../hooks/useEngineers.jsx";
 import useAddContact from "../../hooks/useContacts.jsx";
+import useAddTicket from "../../hooks/useAddTicket.jsx";
 
 export default function AddTicket() {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const [ticket, setTicket] = useState({
     company_id: "",
     owner_id: "",
@@ -22,15 +20,8 @@ export default function AddTicket() {
   const { isFetching, data: companies } = useCompanies()
   const { data: statuses } = useStatuses()
   const { data: engineers } = useEngineers()
-
   const { data: contacts } = useAddContact(ticket)
-
-  const addTicketMutation = useMutation({
-    mutationFn: addTicket,
-    onSuccess: (newTicket) => {
-      queryClient.invalidateQueries({ queryKey: ["tickets"], newTicket });
-    },
-  });
+  const addTicketMutation = useAddTicket()
 
   const handleCompanyChange = (e) => {
     const filteredCompany = companies.filter(
