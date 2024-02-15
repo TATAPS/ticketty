@@ -4,10 +4,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addTicket } from "../api/tickets";
 import TicketForm from "./TicketForm.jsx";
 import { useNavigate } from "react-router-dom";
-import { fetchCompanyContacts } from "../api/companies.jsx";
 import useCompanies from "../../hooks/useCompanies.jsx";
 import useStatuses from "../../hooks/useStatuses.jsx";
 import useEngineers from "../../hooks/useEngineers.jsx";
+import useAddContact from "../../hooks/useContacts.jsx";
 
 export default function AddTicket() {
   const navigate = useNavigate();
@@ -23,11 +23,7 @@ export default function AddTicket() {
   const { data: statuses } = useStatuses()
   const { data: engineers } = useEngineers()
 
-  const { data: contacts } = useQuery({
-    queryKey: ["contacts", ticket?.company_id],
-    enabled: ticket?.company_id !== "",
-    queryFn: async () => await fetchCompanyContacts(ticket?.company_id),
-  });
+  const { data: contacts } = useAddContact(ticket)
 
   const addTicketMutation = useMutation({
     mutationFn: addTicket,
