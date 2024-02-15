@@ -1,9 +1,10 @@
 import "./SingleTicket.css";
 import { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 import { useParams, Link } from "react-router-dom";
 import { fetchTicket } from "../api/tickets.jsx";
 import TicketSummary from "./TicketSummary.jsx";
+import useTicket from "../../hooks/useTicket.jsx";
 
 function SingleTicket() {
   const [ticket, setTicket] = useState({});
@@ -14,22 +15,8 @@ function SingleTicket() {
   //////////////// TODO: EXTRACT PARAMS ID: default type: string //////////////////////
   let { ticketId } = useParams();
 
-  const { isFetching, isError, data: ticketData, error } = useQuery({
-    queryKey: ["tickets", ticketId],
-    queryFn: () => fetchTicket(ticketId),
-  })
-  console.log(isFetching, isError, ticketData, error)
-  ////////////TODO: IMPLEMENT useQuery TO FETCH DATA ///////////////
-  // const queryClient = useQueryClient();
-  // const fetchSingleTicket = async () => {
-  //   const response = await fetch('/tickets/' + ticketId)
-  //   if (!response.ok) {
-  //     throw new Error('Network response was not ok')
-  //   }
-  //   return response.json()
-  // }
+  const { isFetching, isError, data: ticketData, error } = useTicket(ticketId)
 
-  ///////////// ERROR HANDLER ///////////////
   if (isFetching) {
     return <span>Loading...</span>;
   }

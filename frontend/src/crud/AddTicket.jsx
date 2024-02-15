@@ -4,15 +4,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addTicket } from "../api/tickets";
 import TicketForm from "./TicketForm.jsx";
 import { useNavigate } from "react-router-dom";
-import { fetchCompanies, fetchCompanyContacts } from "../api/companies.jsx";
-import { fetchStatuses } from "../api/statuses.jsx";
-import { fetchEngineers } from "../api/engineers.jsx";
-import RenderDropDown from "../../reusable-components/RenderDropDown.jsx";
+import { fetchCompanyContacts } from "../api/companies.jsx";
+import useCompanies from "../../hooks/useCompanies.jsx";
+import useStatuses from "../../hooks/useStatuses.jsx";
+import useEngineers from "../../hooks/useEngineers.jsx";
 
 export default function AddTicket() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
   const [ticket, setTicket] = useState({
     company_id: "",
     owner_id: "",
@@ -20,21 +19,9 @@ export default function AddTicket() {
     title: "",
     status: "Open",
   });
-
-  const { isFetching, data: companies } = useQuery({
-    queryKey: ["companies"],
-    queryFn: async () => await fetchCompanies(),
-  });
-
-  const { data: statuses } = useQuery({
-    queryKey: ["statuses"],
-    queryFn: async () => await fetchStatuses(),
-  });
-
-  const { data: engineers } = useQuery({
-    queryKey: ["engineers"],
-    queryFn: async () => await fetchEngineers(),
-  });
+  const { isFetching, data: companies } = useCompanies()
+  const { data: statuses } = useStatuses()
+  const { data: engineers } = useEngineers()
 
   const { data: contacts } = useQuery({
     queryKey: ["contacts", ticket?.company_id],

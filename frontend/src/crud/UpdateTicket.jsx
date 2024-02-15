@@ -8,7 +8,9 @@ import { fetchTicket, updateTicket } from "../api/tickets.jsx";
 import { fetchCompanies, fetchCompanyContacts } from "../api/companies.jsx";
 import { fetchStatuses } from "../api/statuses.jsx";
 import { fetchEngineers } from "../api/engineers.jsx";
-import RenderInputTypeText from "../../reusable-components/RenderInputTypeText.jsx";
+import useCompanies from "../../hooks/useCompanies.jsx";
+import useStatuses from "../../hooks/useStatuses.jsx";
+import useEngineers from "../../hooks/useEngineers.jsx";
 
 
 function UpdateTicket() {
@@ -25,17 +27,10 @@ function UpdateTicket() {
       setTicket(initialTicket)
     },
   });
-  console.log("ticketData", ticketData);
-  console.log("ticket", ticket)
-  const { data: companies } = useQuery({
-    queryKey: ["companies"],
-    queryFn: async () => await fetchCompanies(),
-  });
 
-  const { data: statuses } = useQuery({
-    queryKey: ["statuses"],
-    queryFn: async () => await fetchStatuses(),
-  });
+  const { data: companies } = useCompanies()
+  const { data: statuses } = useStatuses()
+  const { data: engineers } = useEngineers()
 
   const { data: contacts } = useQuery({
     queryKey: ["contacts", ticket?.company_id],
@@ -43,11 +38,6 @@ function UpdateTicket() {
     queryFn: async () => await fetchCompanyContacts(ticket?.company_id),
   });
 
-  const { data: engineers } = useQuery({
-    queryKey: ["engineers"],
-    queryFn: async () => await fetchEngineers(),
-  });
-  // console.log(engineers);
   const updateTicketMutation = useMutation({
     mutationFn: updateTicket,
     onSuccess: (updatedTicket) => {
