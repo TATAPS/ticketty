@@ -9,8 +9,29 @@ import EmailIcon from "@mui/icons-material/Email";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Login from "../auth/Login";
 import getCookie from "../../helpers/getCookie";
+import { useState, useEffect } from "react";
 
 function Navbar({ onShow, isOpen }) {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [active, setActive] = useState(false)
+
+  useEffect(() => {
+    const darkModeElement = document.querySelector('.dark-mode');
+
+    const handleDarkModeToggle = () => {
+      document.body.classList.toggle('dark-mode-variables');
+      darkModeElement.querySelector('span:nth-child(1)').classList.toggle('active');
+      darkModeElement.querySelector('span:nth-child(2)').classList.toggle('active');
+      setIsDarkMode(prevState => !prevState);
+    };
+
+    darkModeElement.addEventListener('click', handleDarkModeToggle);
+
+    return () => {
+      darkModeElement.removeEventListener('click', handleDarkModeToggle);
+    };
+  }, []);
+
   const cookies = getCookie("username=");
   console.log("cookies", cookies);
   return (
@@ -23,13 +44,17 @@ function Navbar({ onShow, isOpen }) {
         </button>
 
         <div className="profile">
-          <div className="dark-mode">
-            <span className="material-icons-sharp active">
-              <DarkModeIcon />
-            </span>
-            <span className="material-icons-sharp">
-              <LightModeOutlinedIcon />
-            </span>
+          <div className={active ? "dark-mode active" : "dark-mode"} >
+            {active ? (
+              <span onClick={() => setActive(false)} >
+                <DarkModeIcon className="dark" />
+              </span>
+            ) : (
+              <span className={`${isDarkMode ? 'active' : ''}`} onClick={() => setActive(true)}>
+                <LightModeOutlinedIcon className="light" />
+              </span>
+
+            )}
           </div>
           <div className="info">
             <p>
@@ -45,3 +70,5 @@ function Navbar({ onShow, isOpen }) {
 }
 
 export default Navbar;
+
+// className={`${isDarkMode ? 'active' : ''}`}
