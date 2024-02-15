@@ -17,6 +17,7 @@ export default function AddTicket() {
     title: "",
     status: "Open",
   });
+
   const { isFetching, data: companies } = useCompanies()
   const { data: statuses } = useStatuses()
   const { data: engineers } = useEngineers()

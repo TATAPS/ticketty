@@ -1,4 +1,3 @@
-import React from 'react'
 import { addTicket } from '../src/api/tickets';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
