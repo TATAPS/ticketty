@@ -47,11 +47,11 @@ function Navbar({ onShow, isOpen }) {
           <div className={active ? "dark-mode active" : "dark-mode"} >
             {active ? (
               <span onClick={() => setActive(false)} >
-                <DarkModeIcon className="dark" />
+                <LightModeOutlinedIcon className="dark" />
               </span>
             ) : (
               <span className={`${isDarkMode ? 'active' : ''}`} onClick={() => setActive(true)}>
-                <LightModeOutlinedIcon className="light" />
+                <DarkModeIcon className="light" />
               </span>
 
             )}

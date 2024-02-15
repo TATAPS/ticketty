@@ -1,3 +1,7 @@
 .ticket-id {
   text-decoration: none;
 }
+
+.datagrid {
+  color: var(--color-white);
+}
