@@ -1,10 +1,7 @@
 import "./UpdateTicket.css"
 import { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import TicketForm from "./TicketForm.jsx";
-import { useNavigate } from "react-router-dom";
-import { fetchTicket, updateTicket } from "../api/tickets.jsx";
 import useCompanies from "../../hooks/useCompanies.jsx";
 import useStatuses from "../../hooks/useStatuses.jsx";
 import useEngineers from "../../hooks/useEngineers.jsx";
