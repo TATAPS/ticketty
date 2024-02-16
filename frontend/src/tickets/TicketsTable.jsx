@@ -57,7 +57,7 @@ export default function TicketsTable({ tickets }) {
         control={<Switch color="primary" size="small" />}
         label="Exclude hidden columns"
       />
-      <div style={{ height: "100%", width: "96%" }}>
+      <div className="datagrid" style={{ height: "100%", width: "96%" }}>
         <DataGrid
           columns={columns}
           rows={tickets}

@@ -53,14 +53,14 @@
   margin: 1px;
 }
 
-.right-section .dark-mode span .dark {
+.right-section .dark-mode span .light {
   padding: 2px;
   background-color: var(--color-primary);
   color: white;
   border-radius: var(--border-radius-1);
   transform: translateX(50%);
 }
-.right-section .dark-mode span .light {
+.right-section .dark-mode span .dark {
   padding: 2px;
   background-color: var(--color-primary);
   color: white;
