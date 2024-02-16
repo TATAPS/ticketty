@@ -42,18 +42,20 @@ async function loginAction(req, res, next) {
       res.status(400).json("Username or Password incorrect");
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    next(error);
   }
 }
 
 // export const logout = (req, res) => {};
 
-async function logoutAction(req, res) {
+async function logoutAction(req, res, next) {
   try {
     const result = await logout();
     return result;
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    next(error);
   }
 }
 module.exports = {

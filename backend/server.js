@@ -14,7 +14,9 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 
-const MAXAGE = 1000 * 60 * 60 * 2;
+const MAXAGE = 1000 * 60 * 60 * 1;
+// 60
+// * 1; //1 hr
 
 app.use(
   session({
@@ -23,6 +25,7 @@ app.use(
     store: sessionStore,
     resave: false,
     saveUninitialized: false, // turn false for cookie consent
+    rolling: true,
     cookie: {
       maxAge: MAXAGE,
       secure: true,
