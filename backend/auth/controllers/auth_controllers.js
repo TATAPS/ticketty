@@ -27,7 +27,10 @@ async function loginAction(req, res, next) {
       req.session.regenerate(function (err) {
         if (err) next(err);
 
-        req.session.user = { username: foundUser[0]["given_name"] };
+        req.session.user = {
+          username: foundUser[0]["given_name"],
+          role: foundUser[0]["role"],
+        };
         // res.cookie("user");
         res.cookie("username", foundUser[0]["given_name"], {
           expires: new Date(Date.now() + 900000),

@@ -31,7 +31,21 @@ async function isAuthenticated(req, res, next) {
   }
 }
 
+async function isManager(req, res, next) {
+  try {
+    if (req.session.user.role) {
+      next();
+    } else {
+      res.status(404).send("Resource not found");
+    }
+  } catch (error) {
+    console.error("Error in isManager middleware", error);
+    res.status(500).send("Internal server error");
+  }
+}
+
 module.exports = {
   isAuthenticated,
+  isManager,
   verifyToken,
 };

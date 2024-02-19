@@ -17,7 +17,8 @@ router.get("/logout", (req, res) => {
       console.error("Error destroying session:", err);
       res.sendStatus(500);
     } else {
-      res.json("All good, session destroyed, check in mysql to confirm");
+      console.log("status 200");
+      res.status(200).json("All good, session destroyed, check in mysql to confirm");
     }
   });
 });

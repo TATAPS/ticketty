@@ -8,6 +8,7 @@ import Navbar from "./UI/Navbar.jsx";
 import AddTicket from "./crud/AddTicket.jsx";
 import UpdateTicket from "./crud/UpdateTicket.jsx";
 import SingleTicket from "./single/SingleTicket.jsx";
+import { logoutUser } from "./api/engineers.jsx";
 
 function App() {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -27,6 +28,7 @@ function App() {
             <Route path="tickets/:ticketId" element={<SingleTicket />} />
             <Route path="tickets/:ticketId/edit" element={<UpdateTicket />} />
             <Route path="auth/login" element={<Login />} />
+            <Route path="auth/logout" action={logoutUser} />
           </Routes>
         </div>
       </div>

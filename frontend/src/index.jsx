@@ -9,6 +9,7 @@ import SingleTicket from "./single/SingleTicket";
 import AddTicket from "./crud/AddTicket.jsx";
 import UpdateTicket from "./crud/UpdateTicket.jsx";
 import Login from "./auth/Login.jsx";
+import { logoutUser } from "./api/engineers.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/auth/login",
         element: <Login />,
+      },
+      {
+        path: "/auth/logout",
+        action: logoutUser,
       },
     ],
   },

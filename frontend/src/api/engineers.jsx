@@ -33,14 +33,16 @@ export async function loginUser(user) {
 
 export async function logoutUser() {
   try {
-    const response = await fetch("https://localhost:8080/auth/login", {
+    const response = await fetch("https://localhost:8080/auth/logout", {
       method: "GET",
       credentials: "include",
       mode: "cors",
     });
 
     if (response.ok) {
-      window.location.href = "https://localhost:3000/auth/login";
+      console.log("inside logoutUser route on frontend", response.json());
+      // window.location.href = "https://localhost:3000/auth/login";
+      return response.json();
     } else {
       return "Logout Failed";
     }
