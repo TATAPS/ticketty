@@ -42,17 +42,16 @@ export async function addTicket(newTicket) {
 export async function updateTicket(updateTicket) {
   try {
     console.log(updateTicket);
-    const response = await fetch(
-      `https://localhost:8080/api/tickets/${updateTicket.id}/edit`,
-      {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updateTicket),
-      }
-    );
+    const response = await fetch(`https://localhost:8080/api/tickets/update`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateTicket),
+    });
+
+    console.log("inside response", response.body);
     return response.json();
   } catch (error) {
     console.log(error);

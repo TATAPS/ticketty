@@ -60,12 +60,33 @@ function splitFullName(fullName) {
 
 async function updateTicketAction(req, res) {
   try {
-    const { title, company_id, status, engineer_id, contact } = req.body;
+    const {
+      // priority,
+      company_id,
+      owner_id,
+      engineer_id,
+      title,
+      status,
+      ticket_total_time,
+      id,
+    } = req.body;
     console.log(req.body);
-    const { firstName, lastName } = splitFullName(contact);
-    const id = req.params.ticket_id;
-    const values = [title, company_id, status, engineer_id, firstName, lastName, id];
+    const values = [
+      // priority,
+      company_id,
+      owner_id,
+      engineer_id,
+      title,
+      status,
+      ticket_total_time,
+      id,
+    ];
+    // console.log(values);
+    // const { firstName, lastName } = splitFullName(contact);
+    // const id = req.params.ticket_id;
+    // const values = [title, company_id, status, engineer_id, firstName, lastName, id];
     const updatedTicket = await updateTicket(values);
+    console.log("updatedTicket", updatedTicket);
     res.status(200).json(updatedTicket);
   } catch (error) {
     throw error;

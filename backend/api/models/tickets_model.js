@@ -79,17 +79,14 @@ async function addTicket(ticket) {
 }
 
 async function updateTicket(ticket) {
+  // const query = `UPDATE tickets t JOIN persons p ON t.owner_id = p.uuid SET t.title=?, t.company_id=?, t.status=?, t.engineer_id=?, p.given_name=?, p.family_name=? WHERE t.id=?`;
   const query = `
-  UPDATE
-    tickets t
-  JOIN
-    persons p
-  ON
-    t.owner_id = p.uuid
-  SET
-    t.title=?, t.company_id=?, t.status=?, t.engineer_id=?, p.given_name=?, p.family_name=?
-  WHERE
-    t.id=?`;
+  UPDATE tickets SET 
+  company_id=?,
+  owner_id=UUID_TO_BIN(?, 1), 
+  engineer_id=?, title=?, status=?, 
+  ticket_total_time=? 
+  WHERE id=?;`;
   const [tickets] = await executeQuery(query, ticket);
   return tickets;
 }

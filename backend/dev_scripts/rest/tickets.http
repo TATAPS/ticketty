@@ -28,7 +28,12 @@ PUT https://localhost:8080/api/tickets/update
 Content-Type: application/json
 
 {
-  "id": "2",
-  "title": "UPDATE IS WORKING",
-  "status": "Closed"
+  "id": 1,
+  "title": "Changing Testing this",
+  "status": "Closed",
+  "priority": "P2 Medium",
+  "company_id": "40-2522401",
+  "owner_id": "11eeb505-16a3-6017-8584-001fbc130d5b",
+  "engineer_id": 3,
+  "ticket_total_time": 15
 }
