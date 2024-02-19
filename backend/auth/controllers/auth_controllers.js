@@ -27,7 +27,10 @@ async function loginAction(req, res, next) {
       req.session.regenerate(function (err) {
         if (err) next(err);
 
-        req.session.user = { username: foundUser[0]["given_name"] };
+        req.session.user = {
+          username: foundUser[0]["given_name"],
+          role: foundUser[0]["role"],
+        };
         // res.cookie("user");
         res.cookie("username", foundUser[0]["given_name"], {
           expires: new Date(Date.now() + 900000),
@@ -42,18 +45,20 @@ async function loginAction(req, res, next) {
       res.status(400).json("Username or Password incorrect");
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    next(error);
   }
 }
 
 // export const logout = (req, res) => {};
 
-async function logoutAction(req, res) {
+async function logoutAction(req, res, next) {
   try {
     const result = await logout();
     return result;
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    next(error);
   }
 }
 module.exports = {

@@ -1,18 +1,18 @@
 import "./Sidebar.css";
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SettingsIcon from '@mui/icons-material/Settings';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
-import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
-import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import SettingsIcon from "@mui/icons-material/Settings";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
+import AutoGraphOutlinedIcon from "@mui/icons-material/AutoGraphOutlined";
+import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { Link } from "react-router-dom";
 
 function Sidebar({ onShow, isOpen }) {
   return (
-    <aside style={{ display: isOpen ? 'block' : 'none' }}>
+    <aside style={{ display: isOpen ? "block" : "none" }}>
       <div className="sidebar-main">
         <div className="sidebar-toggle">
           {/* <div class="logo">
@@ -67,7 +67,7 @@ function Sidebar({ onShow, isOpen }) {
           </span>
           <h4>Login</h4>
         </Link>
-        <a href="#">
+        <a href="/auth/logout">
           <span className="material-icons-sharp">
             <LogoutOutlinedIcon />
           </span>
@@ -75,7 +75,7 @@ function Sidebar({ onShow, isOpen }) {
         </a>
       </div>
     </aside>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;

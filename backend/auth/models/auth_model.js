@@ -9,7 +9,7 @@ async function logout(req, res, err) {
         console.error("error destroying session:", err);
         res.sendStatus(500);
       } else {
-        res.redirect("/login");
+        res.status(200).send("logout successful");
       }
     });
   } catch (error) {

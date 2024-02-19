@@ -7,8 +7,8 @@ const MySQLStore = require("express-mysql-session")(session);
 const sessionStore = new MySQLStore(
   {
     clearExpired: true,
-    checkExpirationInterval: 900000, //every 15 mins
-    expiration: 864000000, // 1 day
+    checkExpirationInterval: 60000, //900000, //every 15 mins
+    expiration: 43200000, //86400000, // 1 day
   },
   pool
 );
