@@ -5,17 +5,17 @@ import { useParams, Link } from "react-router-dom";
 import { fetchTicket } from "../api/tickets.jsx";
 import TicketSummary from "./TicketSummary.jsx";
 import useTicket from "../../hooks/useTicket.jsx";
+import SingleTicketUpdate from "./singleTicketUpdate.jsx";
 
 function SingleTicket() {
-  const [ticket, setTicket] = useState({});
+  // const [ticket, setTicket] = useState({});
   const [isEditing, setIsEditing] = useState(false);
-
 
   // const [error, setError] = useState(false)
   //////////////// TODO: EXTRACT PARAMS ID: default type: string //////////////////////
   let { ticketId } = useParams();
-
-  const { isFetching, isError, data: ticketData, error } = useTicket(ticketId)
+  console.log("ticketId", ticketId);
+  const { isFetching, isError, data: ticketData, error } = useTicket(ticketId);
 
   if (isFetching) {
     return <span>Loading...</span>;
@@ -32,8 +32,13 @@ function SingleTicket() {
     <div className="list-container">
       <h1>#{ticketId}</h1>
       <div className="list-title">
+        {ticketData ? <TicketSummary ticketData={ticketData} /> : <p>No Ticket Found</p>}
         {ticketData ? (
-          <TicketSummary ticketData={ticketData} />
+          <SingleTicketUpdate
+            ticketData={ticketData}
+            // setTicket={setTicket}
+            // ticket={ticket}
+          />
         ) : (
           <p>No Ticket Found</p>
         )}
@@ -44,7 +49,9 @@ function SingleTicket() {
           </Link>
           <button
           // onClick={() => handleDelete(/*ticketId*/)}
-          >Archives</button>
+          >
+            Archives
+          </button>
         </div>
       </div>
     </div>

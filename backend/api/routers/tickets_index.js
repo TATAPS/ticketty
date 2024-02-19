@@ -11,6 +11,7 @@ const router = Router();
 router.get("/", getAllTicketsAction);
 router.get("/:ticket_id", getSingleTicketAction);
 router.post("/", addTicketAction);
-router.put("/:ticket_id/edit", updateTicketAction);
+// router.put("/:ticket_id/edit", updateTicketAction);
+router.put("/update", updateTicketAction);
 
 module.exports = { router };
