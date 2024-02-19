@@ -30,3 +30,21 @@ export async function loginUser(user) {
     console.error(error);
   }
 }
+
+export async function logoutUser() {
+  try {
+    const response = await fetch("https://localhost:8080/auth/login", {
+      method: "GET",
+      credentials: "include",
+      mode: "cors",
+    });
+
+    if (response.ok) {
+      window.location.href = "https://localhost:3000/auth/login";
+    } else {
+      return "Logout Failed";
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
