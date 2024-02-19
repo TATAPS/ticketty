@@ -69,13 +69,27 @@ async function getSingleTicket(ticketId) {
 }
 
 async function addTicket(ticket) {
-  const query = `INSERT INTO tickets (company_id, engineer_id, title, status, owner_id) VALUES (?, ?, ?, ?, UUID_TO_BIN(?, 1));`;
+  const query = `
+  INSERT INTO
+    tickets (company_id, engineer_id, title, status, owner_id)
+  VALUES
+    (?, ?, ?, ?, UUID_TO_BIN(?, 1));`;
   const [tickets] = await executeQuery(query, ticket);
   return tickets;
 }
 
 async function updateTicket(ticket) {
-  const query = `UPDATE tickets t JOIN persons p ON t.owner_id = p.uuid SET t.title=?, t.company_id=?, t.status=?, t.engineer_id=?, p.given_name=?, p.family_name=? WHERE t.id=?`;
+  const query = `
+  UPDATE
+    tickets t
+  JOIN
+    persons p
+  ON
+    t.owner_id = p.uuid
+  SET
+    t.title=?, t.company_id=?, t.status=?, t.engineer_id=?, p.given_name=?, p.family_name=?
+  WHERE
+    t.id=?`;
   const [tickets] = await executeQuery(query, ticket);
   return tickets;
 }
