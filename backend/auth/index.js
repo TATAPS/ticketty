@@ -18,6 +18,7 @@ router.get("/logout", (req, res) => {
       res.sendStatus(500);
     } else {
       console.log("status 200");
+      res.clearCookie("session_cookie_name")
       res.status(200).json("All good, session destroyed, check in mysql to confirm");
     }
   });

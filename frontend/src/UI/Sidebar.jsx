@@ -8,9 +8,16 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import AutoGraphOutlinedIcon from "@mui/icons-material/AutoGraphOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutUser } from "../api/engineers";
 
 function Sidebar({ onShow, isOpen }) {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logoutUser()
+    navigate('/auth/login')
+  }
+
   return (
     <aside style={{ display: isOpen ? "block" : "none" }}>
       <div className="sidebar-main">
@@ -67,12 +74,12 @@ function Sidebar({ onShow, isOpen }) {
           </span>
           <h4>Login</h4>
         </Link>
-        <a href="/auth/logout">
+        <Link to="/auth/logout" className="link" onClick={handleLogout}>
           <span className="material-icons-sharp">
             <LogoutOutlinedIcon />
           </span>
           <h4>Logout</h4>
-        </a>
+        </Link>
       </div>
     </aside>
   );

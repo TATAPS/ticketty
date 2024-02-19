@@ -23,12 +23,12 @@ function App() {
         <div className="dashboard-container">
           <Navbar isOpen={isMenuOpen} onShow={handleMenuClick} />
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="*" element={<Dashboard />} />
             <Route path="addticket" element={<AddTicket />} />
             <Route path="tickets/:ticketId" element={<SingleTicket />} />
             <Route path="tickets/:ticketId/edit" element={<UpdateTicket />} />
             <Route path="auth/login" element={<Login />} />
-            <Route path="auth/logout" action={logoutUser} />
+            {/* <Route path="auth/logout" /> */}
           </Routes>
         </div>
       </div>
