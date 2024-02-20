@@ -37,7 +37,9 @@ async function getAllTickets() {
 async function getSingleTicket(ticketId) {
   const query = `
   SELECT
+  t.created_at as ticket_creation_time,
     t.id,
+    t.priority,
     t.company_id,
     BIN_TO_UUID(t.owner_id, 1) AS owner_id,
     t.engineer_id,
@@ -71,9 +73,9 @@ async function getSingleTicket(ticketId) {
 async function addTicket(ticket) {
   const query = `
   INSERT INTO
-    tickets (company_id, engineer_id, title, status, owner_id)
+    tickets (priority, company_id, engineer_id, title, status, owner_id)
   VALUES
-    (?, ?, ?, ?, UUID_TO_BIN(?, 1));`;
+    (?, ?, ?, ?, ?, UUID_TO_BIN(?, 1));`;
   const [tickets] = await executeQuery(query, ticket);
   return tickets;
 }
@@ -81,7 +83,8 @@ async function addTicket(ticket) {
 async function updateTicket(ticket) {
   // const query = `UPDATE tickets t JOIN persons p ON t.owner_id = p.uuid SET t.title=?, t.company_id=?, t.status=?, t.engineer_id=?, p.given_name=?, p.family_name=? WHERE t.id=?`;
   const query = `
-  UPDATE tickets SET 
+  UPDATE tickets SET
+  priority=?, 
   company_id=?,
   owner_id=UUID_TO_BIN(?, 1), 
   engineer_id=?, title=?, status=?, 

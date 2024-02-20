@@ -9,6 +9,7 @@ export async function fetchCompanies() {
     throw error;
   }
 }
+
 export async function fetchCompany(id) {
   try {
     const response = await fetch(`https://localhost:8080/api/companies/${id}`, {

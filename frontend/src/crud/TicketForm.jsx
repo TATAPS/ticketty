@@ -4,6 +4,7 @@ import RenderDropDown from "../../reusable-components/RenderDropDown";
 import RenderInputTypeText from "../../reusable-components/RenderInputTypeText";
 
 function TicketForm({
+  initValuesPriorities,
   initValuesCompanies,
   initValuesContacts,
   initValuesStatuses,
@@ -17,6 +18,7 @@ function TicketForm({
   handleEngineerChange,
   handleInputChange,
 }) {
+  const { priorities } = initValuesPriorities;
   const { companies } = initValuesCompanies;
   const { contacts } = initValuesContacts;
   const { statuses } = initValuesStatuses;
@@ -31,34 +33,31 @@ function TicketForm({
       engineer_id: "",
       status: "",
       owner_id: "",
+      priority: "",
     });
     // navigate("/");
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {
-        <RenderDropDown
-          label={"Company:"}
-          displayName={"Company"}
-          onChangeHandler={handleCompanyChange}
-          selectName={"company"}
-          dataToMap={companies}
-          mapKey={"ein_tin"}
-          value={"name"}
-        />
-      }
-      {
-        <RenderDropDown
-          label={"Status:"}
-          displayName={"Status"}
-          onChangeHandler={handleStatusChange}
-          selectName={"status"}
-          dataToMap={statuses}
-          mapKey={"id"}
-          value={"status"}
-        />
-      }
+      <RenderDropDown
+        label={"Company:"}
+        displayName={"Company"}
+        onChangeHandler={handleCompanyChange}
+        selectName={"company"}
+        dataToMap={companies}
+        mapKey={"ein_tin"}
+        value={"name"}
+      />
+      <RenderDropDown
+        label={"Priority:"}
+        displayName={"Priority"}
+        onChangeHandler={handleInputChange}
+        selectName={"priority"}
+        dataToMap={priorities}
+        mapKey={"id"}
+        value="priority"
+      />
       <RenderDropDown
         label="Company Contact:"
         displayName="Contact"
@@ -68,14 +67,21 @@ function TicketForm({
         mapKey="person_uuid"
         value="contact"
       />
-
+      <RenderDropDown
+        label={"Status:"}
+        displayName={"Status"}
+        onChangeHandler={handleStatusChange}
+        selectName={"status"}
+        dataToMap={statuses}
+        mapKey={"id"}
+        value={"status"}
+      />
       <RenderInputTypeText
         label="Title"
         displayName="title"
         onChangeHandler={handleInputChange}
         ticket={ticket}
       />
-
       <RenderDropDown
         label="Engineer:"
         displayName="Resource"

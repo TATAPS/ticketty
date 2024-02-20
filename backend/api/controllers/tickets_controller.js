@@ -27,6 +27,7 @@ async function getSingleTicketAction(req, res) {
 async function addTicketAction(req, res) {
   try {
     const values = [
+      req.body.priority,
       req.body.company_id,
       req.body.engineer_id,
       req.body.title,
@@ -61,7 +62,7 @@ function splitFullName(fullName) {
 async function updateTicketAction(req, res) {
   try {
     const {
-      // priority,
+      priority,
       company_id,
       owner_id,
       engineer_id,
@@ -72,7 +73,7 @@ async function updateTicketAction(req, res) {
     } = req.body;
     console.log(req.body);
     const values = [
-      // priority,
+      priority,
       company_id,
       owner_id,
       engineer_id,

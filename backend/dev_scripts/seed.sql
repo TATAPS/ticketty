@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS companies;
 DROP TABLE IF EXISTS company_contacts;
 DROP TABLE IF EXISTS engineers;
 DROP TABLE IF EXISTS priorities;
+DROP TABLE IF EXISTS ticket_notes;
 DROP TABLE IF EXISTS tickets;
 DROP TABLE IF EXISTS persons;
 DROP TABLE IF EXISTS statuses;
@@ -82,7 +83,7 @@ CREATE TABLE statuses (
 
 CREATE TABLE tickets (
     id INT NOT NULL AUTO_INCREMENT,
-    priority ENUM("P1 High", "P2 Medium", "P3 Low", "P4 Other"),
+    priority ENUM("P1 High", "P2 Medium", "P3 Low", "P4 Other") DEFAULT "P3 Low",
     company_id VARCHAR(15) NOT NULL,
     owner_id BINARY(16),
     engineer_id INT NOT NULL DEFAULT 1,
@@ -156,7 +157,7 @@ INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("38-
 INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), "Our CCTV Cameras are down! Help!", "Assigned", "P1 High");
 INSERT INTO tickets (company_id, owner_id, engineer_id, title, status, priority) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), 2 , "My internet is down", "Working", "P1 High");
 INSERT INTO tickets (company_id, owner_id, engineer_id, title, status, priority) VALUES ("30-2846270", UUID_TO_BIN('187b0262-b554-11ee-ad8f-001fbc130d5b', 1), 3, "The Starbucks machine isn't dispensing coffee", "Closed", "P3 Low");
-INSERT INTO tickets (company_id, owner_id, title, status) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "Our computers are really slow", "Pending");
+INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "Our computers are really slow", "Pending", "P4 Other");
 INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "Is this a virus?", "Pending", "P1 High");
 INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("38-3881633", UUID_TO_BIN('6fa3ab02-b554-11ee-ad8f-001fbc130d5b', 1), "What should we do with this electrical outlet?", "Working", "P3 Low");
 INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("40-2522401", UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), "VPN access needed", "Assigned", "P3 Low");

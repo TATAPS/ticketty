@@ -7,10 +7,12 @@ import useStatuses from "../../hooks/useStatuses.jsx";
 import useEngineers from "../../hooks/useEngineers.jsx";
 import useAddContact from "../../hooks/useContacts.jsx";
 import useAddTicket from "../../hooks/useAddTicket.jsx";
+import usePriorities from "../../hooks/usePriorities.jsx";
 
 export default function AddTicket() {
   const navigate = useNavigate();
   const [ticket, setTicket] = useState({
+    priority: "P3 Low",
     company_id: "",
     owner_id: "",
     engineer_id: "",
@@ -18,11 +20,12 @@ export default function AddTicket() {
     status: "Open",
   });
 
-  const { isFetching, data: companies } = useCompanies()
-  const { data: statuses } = useStatuses()
-  const { data: engineers } = useEngineers()
-  const { data: contacts } = useAddContact(ticket)
-  const addTicketMutation = useAddTicket()
+  const { isFetching, data: companies } = useCompanies();
+  const { data: priorities } = usePriorities();
+  const { data: statuses } = useStatuses();
+  const { data: engineers } = useEngineers();
+  const { data: contacts } = useAddContact(ticket);
+  const addTicketMutation = useAddTicket();
 
   const handleCompanyChange = (e) => {
     const filteredCompany = companies.filter(
@@ -81,6 +84,7 @@ export default function AddTicket() {
           <h1>New Ticket</h1>
           <TicketForm
             initValuesCompanies={{ companies }}
+            initValuesPriorities={{ priorities }}
             initValuesContacts={{ contacts }}
             initValuesStatuses={{ statuses }}
             initValuesEngineers={{ engineers }}
