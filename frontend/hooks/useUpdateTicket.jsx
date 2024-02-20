@@ -10,7 +10,8 @@ function useUpdateTicket(ticketId) {
     mutationFn: updateTicket,
     onSuccess: (updatedTicket) => {
       queryClient.setQueryData({ queryKey: ["tickets", ticketId], ...updatedTicket });
-      queryClient.invalidateQueries({ queryKey: ["ticketTitle"] });
+      queryClient.invalidateQueries({ queryKey: ["tickets"] });
+      // queryClient.invalidateQueries({ queryKey: ["ticketTitle"] });
       // navigate(`/tickets/${ticketId}`); // Redirect to ticket details page after update
     },
   });
