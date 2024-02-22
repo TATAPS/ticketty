@@ -26,6 +26,7 @@ function SingleTicket() {
   }
 
   if (ticketData) {
+    console.log(ticketData);
     ticketData.map((val, index) =>
       notesData.push({
         note_id: val.note_id,
@@ -40,7 +41,7 @@ function SingleTicket() {
     <div className="list-container">
       <h1>#{ticketId}</h1>
       <div className="list-title">
-        {ticketData ? <TicketSummary ticketData={ticketData} /> : <p>No Ticket Found</p>}
+        {/* {ticketData ? <TicketSummary ticketData={ticketData} /> : <p>No Ticket Found</p>} */}
         {ticketData ? (
           <SingleTicketUpdate
             ticketData={ticketData}
