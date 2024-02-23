@@ -10,11 +10,11 @@ import SingleTicketUpdate from "./singleTicketUpdate.jsx";
 function SingleTicket() {
   // const [ticket, setTicket] = useState({});
   const [isEditing, setIsEditing] = useState(false);
-
+  const notesData = [];
   // const [error, setError] = useState(false)
   //////////////// TODO: EXTRACT PARAMS ID: default type: string //////////////////////
   let { ticketId } = useParams();
-  console.log("ticketId", ticketId);
+  // console.log("ticketId", ticketId);
   const { isFetching, isError, data: ticketData, error } = useTicket(ticketId);
 
   if (isFetching) {
@@ -27,15 +27,25 @@ function SingleTicket() {
 
   if (ticketData) {
     console.log(ticketData);
+    ticketData.map((val, index) =>
+      notesData.push({
+        note_id: val.note_id,
+        note: val.note,
+        ticket_total_time: val.ticket_total_time,
+        ticket_id: val.ticket_id,
+      })
+    );
+    console.log("notes", notesData);
   }
   return (
     <div className="list-container">
       <h1>#{ticketId}</h1>
       <div className="list-title">
-        {ticketData ? <TicketSummary ticketData={ticketData} /> : <p>No Ticket Found</p>}
+        {/* {ticketData ? <TicketSummary ticketData={ticketData} /> : <p>No Ticket Found</p>} */}
         {ticketData ? (
           <SingleTicketUpdate
             ticketData={ticketData}
+            notesData={notesData}
             // setTicket={setTicket}
             // ticket={ticket}
           />

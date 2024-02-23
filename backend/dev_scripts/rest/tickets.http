@@ -1,4 +1,13 @@
 ###
+POST https://localhost:8080/auth/login
+Content-Type: application/json
+
+{   
+    "username": "dispatch",
+    "password": "CracK3dPas$WordPl3ase"
+}
+
+###
 GET https://localhost:8080/api/tickets
 Content-Type: application/json
 
