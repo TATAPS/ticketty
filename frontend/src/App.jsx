@@ -9,6 +9,8 @@ import AddTicket from "./crud/AddTicket.jsx";
 import UpdateTicket from "./crud/UpdateTicket.jsx";
 import SingleTicket from "./single/SingleTicket.jsx";
 import { logoutUser } from "./api/engineers.jsx";
+import ProtectedRoutes from "./auth/ProtectedRoutes.jsx";
+import getCookie from "../helpers/getCookie.js";
 
 function App() {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -16,6 +18,8 @@ function App() {
   const handleMenuClick = () => {
     setMenuOpen((prevState) => !prevState);
   };
+  const user = getCookie("username=");
+  console.log("user", user)
   return (
     <div className="App">
       <div className="dashboard">
@@ -23,12 +27,14 @@ function App() {
         <div className="dashboard-container">
           <Navbar isOpen={isMenuOpen} onShow={handleMenuClick} />
           <Routes>
-            <Route path="*" element={<Dashboard />} />
-            <Route path="addticket" element={<AddTicket />} />
-            <Route path="tickets/:ticketId" element={<SingleTicket />} />
-            <Route path="tickets/:ticketId/edit" element={<UpdateTicket />} />
             <Route path="auth/login" element={<Login />} />
-            {/* <Route path="auth/logout" /> */}
+            <Route element={<ProtectedRoutes user={user} />}>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="addticket" element={<AddTicket />} />
+              <Route path="tickets/:ticketId" element={<SingleTicket />} />
+              <Route path="tickets/:ticketId/edit" element={<UpdateTicket />} />
+            </Route>
+            {/* <Route path="*" element={<p>There's nothing here: 404!</p>} /> */}
           </Routes>
         </div>
       </div>
