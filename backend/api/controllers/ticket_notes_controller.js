@@ -1,4 +1,4 @@
-const { getAllTicketNotes } = require("../models/ticket_notes_model.js");
+const { getAllTicketNotes, addTicketNotes } = require("../models/ticket_notes_model.js");
 
 async function getAllTicketNotesAction(req, res) {
   try {
@@ -9,6 +9,17 @@ async function getAllTicketNotesAction(req, res) {
   }
 }
 
+async function addTicketNotesAction(req, res) {
+  try {
+    const { ticketId, note } = req.body;
+    const result = await addTicketNotes(ticketId, note);
+    res.json(result);
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   getAllTicketNotesAction,
+  addTicketNotesAction,
 };
