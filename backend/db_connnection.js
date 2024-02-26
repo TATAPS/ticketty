@@ -26,8 +26,29 @@ async function executeQuery(sql, values) {
   }
 }
 
+async function performTransaction(sql, values) {
+  let connection;
+  try {
+    connection = await pool.getConnection();
+    await connection.beginTransaction();
+    const [rows, fields] = await connection.execute(sql, values);
+    await connection.commit();
+    console.log("transaction committed successfully,");
+    return [rows];
+  } catch (err) {
+    await connection.rollback();
+    // console.error(err),
+    throw err;
+  } finally {
+    if (connection) {
+      connection.release();
+    }
+  }
+}
+
 module.exports = {
   executeQuery,
+  performTransaction,
   pool,
 };
 // async function connectDatabase() {

@@ -185,11 +185,12 @@ function SingleTicketUpdate({ ticketData, notesData }) {
             ticket={ticket}
           />
         }
-        {notes[0].note ? (
+        {
+          // notes[0].note ? (
           notes.map((val) => {
             return (
               <div
-                className="ticket-note"
+                className={notes[0].note ? "ticket-note" : "hidden"}
                 key={val.note_id}
                 style={{ backgroundColor: "white" }}
               >
@@ -198,9 +199,10 @@ function SingleTicketUpdate({ ticketData, notesData }) {
               </div>
             );
           })
-        ) : (
-          <p hidden></p>
-        )}
+          // ) : (
+          //   <p hidden></p>
+          // )
+        }
         <input type="text" placeholder="Add a New Note" className="newnote-input" />
       </div>
       <button onClick={() => handleAddTicket(ticket)}>Save</button>

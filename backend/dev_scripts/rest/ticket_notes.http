@@ -1,0 +1,29 @@
+###
+POST https://localhost:8080/auth/login
+Content-Type: application/json
+
+{   
+    "username": "dispatch",
+    "password": "CracK3dPas$WordPl3ase"
+}
+
+###
+POST https://localhost:8080/api/ticketNotes/Create
+Content-Type: application/json
+
+{
+    "ticketId": 1,
+    "note": "Hi Trang, this is a new ticket_note"
+}
+
+###
+###
+POST https://localhost:8080/api/ticketNotes/Create
+Content-Type: application/json
+
+{
+    "ticketId": 1,
+    "note": "This is also a madeup note"
+}
+
+###
