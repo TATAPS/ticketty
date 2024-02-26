@@ -1,9 +1,12 @@
 import "./TicketsTable.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { GridToolbar } from "@mui/x-data-grid";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+import StyledDataGrid from "./StyledDataGrid";
+import { Box } from "@mui/material";
+import dataColumns from "./dataColumns";
 
 export default function TicketsTable({ tickets }) {
   const [filterModel, setFilterModel] = useState({
@@ -12,23 +15,6 @@ export default function TicketsTable({ tickets }) {
   });
   const [columnVisibilityModel, setColumnVisibilityModel] = useState({});
   const navigate = useNavigate();
-
-  const columns = [
-    {
-      field: "id",
-      headerName: "Ticket ID",
-      width: 70,
-    },
-    { field: "status", headerName: "Status", width: 100 },
-    { field: "priority", headerName: "Priority", width: 100 },
-    { field: "age_days", headerName: "Age", type: "number", width: 50 },
-    { field: "company", headerName: "Company", width: 150 },
-    { field: "contact", headerName: "Main Contact", width: 150 },
-    { field: "phone", headerName: "Phone", width: 125 },
-    { field: "email", headerName: "Email", width: 200 },
-    { field: "title", headerName: "Summary Description", sortable: false, width: 400 },
-    { field: "engineer", headerName: "Assigned Engineer", width: 150 },
-  ];
 
   const handleRowClick = (params, event) => {
     if (event.type === "click") {
@@ -57,9 +43,17 @@ export default function TicketsTable({ tickets }) {
         control={<Switch color="primary" size="small" />}
         label="Exclude hidden columns"
       />
-      <div className="datagrid" style={{ height: "100%", width: "96%" }}>
-        <DataGrid
-          columns={columns}
+      <Box
+        sx={{
+          height: '100%',
+          width: '100%',
+          '& .ticket--header': {
+            color: 'var(--color-dark)',
+          },
+        }}
+      >
+        <StyledDataGrid
+          columns={dataColumns}
           rows={tickets}
           disableColumnFilter
           disableDensitySelector
@@ -71,8 +65,27 @@ export default function TicketsTable({ tickets }) {
           columnVisibilityModel={columnVisibilityModel}
           onColumnVisibilityModelChange={(newModel) => setColumnVisibilityModel(newModel)}
           onRowClick={handleRowClick}
+          sx={{
+            '& .priority.high': {
+              backgroundColor: 'var(--color-danger)',
+              color: 'var(--color-dark)',
+            },
+            '& .priority.medium': {
+              backgroundColor: 'var(--color-primary)',
+              color: 'var(--color-dark)',
+            },
+            '& .priority.low': {
+              backgroundColor: 'var(--color-success)',
+              color: 'var(--color-dark)',
+            },
+            '& .priority.other': {
+              backgroundColor: 'var(--color-warning)',
+              color: 'var(--color-dark)',
+            },
+          }}
+          getRowClassName={(params) => `status--${params.row.status}`}
         />
-      </div>
+      </Box>
     </>
   );
 }

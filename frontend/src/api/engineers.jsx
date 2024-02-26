@@ -41,7 +41,7 @@ export async function logoutUser() {
     if (response.ok) {
       console.log("inside logoutUser route on frontend");
       document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      //  window.location.href = "https://localhost:3000/auth/login";
+      window.location.href = "https://localhost:3000/auth/login";
       return await response.json();
       // } else {
       //   return "Logout Failed";
