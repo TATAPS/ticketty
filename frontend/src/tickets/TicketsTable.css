@@ -3,5 +3,6 @@
 }
 
 .datagrid {
-  color: var(--color-light);
+  height: 100%;
+  width: auto;
 }
