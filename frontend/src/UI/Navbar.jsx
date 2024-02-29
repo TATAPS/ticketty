@@ -53,7 +53,6 @@ function Navbar({ onShow, isOpen }) {
               <span className={`${isDarkMode ? 'active' : ''}`} onClick={() => setActive(true)}>
                 <DarkModeIcon className="light" />
               </span>
-
             )}
           </div>
           <div className="info">

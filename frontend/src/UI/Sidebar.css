@@ -97,6 +97,8 @@ aside .sidebar-main a:hover span {
 aside .sidebar-main .message-count {
   background-color: var(--color-danger);
   padding: 2px 8px;
+  /*top right left bottom*/
+  /* margin: 10px 5px 15px 20px;  */
   color: var(--color-white);
   font-size: 11px;
   border-radius: var(--border-radius-1);
@@ -126,8 +128,19 @@ aside .sidebar-main .message-count {
   }
 
   aside .sidebar-main a:last-child {
-    position: relative;
-    margin-top: 1.8rem;
+    width: 4rem;
+    margin-left: 2rem;
+    position: absolute;
+    align-items: center;
+  }
+  aside .sidebar-main .message-count {
+    background-color: var(--color-danger);
+    padding: 2px 6px;
+    /*top right left bottom*/
+    margin: 20px 0px 50px -10px;
+    color: var(--color-white);
+    font-size: 11px;
+    border-radius: var(--border-radius-1);
   }
 }
 
