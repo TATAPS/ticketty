@@ -1,4 +1,4 @@
-const { executeQuery, pool } = require("../../db_connnection.js");
+const { executeQuery, pool, performTransaction } = require("../../db_connnection.js");
 
 async function getAllTickets() {
   // const query = `
@@ -96,7 +96,7 @@ async function addTicket(ticket) {
   return tickets;
 }
 
-async function updateTicket(ticket) {
+async function updateTicket(connection, ticket) {
   // const query = `UPDATE tickets t JOIN persons p ON t.owner_id = p.uuid SET t.title=?, t.company_id=?, t.status=?, t.engineer_id=?, p.given_name=?, p.family_name=? WHERE t.id=?`;
   const query = `
   UPDATE tickets SET
@@ -106,8 +106,16 @@ async function updateTicket(ticket) {
   engineer_id=?, title=?, status=?, 
   ticket_total_time=? 
   WHERE id=?;`;
-  const [tickets] = await executeQuery(query, ticket);
+  // const [tickets] = await executeQuery(query, ticket);
+  const [tickets] = await connection.execute(query, [...ticket]);
+  // const [tickets] = await performTransaction()
   return tickets;
+}
+
+async function testTicketTransaction(ticket) {
+  const data = await performTransaction([{ operation: updateTicket, params: [ticket] }]);
+  console.log("data", data);
+  return data;
 }
 
 module.exports = {
@@ -115,4 +123,5 @@ module.exports = {
   getSingleTicket,
   addTicket,
   updateTicket,
+  testTicketTransaction,
 };

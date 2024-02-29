@@ -5,7 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import { fetchTicket } from "../api/tickets.jsx";
 import TicketSummary from "./TicketSummary.jsx";
 import useTicket from "../../hooks/useTicket.jsx";
-import SingleTicketUpdate from "./singleTicketUpdate.jsx";
+import SingleTicketUpdate from "./SingleTicketUpdate.jsx";
 
 function SingleTicket() {
   // const [ticket, setTicket] = useState({});
@@ -26,10 +26,10 @@ function SingleTicket() {
   }
 
   if (ticketData) {
-    console.log(ticketData);
+    console.log("ticket data here", ticketData);
     ticketData.map((val, index) =>
       notesData.push({
-        note_id: val.note_id,
+        note_id: val.ticket_notes_id,
         note: val.note,
         ticket_total_time: val.ticket_total_time,
         ticket_id: val.ticket_id,

@@ -26,22 +26,33 @@ async function executeQuery(sql, values) {
   }
 }
 
-async function performTransaction(sql, values) {
+// async function performTransaction(sql, values) {
+async function performTransaction(operations) {
   let connection;
+  const result = [];
   try {
     connection = await pool.getConnection();
-    await connection.beginTransaction();
-    const [rows, fields] = await connection.execute(sql, values);
-    await connection.commit();
+    // await connection.beginTransaction();
+    await connection.beginTransaction(connection);
+
+    for (let { operation, params } of operations) {
+      const results = await operation(connection, ...params);
+      result.push(results);
+    }
+
+    // const [rows, fields] = await connection.execute(sql, values);
+    await connection.commit(connection);
     console.log("transaction committed successfully,");
-    return [rows];
+    return result;
+    // return [rows];
   } catch (err) {
-    await connection.rollback();
+    await connection.rollback(connection);
     // console.error(err),
     throw err;
   } finally {
     if (connection) {
       connection.release();
+      console.log("connection released back to the pool");
     }
   }
 }

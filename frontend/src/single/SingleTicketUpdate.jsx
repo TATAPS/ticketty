@@ -40,6 +40,14 @@ function SingleTicketUpdate({ ticketData, notesData }) {
     });
   };
 
+  const handleNotesChange = (e) => {
+    e.preventDefault();
+    setNotes({
+      ...notes,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleEngineerChange = (e) => {
     e.preventDefault();
     const filteredEngineer = engineers.filter(
@@ -203,7 +211,13 @@ function SingleTicketUpdate({ ticketData, notesData }) {
           //   <p hidden></p>
           // )
         }
-        <input type="text" placeholder="Add a New Note" className="newnote-input" />
+        <input
+          onChange={handleInputChange}
+          type="text"
+          name="note"
+          placeholder="Add a New Note"
+          className="newnote-input"
+        />
       </div>
       <button onClick={() => handleAddTicket(ticket)}>Save</button>
     </div>
