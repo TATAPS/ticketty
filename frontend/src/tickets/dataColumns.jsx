@@ -4,7 +4,7 @@ const dataColumns = [
     field: "id",
     headerName: "Ticket ID",
     headerClassName: "ticket--header",
-    width: 70,
+    width: 100,
   },
   {
     field: "status",

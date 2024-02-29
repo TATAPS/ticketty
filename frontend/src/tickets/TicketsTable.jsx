@@ -55,8 +55,8 @@ export default function TicketsTable({ tickets }) {
         <StyledDataGrid
           columns={dataColumns}
           rows={tickets}
-          disableColumnFilter
-          disableDensitySelector
+          // disableColumnFilter
+          // disableDensitySelector
           pageSizeOptions={[5, 10, 25, 100]}
           slots={{ toolbar: GridToolbar }}
           filterModel={filterModel}
@@ -65,24 +65,7 @@ export default function TicketsTable({ tickets }) {
           columnVisibilityModel={columnVisibilityModel}
           onColumnVisibilityModelChange={(newModel) => setColumnVisibilityModel(newModel)}
           onRowClick={handleRowClick}
-          sx={{
-            '& .priority.high': {
-              backgroundColor: 'var(--color-danger)',
-              color: 'var(--color-dark)',
-            },
-            '& .priority.medium': {
-              backgroundColor: 'var(--color-primary)',
-              color: 'var(--color-dark)',
-            },
-            '& .priority.low': {
-              backgroundColor: 'var(--color-success)',
-              color: 'var(--color-dark)',
-            },
-            '& .priority.other': {
-              backgroundColor: 'var(--color-warning)',
-              color: 'var(--color-dark)',
-            },
-          }}
+          draggable="true"
           getRowClassName={(params) => `status--${params.row.status}`}
         />
       </Box>
