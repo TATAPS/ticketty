@@ -17,6 +17,91 @@ const getSelectedHoverBackgroundColor = (color, mode) =>
   mode === 'dark' ? darken(color, 0.4) : lighten(color, 0.4);
 
 const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
+  /**** HEADER  *****/
+  '& .MuiDataGrid-menuIcon': {
+    width: '20%',
+  },
+  '& .MuiButtonBase-root': {
+    backgroundColor: 'var(--color-transparent)',
+    color: 'var(--color-dark)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: '0',
+  },
+  '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
+    borderRight: `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
+      }`,
+  },
+  '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
+    borderBottom: `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
+      }`,
+  },
+  '& .MuiDataGrid-columnHeaderDraggableContainer': {
+    // backgroundColor: 'red',
+    color: 'var(--color-dark)',
+    resize: 'horizontal',
+  },
+  '& .MuiDataGrid-columnSeparator': {
+    // backgroundColor: 'blue',
+    color: 'var(--color-dark)',
+    resize: 'horizontal',
+    cursor: 'col-resize'
+
+  },
+  '& .MuiDataGrid-columnSeparator path': {
+
+  },
+
+  /**** PRIORITY CELL  *****/
+
+  '& .priority.high': {
+    // color: 'var(--color-dark)',
+  },
+  '& .priority.high .MuiDataGrid-cellContent': {
+    backgroundColor: 'var(--color-danger)',
+    color: 'var(--color-white)',
+    border: '.5px solid red',
+    borderRadius: '8px',
+    padding: '5px',
+    width: '8rem'
+  },
+  '& .priority.medium': {
+    // backgroundColor: 'var(--color-primary)',
+    color: 'var(--color-dark)',
+  },
+  '& .priority.medium .MuiDataGrid-cellContent': {
+    backgroundColor: 'var(--color-primary)',
+    color: 'var(--color-white)',
+    border: '.5px solid var(--color-primary)',
+    borderRadius: '8px',
+    padding: '5px',
+    width: '8rem'
+  },
+  '& .priority.low': {
+    // color: 'var(--color-dark)',
+  },
+  '& .priority.low .MuiDataGrid-cellContent': {
+    backgroundColor: 'var(--color-success)',
+    color: 'var(--color-white)',
+    border: '.5px solid var(--color-success)',
+    borderRadius: '8px',
+    padding: '5px',
+    width: '8rem'
+  },
+  '& .priority.other': {
+    // backgroundColor: 'var(--color-warning)',
+    color: 'var(--color-dark)',
+  },
+  '& .priority.other .MuiDataGrid-cellContent': {
+    backgroundColor: 'var(--color-warning)',
+    color: 'var(--color-dark)',
+    border: '.5px solid var(--color-warning)',
+    borderRadius: '8px',
+    padding: '5px',
+    width: '8rem'
+  },
+  /****** ENTIRE ROWS ******/
   '& .status--Open': {
     backgroundColor: getBackgroundColor(theme.palette.info.main, theme.palette.mode),
     '&:hover': {
