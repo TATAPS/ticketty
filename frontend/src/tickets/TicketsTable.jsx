@@ -1,5 +1,5 @@
 import "./TicketsTable.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GridToolbar } from "@mui/x-data-grid";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -15,6 +15,7 @@ export default function TicketsTable({ tickets }) {
   });
   const [columnVisibilityModel, setColumnVisibilityModel] = useState({});
   const navigate = useNavigate();
+
 
   const handleRowClick = (params, event) => {
     if (event.type === "click") {
@@ -57,6 +58,7 @@ export default function TicketsTable({ tickets }) {
           rows={tickets}
           // disableColumnFilter
           // disableDensitySelector
+          checkboxSelection="true"
           pageSizeOptions={[5, 10, 25, 100]}
           slots={{ toolbar: GridToolbar }}
           filterModel={filterModel}
@@ -65,8 +67,10 @@ export default function TicketsTable({ tickets }) {
           columnVisibilityModel={columnVisibilityModel}
           onColumnVisibilityModelChange={(newModel) => setColumnVisibilityModel(newModel)}
           onRowClick={handleRowClick}
-          draggable="true"
+          // draggable="true"
           getRowClassName={(params) => `status--${params.row.status}`}
+          resizable
+
         />
       </Box>
     </>

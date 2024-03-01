@@ -5,6 +5,7 @@ const dataColumns = [
     headerName: "Ticket ID",
     headerClassName: "ticket--header",
     width: 100,
+    resizable: true
   },
   {
     field: "status",

@@ -29,12 +29,30 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     justifyContent: 'center',
     marginRight: '0',
   },
-  // '& .MuiDataGrid-iconButtonContainer': {
-  //   backgroundColor: 'var(--color-warning)',
-  //   color: 'var(--color-dark)',
-  //   width: '8 rem',
-  //   marginRight: '0'
-  // },
+  '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
+    borderRight: `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
+      }`,
+  },
+  '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
+    borderBottom: `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
+      }`,
+  },
+  '& .MuiDataGrid-columnHeaderDraggableContainer': {
+    // backgroundColor: 'red',
+    color: 'var(--color-dark)',
+    resize: 'horizontal',
+  },
+  '& .MuiDataGrid-columnSeparator': {
+    // backgroundColor: 'blue',
+    color: 'var(--color-dark)',
+    resize: 'horizontal',
+    cursor: 'col-resize'
+
+  },
+  '& .MuiDataGrid-columnSeparator path': {
+
+  },
+
   /**** PRIORITY CELL  *****/
 
   '& .priority.high': {
