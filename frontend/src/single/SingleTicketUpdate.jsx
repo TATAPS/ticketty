@@ -63,6 +63,9 @@ function SingleTicketUpdate({ ticketData, notesData }) {
     updateTicketMutation.mutate({
       ...ticket,
     });
+    setTicket({
+      note: "",
+    });
     navigate("/");
   };
 

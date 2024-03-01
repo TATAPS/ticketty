@@ -92,12 +92,14 @@ async function updateTicketAction(req, res) {
     // const id = req.params.ticket_id;
     // const values = [title, company_id, status, engineer_id, firstName, lastName, id];
     // const updatedTicket = await updateTicket(values);
-    const updatedTicket = await performTransaction([
-      { operation: updateTicket, params: [values] },
-      { operation: createTicketNotesOperation, params: [id, note] },
-    ]);
-    console.log("updatedTicket", updatedTicket);
-    res.status(200).json(updatedTicket);
+    if (note !== null) {
+      const updatedTicket = await performTransaction([
+        { operation: updateTicket, params: [values] },
+        { operation: createTicketNotesOperation, params: [id, note] },
+      ]);
+      console.log("updatedTicket", updatedTicket);
+      res.status(200).json(updatedTicket);
+    }
   } catch (error) {
     throw error;
   }
