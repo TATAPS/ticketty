@@ -19,7 +19,10 @@ import RenderDropDownUpdate from "../../reusable-components/RenderDropDownUpdate
 function SingleTicketUpdate({ ticketData, notesData }) {
   const navigate = useNavigate();
 
-  const [ticket, setTicket] = useState(ticketData[0]);
+  const [ticket, setTicket] = useState({
+    ...ticketData[0],
+    newNote: "",
+  });
   const [notes, setNotes] = useState(notesData);
 
   let { ticketId } = useParams();
@@ -64,7 +67,7 @@ function SingleTicketUpdate({ ticketData, notesData }) {
       ...ticket,
     });
     setTicket({
-      note: "",
+      newNote: "",
     });
     navigate("/");
   };
@@ -95,7 +98,9 @@ function SingleTicketUpdate({ ticketData, notesData }) {
       email: filteredContact[0]["email"],
     });
   };
-
+  console.log("====================================");
+  console.log("= Starting SingleTicketUpdate.jsx =");
+  console.log("====================================");
   console.log("tickets", ticket);
   console.log("notes", notes);
   console.log("notes.note", notes.length);
@@ -217,9 +222,10 @@ function SingleTicketUpdate({ ticketData, notesData }) {
         <input
           onChange={handleInputChange}
           type="text"
-          name="note"
+          name="newNote"
           placeholder="Add a New Note"
           className="newnote-input"
+          value={ticket.newNote}
         />
       </div>
       <button onClick={() => handleAddTicket(ticket)}>Save</button>
