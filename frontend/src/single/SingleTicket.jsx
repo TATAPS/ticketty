@@ -6,6 +6,8 @@ import { fetchTicket } from "../api/tickets.jsx";
 import TicketSummary from "./TicketSummary.jsx";
 import useTicket from "../../hooks/useTicket.jsx";
 import SingleTicketUpdate from "./SingleTicketUpdate.jsx";
+import SingleTicketDetails from "./SingleTicketDetails.jsx";
+import SingleTicketNotes from "./SingleTicketNotes.jsx";
 
 function SingleTicket() {
   // const [ticket, setTicket] = useState({});
@@ -43,27 +45,20 @@ function SingleTicket() {
       <div className="list-title">
         {/* {ticketData ? <TicketSummary ticketData={ticketData} /> : <p>No Ticket Found</p>} */}
         {ticketData ? (
-          <SingleTicketUpdate
-            ticketData={ticketData}
-            notesData={notesData}
-            // setTicket={setTicket}
-            // ticket={ticket}
-          />
+          <>
+            {/* <div className="ticket-summary"> */}
+            <SingleTicketUpdate ticketData={ticketData} notesData={notesData} />
+            {/* <SingleTicketDetails ticketData={ticketData} notesData={notesData} />
+              <SingleTicketNotes ticketData={ticketData} notesData={notesData} /> */}
+            {/* </div> */}
+          </>
         ) : (
           <p>No Ticket Found</p>
         )}
-        {/* <Tickets /> */}
-        <div className="edit-section">
-          <Link to={`/tickets/${ticketId}/edit`}>
-            <button>Update</button>
-          </Link>
-          <button
-          // onClick={() => handleDelete(/*ticketId*/)}
-          >
-            Archives
-          </button>
-        </div>
       </div>
+      {/* <div className="edit-section">
+        <button onClick={() => handleAddTicket(ticket)}>Save</button>
+      </div> */}
     </div>
   );
 }
