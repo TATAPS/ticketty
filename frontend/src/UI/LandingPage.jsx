@@ -8,7 +8,6 @@ function LandingPage() {
       <div className="landing-page">
         {/* ****** NAVBAR ****** */}
         <nav>
-          nav
           <div className="logo">Logo</div>
           <div className="content">
             <div className="home">Home</div>
@@ -61,8 +60,7 @@ function LandingPage() {
         {/* ****** CORE FEATURES ****** */}
         <section className="tech-stacks">
           <header>
-            <h1>Core Features</h1>
-            <h4>Explore All Features</h4>
+            <h1>Tech Stacks</h1>
           </header>
           <ul className="tech-lists">
             <li>ReactJS</li>
