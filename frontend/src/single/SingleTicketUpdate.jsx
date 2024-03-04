@@ -28,7 +28,7 @@ function SingleTicketUpdate({ ticketData, notesData }) {
   const [notes, setNotes] = useState(notesData);
 
   let { ticketId } = useParams();
-  console.log("ticketid", ticketId);
+  // console.log("ticketid", ticketId);
   const { isFetching, data: companies } = useCompanies();
   const { data: priorities } = usePriorities();
   const { data: statuses } = useStatuses();
@@ -66,10 +66,7 @@ function SingleTicketUpdate({ ticketData, notesData }) {
   };
 
   const handleAddTicket = (ticket) => {
-    setTicket({
-      ...ticket,
-      note_creator_id: ticket.engineer_uuid,
-    });
+    console.log("HANDLE ADD TICKET INVOKED");
     updateTicketMutation.mutate({
       ...ticket,
     });
@@ -106,14 +103,12 @@ function SingleTicketUpdate({ ticketData, notesData }) {
       email: filteredContact[0]["email"],
     });
   };
-  console.log("====================================");
-  console.log("= Starting SingleTicketUpdate.jsx =");
-  console.log("====================================");
-  console.log("tickets", ticket);
-  console.log("notes", notes);
-  console.log("notes.note", notes.length);
-  console.log("companies", companies);
-  console.log("contacts", contacts);
+
+  // console.log("tickets", ticket);
+  // console.log("notes", notes);
+  // console.log("notes.note", notes.length);
+  // console.log("companies", companies);
+  // console.log("contacts", contacts);
   return (
     <>
       <div className="ticket-summary">
