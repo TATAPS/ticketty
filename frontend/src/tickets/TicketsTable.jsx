@@ -22,7 +22,6 @@ export default function TicketsTable({ tickets }) {
       navigate(`/tickets/${params.id}`);
     }
   };
-
   return (
     <>
       <FormControlLabel

@@ -23,7 +23,7 @@ function SingleTicketUpdate({ ticketData, notesData }) {
   const [notes, setNotes] = useState(notesData);
 
   let { ticketId } = useParams();
-  console.log("ticketid", ticketId);
+  // console.log("ticketid", ticketId);
   const { isFetching, data: companies } = useCompanies();
   const { data: priorities } = usePriorities();
   const { data: statuses } = useStatuses();
@@ -52,6 +52,7 @@ function SingleTicketUpdate({ ticketData, notesData }) {
   };
 
   const handleAddTicket = (ticket) => {
+    console.log("HANDLE ADD TICKET INVOKED");
     updateTicketMutation.mutate({
       ...ticket,
     });
@@ -85,11 +86,11 @@ function SingleTicketUpdate({ ticketData, notesData }) {
     });
   };
 
-  console.log("tickets", ticket);
-  console.log("notes", notes);
-  console.log("notes.note", notes.length);
-  console.log("companies", companies);
-  console.log("contacts", contacts);
+  // console.log("tickets", ticket);
+  // console.log("notes", notes);
+  // console.log("notes.note", notes.length);
+  // console.log("companies", companies);
+  // console.log("contacts", contacts);
   return (
     <div className="ticket-summary">
       <div className="ticket-info" style={{ backgroundColor: "white" }}>

@@ -11,6 +11,7 @@ import SingleTicket from "./single/SingleTicket.jsx";
 import { logoutUser } from "./api/engineers.jsx";
 import ProtectedRoutes from "./auth/ProtectedRoutes.jsx";
 import getCookie from "../helpers/getCookie.js";
+import LandingPage from "./UI/LandingPage.jsx";
 
 function App() {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -34,7 +35,7 @@ function App() {
               <Route path="tickets/:ticketId" element={<SingleTicket />} />
               <Route path="tickets/:ticketId/edit" element={<UpdateTicket />} />
             </Route>
-            {/* <Route path="*" element={<p>There's nothing here: 404!</p>} /> */}
+            <Route path="/home" element={<LandingPage />} />
           </Routes>
         </div>
       </div>
