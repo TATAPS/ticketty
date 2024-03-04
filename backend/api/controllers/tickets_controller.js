@@ -75,6 +75,7 @@ async function updateTicketAction(req, res) {
       ticket_total_time,
       id,
       newNote = "",
+      note_creator_id,
     } = req.body;
     console.log(req.body);
     const values = [
@@ -95,7 +96,7 @@ async function updateTicketAction(req, res) {
     if (newNote !== null && newNote !== "") {
       const updatedTicket = await performTransaction([
         { operation: updateTicket, params: [values] },
-        { operation: createTicketNotesOperation, params: [id, newNote] },
+        { operation: createTicketNotesOperation, params: [id, newNote, note_creator_id] },
       ]);
       console.log("inside if, updatedTicket", updatedTicket);
       res.status(200).json(updatedTicket);

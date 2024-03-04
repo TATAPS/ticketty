@@ -41,6 +41,7 @@ function SingleTicketUpdate({ ticketData, notesData }) {
     e.preventDefault();
     setTicket({
       ...ticket,
+      note_creator_id: ticket.engineer_uuid,
       [e.target.name]: e.target.value,
     });
   };
@@ -65,11 +66,16 @@ function SingleTicketUpdate({ ticketData, notesData }) {
   };
 
   const handleAddTicket = (ticket) => {
+    setTicket({
+      ...ticket,
+      note_creator_id: ticket.engineer_uuid,
+    });
     updateTicketMutation.mutate({
       ...ticket,
     });
     setTicket({
       newNote: "",
+      note_creator_id: "",
     });
     navigate("/");
   };

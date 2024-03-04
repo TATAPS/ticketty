@@ -3,18 +3,8 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import useTicket from "../../hooks/useTicket.jsx";
 import { useNavigate } from "react-router-dom";
-// import useAddTicket from "../../hooks/useAddTicket.jsx";
 import useUpdateTicket from "../../hooks/useUpdateTicket.jsx";
-// import RenderDropDown from "../../reusable-components/RenderDropDown.jsx";
 import RenderInputTypeText from "../../reusable-components/RenderInputTypeText.jsx";
-import useCompanies from "../../hooks/useCompanies.jsx";
-import useStatuses from "../../hooks/useStatuses.jsx";
-import useEngineers from "../../hooks/useEngineers.jsx";
-import useAddContact from "../../hooks/useContacts.jsx";
-import useAddTicket from "../../hooks/useAddTicket.jsx";
-import usePriorities from "../../hooks/usePriorities.jsx";
-import { updateTicket } from "../api/tickets.jsx";
-import RenderDropDownUpdate from "../../reusable-components/RenderDropDownUpdate.jsx";
 
 function SingleTicketNotes({ ticket, notes, handleInputChange }) {
   return (
@@ -31,11 +21,27 @@ function SingleTicketNotes({ ticket, notes, handleInputChange }) {
       {notes.map((val) => {
         return (
           <div
-            className={notes[0].note ? "ticket-note" : "hidden"}
+            className={
+              notes[0].note
+                ? val.note_creator_id === ticket.engineer_uuid
+                  ? "ticket-note ticket-note-engineer"
+                  : "ticket-note ticket-note-alt"
+                : "hidden"
+            }
             key={val.note_id}
-            style={{ backgroundColor: "white" }}
+            // style={{ backgroundColor: "white" }}
           >
-            <p> {val.note}</p>
+            {val.note_creator_id === ticket.engineer_uuid ? (
+              <>
+                <p className="name-contact-engineer">{ticket.engineer}</p>
+                <p className="ticket-note-text">{val.note}</p>
+              </>
+            ) : (
+              <>
+                <p className="name-contact-alt">{ticket.contact}</p>
+                <p className="ticket-note-text"> {val.note}</p>
+              </>
+            )}
           </div>
         );
       })}

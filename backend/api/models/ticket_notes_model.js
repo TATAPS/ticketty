@@ -12,9 +12,10 @@ async function addTicketNotes(ticketId, note) {
   return result;
 }
 
-async function createTicketNotesOperation(connection, ticketId, note) {
-  const query = "INSERT INTO ticket_notes (ticket_id, note) VALUES (?, ?);";
-  const [result] = await connection.execute(query, [ticketId, note]);
+async function createTicketNotesOperation(connection, ticketId, note, note_creator_id) {
+  const query =
+    "INSERT INTO ticket_notes (ticket_id, note, creator_id) VALUES (?, ?, UUID_TO_BIN(?,1));";
+  const [result] = await connection.execute(query, [ticketId, note, note_creator_id]);
   return result;
 }
 

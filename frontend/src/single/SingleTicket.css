@@ -33,10 +33,30 @@
   margin: 10px;
 }
 
+.ticket-notes-title {
+  background-color: var(--color-warning);
+  color: var(--color-white);
+}
+
 .ticket-note {
   border-radius: 30px;
   padding: 9px;
   margin: 10px;
+}
+
+.ticket-note-engineer {
+  background-color: var(--color-primary);
+  font-weight: 400;
+}
+
+.ticket-note-alt {
+  background-color: var(--color-warning);
+  color: var(--color-white);
+  font-weight: 400;
+}
+
+.ticket-note-text {
+  color: var(--color-white);
 }
 
 .ticket-info {
