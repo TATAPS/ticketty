@@ -5,7 +5,8 @@ function LandingPage() {
   return (
     <>
       {/* ******************* MAIN PAGE ************************ */}
-      <div className="landing-page">landing-page
+      <div className="landing-page">
+        {/* ****** NAVBAR ****** */}
         <nav>
           nav
           <div className="logo">Logo</div>
@@ -21,6 +22,7 @@ function LandingPage() {
             <h4>Sign Up</h4>
           </div>
         </nav>
+        {/* ****** HERO ****** */}
         <section className="hero">
           <h1>Ticketty
             <br />
@@ -35,6 +37,7 @@ function LandingPage() {
             <h4>Learn, Collaborate & Improve Workflows</h4>
           </div>
         </section>
+        {/* ****** CUSTOMER SUCCESS ****** */}
         <section className="customer-success">
           <header>
             <h1>Trending Automation </h1>
@@ -55,26 +58,25 @@ function LandingPage() {
             </div>
           </div>
         </section>
-        <section className="core-feature">
+        {/* ****** CORE FEATURES ****** */}
+        <section className="tech-stacks">
           <header>
             <h1>Core Features</h1>
             <h4>Explore All Features</h4>
           </header>
-          <ul className="features-list">
-            <li>Create Ticket</li>
-            <li>Update Ticket</li>
-            <li>Live Chat</li>
-            <li>Instant Notifications</li>
-            <li>Curated Dataset</li>
-            <li>Statistical Analysis</li>
+          <ul className="tech-lists">
+            <li>ReactJS</li>
+            <li>React Query</li>
+            <li>MySQL</li>
           </ul>
         </section>
 
+        {/* ****** INDUSTRY SOLUTION ****** */}
         <section className="industry-solution">
           <header>
             <h1>Industry Solution</h1>
           </header>
-          <ul className="features-list">
+          <ul className="industry-list">
             <li>1. Finance</li>
             <li>2. Healthcare</li>
             <li>3. Automobile</li>
@@ -83,11 +85,13 @@ function LandingPage() {
             <li>6. Education</li>
           </ul>
         </section>
+
+        {/* ****** TUTORIAL ****** */}
         <section className="tutorials">
           <header>
             <h1>How It Works</h1>
           </header>
-          <div className="tutorials-content">
+          <div className="tutorials-list">
             <h4>Login/Sign Up</h4>
             <h4>Onboarding</h4>
             <h4>Create Your First Ticket</h4>
@@ -99,7 +103,7 @@ function LandingPage() {
           <header>
             <h1>Meet Our Creators</h1>
           </header>
-          <div className="team-content">
+          <div className="team-list">
             <div className="tim ">Tim</div>
             <div className="jackie ">Jackie</div>
           </div>
