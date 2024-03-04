@@ -1,4 +1,4 @@
-const { executeQuery, pool } = require("../../db_connnection.js");
+const { executeQuery, pool, performTransaction } = require("../../db_connnection.js");
 
 async function getAllTickets() {
   // const query = `
@@ -72,7 +72,7 @@ BIN_TO_UUID(t.owner_id, 1) AS owner_id,
 CONCAT(p.given_name, " ", p.family_name) AS contact, p.phone, p.email, t.engineer_id, BIN_TO_UUID(e.person_uuid, 1) AS engineer_uuid, 
 CONCAT(eng.given_name, " ", eng.family_name) AS engineer, eng.phone AS engineer_phone, eng.email AS engineer_email, 
 t.title, t.status, t.ticket_total_time, tn.id AS ticket_notes_id, 
-tn.ticket_id AS ticket_id, tn.note, tn.total_time AS ticket_note_total_time, 
+tn.ticket_id AS ticket_id, BIN_TO_UUID(tn.creator_id,1) as note_creator_id, tn.note, tn.total_time AS ticket_note_total_time, 
 tn.created_at AS ticket_note_creation_time
 FROM tickets t JOIN companies c ON t.company_id = c.ein_tin
 JOIN persons p ON t.owner_id = p.uuid
@@ -96,7 +96,7 @@ async function addTicket(ticket) {
   return tickets;
 }
 
-async function updateTicket(ticket) {
+async function updateTicket(connection, ticket) {
   // const query = `UPDATE tickets t JOIN persons p ON t.owner_id = p.uuid SET t.title=?, t.company_id=?, t.status=?, t.engineer_id=?, p.given_name=?, p.family_name=? WHERE t.id=?`;
   const query = `
   UPDATE tickets SET
@@ -106,8 +106,16 @@ async function updateTicket(ticket) {
   engineer_id=?, title=?, status=?, 
   ticket_total_time=? 
   WHERE id=?;`;
-  const [tickets] = await executeQuery(query, ticket);
+  // const [tickets] = await executeQuery(query, ticket);
+  const [tickets] = await connection.execute(query, [...ticket]);
+  // const [tickets] = await performTransaction()
   return tickets;
+}
+
+async function testTicketTransaction(ticket) {
+  const data = await performTransaction([{ operation: updateTicket, params: [ticket] }]);
+  console.log("data", data);
+  return data;
 }
 
 module.exports = {
@@ -115,4 +123,5 @@ module.exports = {
   getSingleTicket,
   addTicket,
   updateTicket,
+  testTicketTransaction,
 };

@@ -5,6 +5,7 @@ export default function RenderInputTypeText({
   displayName,
   onChangeHandler,
   ticket,
+  class_name = "ticket-notes-title",
 }) {
   return (
     <div>
@@ -15,6 +16,7 @@ export default function RenderInputTypeText({
           type="text"
           name={displayName}
           value={ticket[label.toLowerCase()]}
+          className="ticket-notes-title"
         />
       </label>
     </div>

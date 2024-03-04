@@ -46,3 +46,7 @@ Content-Type: application/json
   "engineer_id": 3,
   "ticket_total_time": 15
 }
+
+###
+GET https://localhost:8080/api/tickets/1
+Content-Type: application/json

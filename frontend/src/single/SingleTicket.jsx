@@ -1,20 +1,15 @@
 import "./SingleTicket.css";
 import { useState } from "react";
-
 import { useParams, Link } from "react-router-dom";
-import { fetchTicket } from "../api/tickets.jsx";
-import TicketSummary from "./TicketSummary.jsx";
 import useTicket from "../../hooks/useTicket.jsx";
-import SingleTicketUpdate from "./singleTicketUpdate.jsx";
+import SingleTicketUpdate from "./SingleTicketUpdate.jsx";
 
 function SingleTicket() {
-  // const [ticket, setTicket] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const notesData = [];
   // const [error, setError] = useState(false)
   //////////////// TODO: EXTRACT PARAMS ID: default type: string //////////////////////
   let { ticketId } = useParams();
-  // console.log("ticketId", ticketId);
   const { isFetching, isError, data: ticketData, error } = useTicket(ticketId);
 
   if (isFetching) {
@@ -26,13 +21,14 @@ function SingleTicket() {
   }
 
   if (ticketData) {
-    console.log(ticketData);
+    console.log("ticket data here", ticketData);
     ticketData.map((val, index) =>
       notesData.push({
-        note_id: val.note_id,
+        note_id: val.ticket_notes_id,
         note: val.note,
         ticket_total_time: val.ticket_total_time,
         ticket_id: val.ticket_id,
+        note_creator_id: val.note_creator_id,
       })
     );
     console.log("notes", notesData);
@@ -41,28 +37,11 @@ function SingleTicket() {
     <div className="list-container">
       <h1>#{ticketId}</h1>
       <div className="list-title">
-        {/* {ticketData ? <TicketSummary ticketData={ticketData} /> : <p>No Ticket Found</p>} */}
         {ticketData ? (
-          <SingleTicketUpdate
-            ticketData={ticketData}
-            notesData={notesData}
-            // setTicket={setTicket}
-            // ticket={ticket}
-          />
+          <SingleTicketUpdate ticketData={ticketData} notesData={notesData} />
         ) : (
           <p>No Ticket Found</p>
         )}
-        {/* <Tickets /> */}
-        <div className="edit-section">
-          <Link to={`/tickets/${ticketId}/edit`}>
-            <button>Update</button>
-          </Link>
-          <button
-          // onClick={() => handleDelete(/*ticketId*/)}
-          >
-            Archives
-          </button>
-        </div>
       </div>
     </div>
   );

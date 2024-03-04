@@ -3,7 +3,11 @@ const {
   addTicket,
   updateTicket,
   getSingleTicket,
+  testTicketTransaction,
 } = require("../models/tickets_model.js");
+
+const { performTransaction } = require("../../db_connnection.js");
+const { createTicketNotesOperation } = require("../models/ticket_notes_model.js");
 
 async function getAllTicketsAction(req, res) {
   try {
@@ -70,6 +74,8 @@ async function updateTicketAction(req, res) {
       status,
       ticket_total_time,
       id,
+      newNote = "",
+      note_creator_id,
     } = req.body;
     console.log(req.body);
     const values = [
@@ -82,13 +88,25 @@ async function updateTicketAction(req, res) {
       ticket_total_time,
       id,
     ];
-    // console.log(values);
+    console.log(newNote);
     // const { firstName, lastName } = splitFullName(contact);
     // const id = req.params.ticket_id;
     // const values = [title, company_id, status, engineer_id, firstName, lastName, id];
-    const updatedTicket = await updateTicket(values);
-    console.log("updatedTicket", updatedTicket);
-    res.status(200).json(updatedTicket);
+    // const updatedTicket = await updateTicket(values);
+    if (newNote !== null && newNote !== "") {
+      const updatedTicket = await performTransaction([
+        { operation: updateTicket, params: [values] },
+        { operation: createTicketNotesOperation, params: [id, newNote, note_creator_id] },
+      ]);
+      console.log("inside if, updatedTicket", updatedTicket);
+      res.status(200).json(updatedTicket);
+    } else {
+      console.log("inside the else statement");
+      const updatedTicket = await performTransaction([
+        { operation: updateTicket, params: [values] },
+      ]);
+      res.status(200).json(updatedTicket);
+    }
   } catch (error) {
     throw error;
   }

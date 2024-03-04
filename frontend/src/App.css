@@ -159,3 +159,22 @@ input {
   max-height: 100%;
   overflow-y: scroll;
 }
+
+.name-bold {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.name-contact-engineer {
+  font-weight: 600;
+  color: var(--color-warning);
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.name-contact-alt {
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 16px;
+  text-decoration: underline;
+}

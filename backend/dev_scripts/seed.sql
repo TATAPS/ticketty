@@ -105,6 +105,7 @@ CREATE TABLE tickets (
 CREATE TABLE ticket_notes (
     id INT NOT NULL AUTO_INCREMENT,
     ticket_id INT NOT NULL,
+    creator_id BINARY(16) NOT NULL,
     note VARCHAR(1800),
     total_time INT NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -165,15 +166,15 @@ INSERT INTO tickets (company_id, owner_id, title, status, priority) VALUES ("40-
 INSERT INTO tickets (company_id, owner_id, engineer_id, title, status, priority) VALUES ("30-2846270", UUID_TO_BIN('187b0262-b554-11ee-ad8f-001fbc130d5b', 1), 2, "Office 365 down?", "Working", "P1 High");
 INSERT INTO tickets (company_id, owner_id, engineer_id, title, status, priority) VALUES ("30-2846270", UUID_TO_BIN('187b0262-b554-11ee-ad8f-001fbc130d5b', 1), 2, "Jan got a virus again", "Working", "P1 High");
 
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(3, "Hi Arlen, I see that there is an outage in your area", 15);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(3, "That sucks, did you receive an estimate on when it would be back up?", 0);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(3, "Yes, should be back up in the next hour", 15);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(7, "So Jen spilt coffee on the outlet in the wall", 0);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(7, "Hi Xena, you will need to contact an electrician. We are not able to assist in this request", 15);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(7, "Ok, we will reach out to one and let you know what they say", 0);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(10, "Hi Kinsley, I'm checking the website now", 15);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(10, "Thanks!", 0);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(10, "Hi Kinsley, it looks like there is an outage going on, but should be resolved in a few hours", 15);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(11, "Hi Kinsley, please have her immediately disconnect from the internet.", 15);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(11, "Can do, do we need to send this to you, or what would you like us to do?", 0);
-INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(11, "Please send it to us, but please make sure the wifi has been disabled on it before sending", 15);
+INSERT INTO ticket_notes (ticket_id, creator_id, note, total_time) VALUES(3, UUID_TO_BIN('08c4b362-b554-11ee-ad8f-001fbc130d5b', 1), "Hi Arlen, I see that there is an outage in your area", 15);
+INSERT INTO ticket_notes (ticket_id, creator_id, note, total_time) VALUES(3, UUID_TO_BIN('11eeb505-16a3-6017-8584-001fbc130d5b', 1), "That sucks, did you receive an estimate on when it would be back up?", 0);
+INSERT INTO ticket_notes (ticket_id, creator_id, note, total_time) VALUES(3, UUID_TO_BIN('08c4b362-b554-11ee-ad8f-001fbc130d5b', 1), "Yes, should be back up in the next hour", 15);
+-- INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(7, "So Jen spilt coffee on the outlet in the wall", 0);
+-- INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(7, "Hi Xena, you will need to contact an electrician. We are not able to assist in this request", 15);
+-- INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(7, "Ok, we will reach out to one and let you know what they say", 0);
+-- INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(10, "Hi Kinsley, I'm checking the website now", 15);
+-- INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(10, "Thanks!", 0);
+-- INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(10, "Hi Kinsley, it looks like there is an outage going on, but should be resolved in a few hours", 15);
+-- INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(11, "Hi Kinsley, please have her immediately disconnect from the internet.", 15);
+-- INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(11, "Can do, do we need to send this to you, or what would you like us to do?", 0);
+-- INSERT INTO ticket_notes (ticket_id, note, total_time) VALUES(11, "Please send it to us, but please make sure the wifi has been disabled on it before sending", 15);

@@ -15,11 +15,16 @@ import useAddTicket from "../../hooks/useAddTicket.jsx";
 import usePriorities from "../../hooks/usePriorities.jsx";
 import { updateTicket } from "../api/tickets.jsx";
 import RenderDropDownUpdate from "../../reusable-components/RenderDropDownUpdate.jsx";
+import SingleTicketDetails from "./SingleTicketDetails.jsx";
+import SingleTicketNotes from "./SingleTicketNotes.jsx";
 
 function SingleTicketUpdate({ ticketData, notesData }) {
   const navigate = useNavigate();
 
-  const [ticket, setTicket] = useState(ticketData[0]);
+  const [ticket, setTicket] = useState({
+    ...ticketData[0],
+    newNote: "",
+  });
   const [notes, setNotes] = useState(notesData);
 
   let { ticketId } = useParams();
@@ -36,6 +41,15 @@ function SingleTicketUpdate({ ticketData, notesData }) {
     e.preventDefault();
     setTicket({
       ...ticket,
+      note_creator_id: ticket.engineer_uuid,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleNotesChange = (e) => {
+    e.preventDefault();
+    setNotes({
+      ...notes,
       [e.target.name]: e.target.value,
     });
   };
@@ -52,8 +66,16 @@ function SingleTicketUpdate({ ticketData, notesData }) {
   };
 
   const handleAddTicket = (ticket) => {
+    setTicket({
+      ...ticket,
+      note_creator_id: ticket.engineer_uuid,
+    });
     updateTicketMutation.mutate({
       ...ticket,
+    });
+    setTicket({
+      newNote: "",
+      note_creator_id: "",
     });
     navigate("/");
   };
@@ -84,129 +106,42 @@ function SingleTicketUpdate({ ticketData, notesData }) {
       email: filteredContact[0]["email"],
     });
   };
-
+  console.log("====================================");
+  console.log("= Starting SingleTicketUpdate.jsx =");
+  console.log("====================================");
   console.log("tickets", ticket);
   console.log("notes", notes);
   console.log("notes.note", notes.length);
   console.log("companies", companies);
   console.log("contacts", contacts);
   return (
-    <div className="ticket-summary">
-      <div className="ticket-info" style={{ backgroundColor: "white" }}>
-        <div>
-          {
-            <RenderDropDownUpdate
-              label={"Company:"}
-              onChangeHandler={handleCompanyChange}
-              selectName={"contact"}
-              dataToMap={companies}
-              mapKey={"ein_tin"}
-              value={"name"}
-              defaultValue={ticket.company}
-            />
-          }
-        </div>
-        <div>
-          {
-            <RenderDropDownUpdate
-              label={"Company Contact:"}
-              onChangeHandler={handleContactChange}
-              selectName={"contact"}
-              dataToMap={contacts}
-              mapKey={"person_uuid"}
-              value={"contact"}
-              defaultValue={ticket.contact}
-            />
-          }
-          {
-            <RenderDropDownUpdate
-              label={"Priority:"}
-              onChangeHandler={handleInputChange}
-              selectName={"priority"}
-              dataToMap={priorities}
-              mapKey={"id"}
-              value={"priority"}
-              defaultValue={ticket.priority}
-            />
-          }
-          {
-            <RenderDropDownUpdate
-              label={"Status:"}
-              onChangeHandler={handleInputChange}
-              selectName={"status"}
-              dataToMap={statuses}
-              mapKey={"id"}
-              value={"status"}
-              defaultValue={ticket.status}
-            />
-          }
-          {
-            <RenderDropDownUpdate
-              label={"Phone:"}
-              onChangeHandler={handleInputChange}
-              selectName={"phone"}
-              dataToMap={contacts}
-              mapKey={"person_uuid"}
-              value={"phone"}
-              defaultValue={ticket.phone}
-            />
-          }
-          {
-            <RenderDropDownUpdate
-              label={"Email:"}
-              onChangeHandler={handleInputChange}
-              selectName={"email"}
-              dataToMap={contacts}
-              mapKey={"person_uuid"}
-              value={"email"}
-              defaultValue={ticket.email}
-            />
-          }
-          {
-            <RenderDropDownUpdate
-              label={"Assigned Engineer:"}
-              onChangeHandler={handleEngineerChange}
-              selectName={"engineer"}
-              dataToMap={engineers}
-              mapKey={"id"}
-              value={"contact"}
-              defaultValue={ticket.engineer}
-            />
-          }
-        </div>
-      </div>
-      <div className="ticket-notes">
-        <h3>Notes</h3>
-        {
-          <RenderInputTypeText
-            label="Title"
-            displayName="title"
-            onChangeHandler={handleInputChange}
+    <>
+      <div className="ticket-summary">
+        <SingleTicketDetails
+          ticket={ticket}
+          notes={notes}
+          companies={companies}
+          engineers={engineers}
+          statuses={statuses}
+          priorities={priorities}
+          contacts={contacts}
+          handleCompanyChange={handleCompanyChange}
+          handleContactChange={handleContactChange}
+          handleEngineerChange={handleEngineerChange}
+          handleInputChange={handleInputChange}
+        />
+        <div className="ticket-notes">
+          <SingleTicketNotes
             ticket={ticket}
+            notes={notes}
+            handleInputChange={handleInputChange}
           />
-        }
-        {
-          // notes[0].note ? (
-          notes.map((val) => {
-            return (
-              <div
-                className={notes[0].note ? "ticket-note" : "hidden"}
-                key={val.note_id}
-                style={{ backgroundColor: "white" }}
-              >
-                {/* problem with this creating white streak when no notes */}
-                <p> {val.note}</p>
-              </div>
-            );
-          })
-          // ) : (
-          //   <p hidden></p>
-          // )
-        }
-        <input type="text" placeholder="Add a New Note" className="newnote-input" />
+        </div>
       </div>
-      <button onClick={() => handleAddTicket(ticket)}>Save</button>
-    </div>
+      <div className="edit-section">
+        <button onClick={() => handleAddTicket(ticket)}>Save</button>
+      </div>
+    </>
   );
 }
 
