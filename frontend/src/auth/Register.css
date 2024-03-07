@@ -36,7 +36,7 @@ img {
   margin: 0.5rem 1rem 0 0;
 }
 
-.info {
+.profile > .info {
   display: flex;
   flex-direction: row;
   align-items: center;

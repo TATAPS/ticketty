@@ -7,11 +7,18 @@ test branch update
 
 ## What's Included?
 
-### 1. Dashboard
+### 1. Authentication
+
+Dispatch user-friendly login
+
+<img src="/images/login-1.gif" alt="login-1" width="600"/>
+<img src="/images/login-2.gif" alt="login-2" width="600"/>
+
+### 2. Dashboard
 
 The dashboard provides a comprehensive view of the ticket list along with their respective status. Users can quickly assess the current status of tickets and prioritize their actions accordingly.
 
-### 2. Single Ticket View
+### 3. Single Ticket View
 
 In the Single Ticket View, users can perform various operations related to individual tickets:
 
@@ -69,7 +76,7 @@ npm run dev
 
 The application relies on a MySQL database to store and manage ticket-related information. Below is a simplified representation of the database schema:
 
-![Ticketty SQL Schema](/media/ticketty-dbschema.png)
+<img src="/images/ticketty-dbschema.png" alt="Ticketty SQL Schema" width="600"/>
 
 **_Ticketty SQL Schema_**
 
@@ -186,11 +193,11 @@ This schema includes tables for Tickets, Engineers, and Assignments, establishin
 
 **Demo REST API**
 
-<img src="/media/demo-API.webp" alt="REST API" width="200"/>
+<img src="/images/demo-API.webp" alt="REST API" width="600"/>
 
 **Demo Session**
 
-<img src="/media/demo-session.png" alt="Session" width="200"/>
+<img src="/images/demo-session.png" alt="Session" width="600"/>
 
 ## Github Workflows
 
