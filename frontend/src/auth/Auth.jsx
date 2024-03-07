@@ -24,7 +24,7 @@ function Auth() {
             <div className="toggle-panel toggle-right">
               <h1>Hello!</h1>
               <p>Register with your personal details to use all of site features</p>
-              <button onClick={() => setActive(true)}>Sign Up</button>
+              <button onClick={() => setActive(true)}>About</button>
             </div>
           </div>
         </div>

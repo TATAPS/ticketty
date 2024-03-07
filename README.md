@@ -190,7 +190,7 @@ This schema includes tables for Tickets, Engineers, and Assignments, establishin
 
 **Demo Session**
 
-<img src="demo-session.png" alt="Session" width="200"/>
+<img src="/media/demo-session.png" alt="Session" width="200"/>
 
 ## Github Workflows
 
