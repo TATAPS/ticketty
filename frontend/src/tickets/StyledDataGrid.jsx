@@ -49,8 +49,10 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     cursor: 'col-resize'
 
   },
-  '& .MuiDataGrid-columnSeparator path': {
-
+  '& .MuiDataGrid-root:last-child': {
+    order: "-1",
+    // flexDirection: "row",
+    flexDirection: "column-reverse"
   },
 
   /**** PRIORITY CELL  *****/

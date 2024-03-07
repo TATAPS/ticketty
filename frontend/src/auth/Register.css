@@ -11,3 +11,38 @@
   opacity: 0;
   z-index: 1;
 }
+
+img {
+  /* mx-auto object-cover rounded-full h-40 w-40 */
+  margin: auto;
+  object-fit: cover;
+  border-radius: 50%;
+  height: 6rem;
+  width: 6rem;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin-top: 10px;
+}
+.profile:nth-child(2) {
+  border-top: var(--color-dark) solid 0.3px;
+  padding-top: 1rem;
+}
+
+.profile > .social-icons {
+  margin: 0.5rem 1rem 0 0;
+}
+
+.profile > .info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile > button {
+  margin-top: 0;
+}
