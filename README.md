@@ -16,7 +16,7 @@ User-friendly login
 
 Secured authentication by saving session-cookies when logging in and destroy it when logging out
 
-<img src="/images/cookie-session-1.png" alt="cookie-session-1" width="300"/>
+<img src="/images/cookie-session-1.png" alt="cookie-session-1" width="600"/>
 <img src="/images/cookie-session-2.png" alt="cookie-session-1" width="300"/>
 
 ### 2. Dashboard
