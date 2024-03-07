@@ -16,15 +16,17 @@ User-friendly login
 
 Secured authentication by saving session-cookies when logging in and destroy it when logging out
 
-<img src="/images/cookie-session-1.gif" alt="login-2" width="300"/>
-<img src="/images/cookie-session-2.gif" alt="login-2" width="300"/>
+<img src="/images/cookie-session-1.png" alt="cookie-session-1" width="300"/>
+<img src="/images/cookie-session-2.png" alt="cookie-session-1" width="300"/>
 
 ### 2. Dashboard
 
 The dashboard provides a comprehensive view of the ticket list along with their respective status. Users can quickly assess the current status of tickets and prioritize their actions accordingly.
 
 [✅] **ROWS**: Sort rows based on user's preferences
+
 [✅] **COLUMNS**: Filter, Hide/Unhide, Adjust Column Density
+
 [✅] **SEARCH**: Search for specific data inside the table
 
 <img src="/images/dashboard-1.gif" alt="dashboard-1" width="600"/>
