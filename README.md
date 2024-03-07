@@ -15,59 +15,184 @@ The dashboard provides a comprehensive view of the ticket list along with their 
 
 In the Single Ticket View, users can perform various operations related to individual tickets:
 
-**_Assign Engineer_**: Users can assign specific engineers to handle particular tickets. This helps in streamlining the workflow and ensuring that each ticket receives appropriate attention.
+[] **_Assign Engineer_**: Users can assign specific engineers to handle particular tickets. This helps in streamlining the workflow and ensuring that each ticket receives appropriate attention.
 
-**_Manage Tickets_**: Users can manage the details of each ticket, making updates or modifications as needed. This includes changing the status, updating descriptions, and attaching relevant information.
+[✅] **_Manage Tickets_**: Users can manage the details of each ticket, making updates or modifications as needed. This includes changing the status, updating descriptions, and attaching relevant information.
 
-**_Work on Ticket Issues_**: The application facilitates collaboration by allowing engineers to work on the identified issues within a ticket. This feature enhances efficiency and coordination among team members.
-
-## Database SQL Schema
-
-The application relies on a MySQL database to store and manage ticket-related information. Below is a simplified representation of the database schema:
-
-```sql
-Table follows {
-  following_user_id integer
-  followed_user_id integer
-  created_at timestamp
-}
-
-Table users {
-  id integer [primary key]
-  username varchar
-  role varchar
-  created_at timestamp
-}
-
-Table posts {
-  id integer [primary key]
-  title varchar
-  body text [note: 'Content of the post']
-  user_id integer
-  status varchar
-  created_at timestamp
-}
-
-Ref: posts.user_id > users.id // many-to-one
-
-Ref: users.id < follows.following_user_id
-
-Ref: users.id < follows.followed_user_id
-```
-
-This schema includes tables for Tickets, Engineers, and Assignments, establishing relationships between tickets and assigned engineers.
+[✅] **_Work on Ticket Issues_**: The application facilitates collaboration by allowing engineers to work on the identified issues within a ticket. This feature enhances efficiency and coordination among team members.
 
 ## Getting Started
 
 To set up and run the application, follow these general steps:
 
-- Clone the repository to your local machine.
-- Install the necessary dependencies for both the frontend and backend.
-- Configure the MySQL database connection settings.
-- Run the application, ensuring the frontend and backend are connected.
-- For detailed instructions and specific requirements, refer to the documentation provided with the application.
+1. Clone the repository to your local machine.
+2. Install the necessary dependencies for both the frontend and backend.
+3. Configure the MySQL database connection settings.
+4. In the root folder, create a local `cert` folder includes
 
-## Github workflow
+`cert.pem`
+
+```cmd
+-----BEGIN CERTIFICATE-----
+INSERT YOUR CERT KEY HERE
+-----END CERTIFICATE-----
+```
+
+`key.pem`
+
+```cmd
+-----BEGIN RSA PRIVATE KEY-----
+INSERT YOUR RSA PRIVATE KEY HERE
+-----END RSA PRIVATE KEY-----
+
+```
+
+1. Run the application, ensuring the frontend and backend are connected.
+
+**NPM**
+
+Navigate to `backend` folder
+
+```cmd
+npm install
+npm start
+```
+
+Open another terminal, navgate to `frontend` folder
+
+```cmd
+npm install
+npm run dev
+```
+
+## SQL Database Schema
+
+The application relies on a MySQL database to store and manage ticket-related information. Below is a simplified representation of the database schema:
+
+![Ticketty SQL Schema](/media/ticketty-dbschema.png)
+
+**_Ticketty SQL Schema_**
+
+```sql
+TABLE sessions (
+    session_id VARCHAR(128) COLLATE utf8mb4_bin NOT NULL,
+    expires INT(11) UNSIGNED NOT NULL,
+    data MEDIUMTEXT COLLATE utf8mb4_bin,
+    PRIMARY KEY (session_id)
+);
+
+TABLE persons (
+	uuid BINARY(16) DEFAULT (UUID_TO_BIN(UUID(),1)),
+    given_name VARCHAR(50) NOT NULL,
+    family_name VARCHAR(80) NOT NULL,
+    email VARCHAR(254) NOT NULL UNIQUE,
+    phone BIGINT UNSIGNED NOT NULL,
+    active BOOLEAN DEFAULT FALSE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (uuid)
+);
+
+TABLE engineers (
+	id INT NOT NULL AUTO_INCREMENT,
+	person_uuid BINARY(16) NOT NULL,
+    username VARCHAR(254),
+    password VARCHAR(60),
+    salt VARCHAR(32),
+    -- DEFAULT (UUID_TO_BIN(UUID(),1)),
+    role ENUM("Dispatch", "Engineer", "Manager"),
+    active BOOLEAN DEFAULT FALSE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (person_uuid)
+		REFERENCES persons (uuid) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+TABLE companies (
+	ein_tin VARCHAR(15) NOT NULL,
+    name VARCHAR(250) NOT NULL,
+    active BOOLEAN DEFAULT FALSE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (ein_tin)
+);
+
+
+TABLE company_contacts (
+	company_id VARCHAR(15) NOT NULL,
+	person_uuid BINARY(16) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT PK_contacts_companies PRIMARY KEY
+    (
+         company_id,
+         person_uuid
+	),
+	 FOREIGN KEY (company_id) REFERENCES companies (ein_tin) ON DELETE RESTRICT ON UPDATE CASCADE,
+     FOREIGN KEY (person_uuid) REFERENCES persons (uuid) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+TABLE priorities (
+	id INT NOT NULL AUTO_INCREMENT,
+    priority ENUM("P1 High", "P2 Medium", "P3 Low", "P4 Other"),
+    PRIMARY KEY(id)
+);
+
+TABLE statuses (
+    id INT NOT NULL AUTO_INCREMENT,
+    status ENUM("Open", "Closed", "Pending", "Assigned", "Working"),
+    PRIMARY KEY(id)
+);
+
+TABLE tickets (
+    id INT NOT NULL AUTO_INCREMENT,
+    priority ENUM("P1 High", "P2 Medium", "P3 Low", "P4 Other") DEFAULT "P3 Low",
+    company_id VARCHAR(15) NOT NULL,
+    owner_id BINARY(16),
+    engineer_id INT NOT NULL DEFAULT 1,
+    title VARCHAR(150),
+    status ENUM("Open", "Closed", "Pending", "Assigned", "Working"),
+    ticket_total_time INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    closed_at TIMESTAMP,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_company_id FOREIGN KEY (company_id)
+		REFERENCES companies (ein_tin) ON DELETE RESTRICT ON UPDATE CASCADE,
+        -- NOT SURE IF THE NEXT PART IS CORRECT
+	CONSTRAINT fk_owner_id FOREIGN KEY (owner_id)
+		REFERENCES company_contacts (person_uuid) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT fk_engineer_id FOREIGN KEY (engineer_id)
+		REFERENCES engineers (id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+TABLE ticket_notes (
+    id INT NOT NULL AUTO_INCREMENT,
+    ticket_id INT NOT NULL,
+    creator_id BINARY(16) NOT NULL,
+    note VARCHAR(1800),
+    total_time INT NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_ticket_id FOREIGN KEY (ticket_id)
+        REFERENCES tickets (id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+```
+
+This schema includes tables for Tickets, Engineers, and Assignments, establishing relationships between tickets and assigned engineers.
+
+## REST API & Architectures
+
+### Task:
+
+[] Generate Diagram using Python Diagrams
+
+**Demo REST API**
+
+<img src="/media/demo-API.webp" alt="REST API" width="200"/>
+
+**Demo Session**
+
+<img src="demo-session.png" alt="Session" width="200"/>
+
+## Github Workflows
 
 1, Run this script in your local terminal
 
