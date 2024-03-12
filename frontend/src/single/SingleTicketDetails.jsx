@@ -1,4 +1,5 @@
-import "./SingleTicket.css";
+import "./SingleTicketDetails.css";
+import { useNavigate } from "react-router-dom";
 import RenderDropDownUpdate from "../../reusable-components/RenderDropDownUpdate.jsx";
 
 function SingleTicketDetails({
@@ -12,9 +13,15 @@ function SingleTicketDetails({
   handleContactChange,
   handleEngineerChange,
   handleInputChange,
+  handleAddTicket,
 }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="ticket-info" style={{ backgroundColor: "white" }}>
+    <div
+      className="single-ticket-ticket-info"
+      // style={{ backgroundColor: "white" }}
+    >
       <div>
         <RenderDropDownUpdate
           label={"Company:"}
@@ -86,6 +93,17 @@ function SingleTicketDetails({
           value={"contact"}
           defaultValue={ticket.engineer}
         />
+        <div className="single-list-button-container">
+          <button
+            className="single-list-save-button bold"
+            onClick={() => handleAddTicket(ticket)}
+          >
+            Save
+          </button>
+          <button className="single-list-cancel-button " onClick={() => navigate("/")}>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );
