@@ -18,14 +18,14 @@
 } */
 
 .ticket-note-background-shape-contact {
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 9px;
   /* margin: 10px; */
   width: 80%;
 }
 
 .ticket-note-background-shape-engineer {
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 9px;
   margin: 10px;
   width: 80%;
@@ -33,41 +33,63 @@
 }
 
 .ticket-note-engineer-background-color {
-  background-color: var(--color-success);
+  /* background-color: var(--color-primary); */
+  /* background: linear-gradient(to right, #1b9c86, #729791); */
+  background: linear-gradient(to right, #f7d060, #ffe087);
+  /* background: linear-gradient(to right, #1b9c86, #5dc4b2); */
+  /* background-color: #cebd09; */
+  /* background: linear-gradient(to right, #ffe087, #f7d060); */
   font-weight: 400;
 }
 
 .ticket-note-contact-background-color {
   /* background-color: var(--color-warning); */
   /* background-color: rgb(249, 210, 179); */
-  background-color: rgb(241, 192, 192);
+  /* background-color: rgb(241, 192, 192); */
+  /* background-color: var(--color-warning); */
+  background: linear-gradient(to right, #6c9bcf, #7d8da1);
   color: var(--color-white);
   font-weight: 400;
 }
 
 .ticket-note-text-engineer {
+  /* color: var(--color-white); */
   color: var(--color-white);
   font-weight: 600;
+  font-size: 16px;
 }
 
 .ticket-note-text-contact {
   color: black;
-  /* color: var(--color-dark); */
+  /* color: var(--color-primary); */
+  color: var(--color-white);
   font-weight: 600;
   font-size: 16px;
+  /* text-decoration: wavy underline; */
 }
 
 .engineer-name {
   font-weight: 600;
-  color: var(--color-warning);
+  color: black;
+  /* color: var(--color-white); */
+  /* color: #ffebb2; */
+  /* color: white; */
+  /* color: #ffebb2; */
   font-size: 16px;
+  /* font-style: italic; */
   text-decoration: underline;
+  /* text-decoration: wavy underline;
+  text-decoration-thickness: 1px; */
 }
 
 .contact-name {
   font-weight: 600;
   /* color: #202528; */
-  color: var(--color-success);
+  /* color: var(--color-white); */
+  /* color: #cbdff6; */
+  color: black;
+
   font-size: 16px;
   text-decoration: underline;
+  /* text-decoration: wavy underline; */
 }

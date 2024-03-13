@@ -37,7 +37,10 @@ function SingleTicket() {
     <div className="single-ticket-list-container">
       {/* <div className="list-title"> */}
       <h1 className="single-ticket-list-title"> Ticket Summary</h1>
-      <h2 className="bold">Ticket #{ticketId}</h2>
+      <div className="single-ticket-list-category-container">
+        <h2 className="single-ticket-list-category bold">Ticket #{ticketId}</h2>
+        <h2 className="single-ticket-list-category bold">Notes</h2>
+      </div>
       {ticketData ? (
         <SingleTicketUpdate ticketData={ticketData} notesData={notesData} />
       ) : (

@@ -13,6 +13,14 @@
   text-align: center;
 }
 
+.single-ticket-list-category-container {
+  display: grid;
+  flex-direction: row;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  justify-items: self-start;
+}
+
 /* .single-ticket-list-title {
   text-align: center;
 }

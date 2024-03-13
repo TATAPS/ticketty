@@ -3,7 +3,7 @@ function EngineerNote({ ticket, val }) {
     <div>
       {val.note !== null ? (
         <div>
-          <p className="engineer-name">{ticket.engineer}</p>
+          {/* <p className="engineer-name">{ticket.engineer}</p> */}
           <p className="ticket-note-text-engineer"> {val.note}</p>
         </div>
       ) : null}
