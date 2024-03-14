@@ -9,8 +9,8 @@ const PORT = process.env.PORT || 8080;
 // const certificate = readFileSync("../cert/cert.pem", "utf8");
 
 const options = {
-  key: process.env.privateKey,
-  cert: process.env.certificate,
+  key: process.env.privateKey?.replace(/\\n/gm, "\n"),
+  cert: process.env.certificate?.replace(/\\n/gm, "\n"),
 };
 
 const httpsServer = createServer(options, app);
