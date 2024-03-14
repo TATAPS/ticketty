@@ -1,4 +1,5 @@
-import "./SingleTicket.css";
+// import "./SingleTicket.css";
+import "./SingleTicketUpdate.css";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import useTicket from "../../hooks/useTicket.jsx";
@@ -111,7 +112,7 @@ function SingleTicketUpdate({ ticketData, notesData }) {
   // console.log("contacts", contacts);
   return (
     <>
-      <div className="ticket-summary">
+      <div className="single-ticket-summary">
         <SingleTicketDetails
           ticket={ticket}
           notes={notes}
@@ -124,8 +125,9 @@ function SingleTicketUpdate({ ticketData, notesData }) {
           handleContactChange={handleContactChange}
           handleEngineerChange={handleEngineerChange}
           handleInputChange={handleInputChange}
+          handleAddTicket={handleAddTicket}
         />
-        <div className="ticket-notes">
+        <div className="single-ticket-ticket-notes">
           <SingleTicketNotes
             ticket={ticket}
             notes={notes}
@@ -133,9 +135,9 @@ function SingleTicketUpdate({ ticketData, notesData }) {
           />
         </div>
       </div>
-      <div className="edit-section">
+      {/* <div className="edit-section">
         <button onClick={() => handleAddTicket(ticket)}>Save</button>
-      </div>
+      </div> */}
     </>
   );
 }

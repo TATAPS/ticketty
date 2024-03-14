@@ -11,6 +11,7 @@ import UpdateTicket from "./crud/UpdateTicket.jsx";
 import Login from "./auth/Login.jsx";
 import { logoutUser } from "./api/engineers.jsx";
 import LandingPage from "./UI/LandingPage.jsx";
+import Admin from "./admin/Admin.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "tickets/:ticketId",
         element: <SingleTicket />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
       },
     ],
   },
@@ -47,7 +52,7 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <LandingPage />,
-  }
+  },
 ]);
 // client
 const queryClient = new QueryClient();

@@ -93,6 +93,10 @@ b {
   color: var(--color-dark);
 }
 
+.bold {
+  font-weight: 800;
+}
+
 .text-muted {
   color: var(--color-info-dark);
 }
@@ -160,7 +164,7 @@ input {
   overflow-y: scroll;
 }
 
-.name-bold {
+/* .name-bold {
   font-weight: 600;
   color: var(--color-primary);
 }
@@ -177,4 +181,4 @@ input {
   color: var(--color-primary);
   font-size: 16px;
   text-decoration: underline;
-}
+} */

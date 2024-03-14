@@ -1,0 +1,32 @@
+.single-ticket-ticket-info {
+  height: 100%;
+  padding: 20px;
+  margin: 10px;
+  overflow: auto;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 30px;
+  /* resize: both; */
+  background-color: white;
+}
+
+.single-list-button-container {
+  display: flex;
+  justify-content: flex-end;
+  /* padding: 10px; */
+  gap: 10px;
+}
+
+/* .single-ticket-list-title {
+  text-align: center;
+} */
+
+.single-list-save-button {
+  background-color: var(--color-success);
+  color: #fff;
+}
+
+.single-list-cancel-button {
+  background-color: var(--color-warning);
+  color: #fff;
+}

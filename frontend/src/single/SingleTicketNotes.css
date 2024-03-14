@@ -1,0 +1,95 @@
+.single-ticket-ticket-notes {
+  height: 100%;
+  padding: 20px;
+  margin: 10px;
+  overflow: auto;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 30px;
+  /* resize: both; */
+  background-color: white;
+}
+
+/* .ticket-notes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: aqua;
+} */
+
+.ticket-note-background-shape-contact {
+  border-radius: 10px;
+  padding: 9px;
+  /* margin: 10px; */
+  width: 80%;
+}
+
+.ticket-note-background-shape-engineer {
+  border-radius: 10px;
+  padding: 9px;
+  margin: 10px;
+  width: 80%;
+  margin-left: 20%;
+}
+
+.ticket-note-engineer-background-color {
+  /* background-color: var(--color-primary); */
+  /* background: linear-gradient(to right, #1b9c86, #729791); */
+  background: linear-gradient(to right, #f7d060, #ffe087);
+  /* background: linear-gradient(to right, #1b9c86, #5dc4b2); */
+  /* background-color: #cebd09; */
+  /* background: linear-gradient(to right, #ffe087, #f7d060); */
+  font-weight: 400;
+}
+
+.ticket-note-contact-background-color {
+  /* background-color: var(--color-warning); */
+  /* background-color: rgb(249, 210, 179); */
+  /* background-color: rgb(241, 192, 192); */
+  /* background-color: var(--color-warning); */
+  background: linear-gradient(to right, #6c9bcf, #7d8da1);
+  color: var(--color-white);
+  font-weight: 400;
+}
+
+.ticket-note-text-engineer {
+  /* color: var(--color-white); */
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.ticket-note-text-contact {
+  color: black;
+  /* color: var(--color-primary); */
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 16px;
+  /* text-decoration: wavy underline; */
+}
+
+.engineer-name {
+  font-weight: 600;
+  color: black;
+  /* color: var(--color-white); */
+  /* color: #ffebb2; */
+  /* color: white; */
+  /* color: #ffebb2; */
+  font-size: 16px;
+  /* font-style: italic; */
+  text-decoration: underline;
+  /* text-decoration: wavy underline;
+  text-decoration-thickness: 1px; */
+}
+
+.contact-name {
+  font-weight: 600;
+  /* color: #202528; */
+  /* color: var(--color-white); */
+  /* color: #cbdff6; */
+  color: black;
+
+  font-size: 16px;
+  text-decoration: underline;
+  /* text-decoration: wavy underline; */
+}

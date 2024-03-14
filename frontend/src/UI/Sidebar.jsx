@@ -12,11 +12,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../api/engineers";
 
 function Sidebar({ onShow, isOpen }) {
+  // const [selected, setSelected] = useState(false);
   const navigate = useNavigate();
   const handleLogout = () => {
-    logoutUser()
-    navigate('/auth/login')
-  }
+    logoutUser();
+    navigate("/auth/login");
+  };
 
   return (
     <aside style={{ display: isOpen ? "block" : "none" }}>
@@ -62,12 +63,12 @@ function Sidebar({ onShow, isOpen }) {
           <h4>New Tickets</h4>
           <span className="message-count">27</span>
         </Link>
-        <a href="#">
+        <Link to="/admin" className="link">
           <span className="material-icons-sharp">
             <SettingsIcon />
           </span>
           <h4>Settings</h4>
-        </a>
+        </Link>
         <Link to="/auth" className="link">
           <span className="material-icons-sharp">
             <LoginOutlinedIcon />

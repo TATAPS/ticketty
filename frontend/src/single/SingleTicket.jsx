@@ -34,16 +34,20 @@ function SingleTicket() {
     console.log("notes", notesData);
   }
   return (
-    <div className="list-container">
-      <h1>#{ticketId}</h1>
-      <div className="list-title">
-        {ticketData ? (
-          <SingleTicketUpdate ticketData={ticketData} notesData={notesData} />
-        ) : (
-          <p>No Ticket Found</p>
-        )}
+    <div className="single-ticket-list-container">
+      {/* <div className="list-title"> */}
+      <h1 className="single-ticket-list-title"> Ticket Summary</h1>
+      <div className="single-ticket-list-category-container">
+        <h2 className="single-ticket-list-category bold">Ticket #{ticketId}</h2>
+        <h2 className="single-ticket-list-category bold">Notes</h2>
       </div>
+      {ticketData ? (
+        <SingleTicketUpdate ticketData={ticketData} notesData={notesData} />
+      ) : (
+        <p>No Ticket Found</p>
+      )}
     </div>
+    // </div>
   );
 }
 
