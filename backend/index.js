@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 8080;
 
 const init = async () => {
   starterSeedDatabase();
-  app.listen(PORT, () => console.log(`Listening at https://localhost:${PORT}`));
+  app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`));
 };
 
 init();
