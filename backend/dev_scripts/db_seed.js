@@ -11,7 +11,7 @@ async function starterSeedDatabase() {
     const connection = await mysql.createConnection({
       host: process.env.HOST,
       user: process.env.USER,
-      password: process.env.PASSWORD,
+      password: process.env.MYSQL_ROOT_PASSWORD,
       database: process.env.SEEDDATABASE,
       multipleStatements: true,
     });
