@@ -1,6 +1,6 @@
+require("dotenv").config();
 const { createServer } = require("https");
 const { readFileSync } = require("fs");
-
 const app = require("./server.js");
 const { starterSeedDatabase } = require("./dev_scripts/db_seed.js");
 const PORT = process.env.PORT || 8080;
