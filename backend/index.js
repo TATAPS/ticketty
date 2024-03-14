@@ -5,12 +5,12 @@ const app = require("./server.js");
 const { starterSeedDatabase } = require("./dev_scripts/db_seed.js");
 const PORT = process.env.PORT || 8080;
 
-const privateKey = readFileSync("../cert/key.pem", "utf8");
-const certificate = readFileSync("../cert/cert.pem", "utf8");
+// const privateKey = readFileSync("../cert/key.pem", "utf8");
+// const certificate = readFileSync("../cert/cert.pem", "utf8");
 
 const options = {
-  key: privateKey,
-  cert: certificate,
+  key: process.env.privateKey,
+  cert: process.env.certificate,
 };
 
 const httpsServer = createServer(options, app);
