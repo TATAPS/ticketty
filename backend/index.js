@@ -8,16 +8,16 @@ const PORT = process.env.PORT || 8080;
 // const privateKey = readFileSync("../cert/key.pem", "utf8");
 // const certificate = readFileSync("../cert/cert.pem", "utf8");
 
-const options = {
-  key: process.env.privateKey.replace(/\\n/g, '\n'),
-  cert: process.env.certificate.replace(/\\n/g, '\n'),
-};
+// const options = {
+//   key: process.env.privateKey.replace(/\\n/g, '\n'),
+//   cert: process.env.certificate.replace(/\\n/g, '\n'),
+// };
 
-const httpsServer = createServer(options, app);
+// const httpsServer = createServer(options, app);
 
 const init = async () => {
   starterSeedDatabase();
-  httpsServer.listen(PORT, () => console.log(`Listening at https://localhost:${PORT}`));
+  app.listen(PORT, () => console.log(`Listening at https://localhost:${PORT}`));
 };
 
 init();
