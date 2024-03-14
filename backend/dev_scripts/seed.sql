@@ -1,4 +1,4 @@
-USE sys;
+USE railway;
 DROP SCHEMA IF EXISTS support_ticket_platform;
 
 CREATE SCHEMA support_ticket_platform;
