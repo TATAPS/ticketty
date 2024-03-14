@@ -63,12 +63,12 @@ function Sidebar({ onShow, isOpen }) {
           <h4>New Tickets</h4>
           <span className="message-count">27</span>
         </Link>
-        <a href="#">
+        <Link to="/admin" className="link">
           <span className="material-icons-sharp">
             <SettingsIcon />
           </span>
           <h4>Settings</h4>
-        </a>
+        </Link>
         <Link to="/auth" className="link">
           <span className="material-icons-sharp">
             <LoginOutlinedIcon />

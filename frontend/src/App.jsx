@@ -12,6 +12,7 @@ import { logoutUser } from "./api/engineers.jsx";
 import ProtectedRoutes from "./auth/ProtectedRoutes.jsx";
 import getCookie from "../helpers/getCookie.js";
 import LandingPage from "./UI/LandingPage.jsx";
+import Admin from "./admin/Admin.jsx";
 
 function App() {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -20,7 +21,7 @@ function App() {
     setMenuOpen((prevState) => !prevState);
   };
   const user = getCookie("username=");
-  console.log("user", user)
+  console.log("user", user);
   return (
     <div className="App">
       <div className="dashboard">
@@ -34,6 +35,7 @@ function App() {
               <Route path="addticket" element={<AddTicket />} />
               <Route path="tickets/:ticketId" element={<SingleTicket />} />
               <Route path="tickets/:ticketId/edit" element={<UpdateTicket />} />
+              <Route path="admin" element={<Admin />} />
             </Route>
             <Route path="/home" element={<LandingPage />} />
           </Routes>

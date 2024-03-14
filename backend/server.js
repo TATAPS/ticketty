@@ -14,7 +14,7 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 
-const MAXAGE = 1000 * 60 * 60 * 1;
+const MAXAGE = 1000 * 60 * 60 * 3;
 // 60
 // * 1; //1 hr
 
